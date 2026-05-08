@@ -149,6 +149,9 @@
 <text name="rt_scheme_report_desc_winter_cover_crops" text="Raport przedstawia listę działek oraz kwotę wypłaconą podczas ostatniej oceny."/>
 <text name="rt_scheme_report_desc_road_snow_clearing" text="Brak raportu dla tego programu. Gdy opady śniegu ustaną, otrzymasz wypłatę proporcjonalną do ilości rozsypanej soli."/>
 <text name="rt_scheme_report_desc_set_aside" text="Raport przedstawia wypłatę dla każdego z twoich pól. Pokazuje również, czy zakwalifikowałeś się do specjalnej 5% stawki podatkowej."/>
+<text name="rt_btn_scheme_action" text="Akcja"/>
+<text name="rt_action_buy_demo_vehicle" text="Dealer oferuje ci możliwość zakupu pojazdu demonstracyjnego w obniżonej cenie %s. Czy chcesz go kupić?"/>
+<text name="rt_action_buy_demo_vehicles" text="Dealer oferuje ci możliwość zakupu pojazdów demonstracyjnych w łącznej obniżonej cenie %s. Czy chcesz je kupić?"/>
 <text name="rt_btn_select_scheme" text="Wybierz program"/>
 <text name="rt_btn_end_scheme" text="Zakończ program"/>
 <text name="rt_btn_watch_scheme_policy" text="Śledź / Przestań śledzić"/>
