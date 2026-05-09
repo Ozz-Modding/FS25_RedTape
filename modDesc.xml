@@ -28,7 +28,7 @@ Changelog:
 
 1.0.2.5:
 - The chance of a grant application being approved has increased to 50-60% depending on your tier.
-- The minimum amount of stored manure is now configurable in the settings.
+- The minimum amount of allowed manure stored is now configurable in the settings.
 - Add missing translations for scheme actions.
 
 1.0.2.4:
