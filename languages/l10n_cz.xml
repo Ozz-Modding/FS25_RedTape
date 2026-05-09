@@ -215,7 +215,7 @@
 		<text name="rt_toolTip_manureStorageLimit" text="Minimální množství hnoje (v litrech), které můžete skladovat bez pokuty dle předpisu o skladování hnoje."/>
 		<text name="rt_grant_button" text="Požádat o dotaci" />
 		<text name="rt_grant_application_submitted" text="Vaše žádost o dotaci byla podána a lze ji zobrazit na kartě Dotace." />
-		<text name="rt_grant_confirm_application_dialog" text="Chcete požádat o dotaci na tuto stavbu? Budou účtovány poplatky za žádost ve výši %s. Zpracování žádostí může trvat až 6 měsíců a mají šanci na schválení 35-45%%, která může být ovlivněna vaším hodnocením dodržování předpisů." />
+		<text name="rt_grant_confirm_application_dialog" text="Chcete požádat o dotaci na tuto stavbu? Budou účtovány poplatky za žádost ve výši %s. Zpracování žádostí může trvat až 6 měsíců a mají šanci na schválení 50-60%%, která může být ovlivněna vaším hodnocením dodržování předpisů." />
 		<text name="rt_grant_existing_application" text="Současně je povolena pouze jedna aktivní žádost. Můžete znovu požádat, jakmile bude vaše stávající žádost zpracována." />
 		<text name="rt_grant_approved_notification" text="Vaše žádost o dotaci byla schválena! Obdržíte %s při nákupu budovy." />
 		<text name="rt_grant_rejected_notification" text="Vaše žádost o dotaci byla zamítnuta." />

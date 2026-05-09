@@ -199,15 +199,15 @@ end
 
 function RTGrantSystem:getApprovalChanceForTier(tier)
     if tier == RTPolicySystem.TIER.A then
-        return 0.45
+        return 0.60
     elseif tier == RTPolicySystem.TIER.B then
-        return 0.42
+        return 0.57
     elseif tier == RTPolicySystem.TIER.C then
-        return 0.38
+        return 0.54
     elseif tier == RTPolicySystem.TIER.D then
-        return 0.35
+        return 0.50
     else
-        return 0.35
+        return 0.50
     end
 end
 

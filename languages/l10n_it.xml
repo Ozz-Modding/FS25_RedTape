@@ -216,7 +216,7 @@
 		<text name="rt_toolTip_manureStorageLimit" text="La quantità minima di letame (in litri) che puoi immagazzinare senza ricevere una multa dalla politica sullo stoccaggio del letame."/>
 		<text name="rt_grant_button" text="Richiedi contributo" />
 		<text name="rt_grant_application_submitted" text="La tua domanda di contributo è stata inviata e può essere visualizzata nella scheda Contributi." />
-		<text name="rt_grant_confirm_application_dialog" text="Vuoi richiedere un contributo per questa costruzione? Ci sarà un costo di domanda pari a %s. Le domande possono richiedere fino a 6 mesi per essere elaborate e hanno una probabilità di approvazione del 35-45%%, influenzata dal tuo livello di conformità." />
+		<text name="rt_grant_confirm_application_dialog" text="Vuoi richiedere un contributo per questa costruzione? Ci sarà un costo di domanda pari a %s. Le domande possono richiedere fino a 6 mesi per essere elaborate e hanno una probabilità di approvazione del 50-60%%, influenzata dal tuo livello di conformità." />
 		<text name="rt_grant_existing_application" text="È consentita una sola domanda attiva alla volta. Potrai fare una nuova richiesta quando la domanda attuale sarà elaborata." />
 		<text name="rt_grant_approved_notification" text="La tua domanda di contributo è stata approvata! Riceverai %s quando acquisterai l’edificio." />
 		<text name="rt_grant_rejected_notification" text="La tua domanda di contributo è stata rifiutata." />

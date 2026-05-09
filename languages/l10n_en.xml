@@ -215,7 +215,7 @@
 		<text name="rt_toolTip_manureStorageLimit" text="The minimum amount of manure (in liters) you can store without facing a fine from the manure storage policy."/>
 		<text name="rt_grant_button" text="Apply for grant" />
 		<text name="rt_grant_application_submitted" text="Your grant application has been submitted and can be viewed in the Grants tab." />
-		<text name="rt_grant_confirm_application_dialog" text="Do you wish to apply for a grant towards this construction? There will be an application cost of %s. Applications may take up to 6 months to be processed and have an approval chance of 35-45%%, which may be impacted by your compliance rating." />
+		<text name="rt_grant_confirm_application_dialog" text="Do you wish to apply for a grant towards this construction? There will be an application cost of %s. Applications may take up to 6 months to be processed and have an approval chance of 50-60%%, which may be impacted by your compliance rating." />
 		<text name="rt_grant_existing_application" text="Only one active application is allowed at a time. You can apply again once your existing application is processed." />
 		<text name="rt_grant_approved_notification" text="Your grant application has been approved! You will receive %s when you purchase the building." />
 		<text name="rt_grant_rejected_notification" text="Your grant application has been rejected." />

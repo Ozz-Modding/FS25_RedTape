@@ -215,7 +215,7 @@
 		<text name="rt_toolTip_manureStorageLimit" text="A quantidade mínima de esterco (em litros) que você pode armazenar sem receber multa pela política de armazenamento de esterco."/>
 		<text name="rt_grant_button" text="Solicitar subsídio" />
 		<text name="rt_grant_application_submitted" text="Sua solicitação de subsídio foi enviada e pode ser visualizada na aba Subsídios." />
-		<text name="rt_grant_confirm_application_dialog" text="Deseja solicitar um subsídio para esta construção? Haverá custos de solicitação de %s. As solicitações podem levar até 6 meses para serem processadas e têm uma chance de aprovação de 35-45%%, que pode ser afetada pela sua classificação de conformidade." />
+		<text name="rt_grant_confirm_application_dialog" text="Deseja solicitar um subsídio para esta construção? Haverá custos de solicitação de %s. As solicitações podem levar até 6 meses para serem processadas e têm uma chance de aprovação de 50-60%%, que pode ser afetada pela sua classificação de conformidade." />
 		<text name="rt_grant_existing_application" text="Apenas uma solicitação ativa é permitida por vez. Você pode solicitar novamente assim que sua solicitação existente for processada." />
 		<text name="rt_grant_approved_notification" text="Sua solicitação de subsídio foi aprovada! Você receberá %s quando comprar o edifício." />
 		<text name="rt_grant_rejected_notification" text="Sua solicitação de subsídio foi rejeitada." />

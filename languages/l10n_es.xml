@@ -215,7 +215,7 @@
 		<text name="rt_toolTip_manureStorageLimit" text="La cantidad mínima de estiércol (en litros) que puedes almacenar sin recibir una multa por la política de almacenamiento de estiércol."/>
 		<text name="rt_grant_button" text="Solicitar subvención" />
 		<text name="rt_grant_application_submitted" text="Tu solicitud de subvención ha sido enviada y puede verse en la pestaña Subvenciones." />
-		<text name="rt_grant_confirm_application_dialog" text="¿Deseas solicitar una subvención para esta construcción? Habrá un costo de solicitud de %s. Las solicitudes pueden tardar hasta 6 meses en procesarse y tienen una probabilidad de aprobación del 35-45%%, que puede verse afectada por tu calificación de cumplimiento." />
+		<text name="rt_grant_confirm_application_dialog" text="¿Deseas solicitar una subvención para esta construcción? Habrá un costo de solicitud de %s. Las solicitudes pueden tardar hasta 6 meses en procesarse y tienen una probabilidad de aprobación del 50-60%%, que puede verse afectada por tu calificación de cumplimiento." />
 		<text name="rt_grant_existing_application" text="Solo se permite una solicitud activa a la vez. Puedes solicitar nuevamente una vez que se procese tu solicitud existente." />
 		<text name="rt_grant_approved_notification" text="¡Tu solicitud de subvención ha sido aprobada! Recibirás %s cuando compres el edificio." />
 		<text name="rt_grant_rejected_notification" text="Tu solicitud de subvención ha sido rechazada." />

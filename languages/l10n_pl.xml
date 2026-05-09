@@ -215,7 +215,7 @@
 <text name="rt_toolTip_manureStorageLimit" text="Minimalna ilość obornika (w litrach), którą możesz przechowywać bez kary wynikającej z polityki przechowywania obornika."/>
 <text name="rt_grant_button" text="Złóż wniosek o dotację" />
 <text name="rt_grant_application_submitted" text="Twój wniosek o dotację został przesłany i można go zobaczyć w zakładce Dotacje." />
-<text name="rt_grant_confirm_application_dialog" text="Czy chcesz złożyć wniosek o dotację na tę konstrukcję? Opłata za złożenie wniosku wynosi %s. Rozpatrzenie wniosku może zająć do 6 miesięcy, a szansa na zatwierdzenie wynosi 35-45%%, na co może wpłynąć twój wskaźnik zgodności z przepisami." />
+<text name="rt_grant_confirm_application_dialog" text="Czy chcesz złożyć wniosek o dotację na tę konstrukcję? Opłata za złożenie wniosku wynosi %s. Rozpatrzenie wniosku może zająć do 6 miesięcy, a szansa na zatwierdzenie wynosi 50-60%%, na co może wpłynąć twój wskaźnik zgodności z przepisami." />
 <text name="rt_grant_existing_application" text="Aktywny może być tylko jeden wniosek jednocześnie. Możesz aplikować ponownie po tym, jak twój obecny wniosek zostanie przetworzony." />
 <text name="rt_grant_approved_notification" text="Twój wniosek o dotację został zatwierdzony! Otrzymasz %s przy zakupie tego budynku." />
 <text name="rt_grant_rejected_notification" text="Twój wniosek o dotację został odrzucony." />

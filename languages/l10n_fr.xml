@@ -215,7 +215,7 @@
 		<text name="rt_toolTip_manureStorageLimit" text="La quantité minimale de fumier (en litres) que vous pouvez stocker sans recevoir d'amende liée à la politique de stockage du fumier."/>
 		<text name="rt_grant_button" text="Demander une subvention" />
 		<text name="rt_grant_application_submitted" text="Votre demande de subvention a été soumise et peut être consultée dans l'onglet Subventions." />
-		<text name="rt_grant_confirm_application_dialog" text="Souhaitez-vous demander une subvention pour cette construction ? Il y aura des frais de demande de %s. Les demandes peuvent prendre jusqu'à 6 mois à traiter et ont une chance d'approbation de 35-45%%, qui peut être impactée par votre note de conformité." />
+		<text name="rt_grant_confirm_application_dialog" text="Souhaitez-vous demander une subvention pour cette construction ? Il y aura des frais de demande de %s. Les demandes peuvent prendre jusqu'à 6 mois à traiter et ont une chance d'approbation de 50-60%%, qui peut être impactée par votre note de conformité." />
 		<text name="rt_grant_existing_application" text="Une seule demande active est autorisée à la fois. Vous pouvez redemander une fois votre demande existante traitée." />
 		<text name="rt_grant_approved_notification" text="Votre demande de subvention a été approuvée ! Vous recevrez %s lors de l'achat du bâtiment." />
 		<text name="rt_grant_rejected_notification" text="Votre demande de subvention a été rejetée." />

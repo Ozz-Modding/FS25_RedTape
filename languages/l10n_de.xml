@@ -215,7 +215,7 @@
 		<text name="rt_toolTip_manureStorageLimit" text="Die Mindestmenge an Gülle (in Litern), die Sie lagern können, ohne eine Strafe durch die Güllelagervorschrift zu erhalten."/>
 		<text name="rt_grant_button" text="Zuschuss beantragen" />
 		<text name="rt_grant_application_submitted" text="Ihr Zuschussantrag wurde eingereicht und kann im Zuschüsse-Tab eingesehen werden." />
-		<text name="rt_grant_confirm_application_dialog" text="Möchten Sie einen Zuschuss für diese Konstruktion beantragen? Es fallen Antragskosten von %s an. Anträge können bis zu 6 Monate dauern und haben eine Genehmigungswahrscheinlichkeit von 35-45%%, die durch Ihre Compliance-Bewertung beeinflusst werden kann." />
+		<text name="rt_grant_confirm_application_dialog" text="Möchten Sie einen Zuschuss für diese Konstruktion beantragen? Es fallen Antragskosten von %s an. Anträge können bis zu 6 Monate dauern und haben eine Genehmigungswahrscheinlichkeit von 50-60%%, die durch Ihre Compliance-Bewertung beeinflusst werden kann." />
 		<text name="rt_grant_existing_application" text="Es ist nur ein aktiver Antrag gleichzeitig erlaubt. Sie können erneut beantragen, sobald Ihr bestehender Antrag bearbeitet wurde." />
 		<text name="rt_grant_approved_notification" text="Ihr Zuschussantrag wurde genehmigt! Sie erhalten %s beim Kauf des Gebäudes." />
 		<text name="rt_grant_rejected_notification" text="Ihr Zuschussantrag wurde abgelehnt." />
