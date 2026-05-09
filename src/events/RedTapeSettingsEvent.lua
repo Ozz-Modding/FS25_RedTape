@@ -15,6 +15,7 @@ function RTSettingsEvent.new()
     self.grantsEnabled = g_currentMission.RedTape.settings.grantsEnabled
     self.baseTaxRate = g_currentMission.RedTape.settings.baseTaxRate
     self.productivityRecovery = g_currentMission.RedTape.settings.productivityRecovery
+    self.manureStorageLimit = g_currentMission.RedTape.settings.manureStorageLimit
     return self
 end
 
@@ -24,6 +25,7 @@ function RTSettingsEvent:writeStream(streamId, connection)
     streamWriteBool(streamId, self.grantsEnabled)
     streamWriteFloat32(streamId, self.baseTaxRate)
     streamWriteInt32(streamId, self.productivityRecovery)
+    streamWriteInt32(streamId, self.manureStorageLimit)
 end
 
 function RTSettingsEvent:readStream(streamId, connection)
@@ -32,6 +34,7 @@ function RTSettingsEvent:readStream(streamId, connection)
     self.grantsEnabled = streamReadBool(streamId)
     self.baseTaxRate = streamReadFloat32(streamId)
     self.productivityRecovery = streamReadInt32(streamId)
+    self.manureStorageLimit = streamReadInt32(streamId)
     self:run(connection)
 end
 
@@ -45,6 +48,7 @@ function RTSettingsEvent:run(connection)
     g_currentMission.RedTape.settings.grantsEnabled = self.grantsEnabled
     g_currentMission.RedTape.settings.baseTaxRate = self.baseTaxRate
     g_currentMission.RedTape.settings.productivityRecovery = self.productivityRecovery
+    g_currentMission.RedTape.settings.manureStorageLimit = self.manureStorageLimit
 
     if not connection:getIsServer() then
         if (not g_currentMission.RedTape.settings.policiesAndSchemesEnabled) then

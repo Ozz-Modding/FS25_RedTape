@@ -211,6 +211,8 @@
 <text name="rt_setting_productivityRecovery" text="Odzyskiwanie produktywności"/>
 <text name="rt_toolTip_productivityRecovery" text="Przyspiesza powrót produktywności hodowli po przeniesieniu zwierząt. Opcja 'Natychmiastowe' od razu przywraca produktywność do maksimum."/>
 <text name="rt_setting_instant" text="Natychmiastowe"/>
+<text name="rt_setting_manureStorageLimit" text="Limit przechowywania obornika"/>
+<text name="rt_toolTip_manureStorageLimit" text="Minimalna ilość obornika (w litrach), którą możesz przechowywać bez kary wynikającej z polityki przechowywania obornika."/>
 <text name="rt_grant_button" text="Złóż wniosek o dotację" />
 <text name="rt_grant_application_submitted" text="Twój wniosek o dotację został przesłany i można go zobaczyć w zakładce Dotacje." />
 <text name="rt_grant_confirm_application_dialog" text="Czy chcesz złożyć wniosek o dotację na tę konstrukcję? Opłata za złożenie wniosku wynosi %s. Rozpatrzenie wniosku może zająć do 6 miesięcy, a szansa na zatwierdzenie wynosi 35-45%%, na co może wpłynąć twój wskaźnik zgodności z przepisami." />

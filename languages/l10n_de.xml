@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="Produktivitätserholung"/>
 		<text name="rt_toolTip_productivityRecovery" text="Beschleunigen Sie, wie schnell sich die Produktivität der Tierhaltung nach dem Umzug von Tieren erholt. Sofort setzt die Produktivität sofort auf das Maximum."/>
 		<text name="rt_setting_instant" text="Sofort"/>
+		<text name="rt_setting_manureStorageLimit" text="Güllelagergrenze"/>
+		<text name="rt_toolTip_manureStorageLimit" text="Die Mindestmenge an Gülle (in Litern), die Sie lagern können, ohne eine Strafe durch die Güllelagervorschrift zu erhalten."/>
 		<text name="rt_grant_button" text="Zuschuss beantragen" />
 		<text name="rt_grant_application_submitted" text="Ihr Zuschussantrag wurde eingereicht und kann im Zuschüsse-Tab eingesehen werden." />
 		<text name="rt_grant_confirm_application_dialog" text="Möchten Sie einen Zuschuss für diese Konstruktion beantragen? Es fallen Antragskosten von %s an. Anträge können bis zu 6 Monate dauern und haben eine Genehmigungswahrscheinlichkeit von 35-45%%, die durch Ihre Compliance-Bewertung beeinflusst werden kann." />

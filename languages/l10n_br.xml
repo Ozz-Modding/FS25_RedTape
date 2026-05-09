@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="Recuperação de produtividade"/>
 		<text name="rt_toolTip_productivityRecovery" text="Acelere a rapidez com que a produtividade pecuária se recupera após mover animais. Instantâneo define a produtividade no máximo imediatamente."/>
 		<text name="rt_setting_instant" text="Instantâneo"/>
+		<text name="rt_setting_manureStorageLimit" text="Limite de armazenamento de esterco"/>
+		<text name="rt_toolTip_manureStorageLimit" text="A quantidade mínima de esterco (em litros) que você pode armazenar sem receber multa pela política de armazenamento de esterco."/>
 		<text name="rt_grant_button" text="Solicitar subsídio" />
 		<text name="rt_grant_application_submitted" text="Sua solicitação de subsídio foi enviada e pode ser visualizada na aba Subsídios." />
 		<text name="rt_grant_confirm_application_dialog" text="Deseja solicitar um subsídio para esta construção? Haverá custos de solicitação de %s. As solicitações podem levar até 6 meses para serem processadas e têm uma chance de aprovação de 35-45%%, que pode ser afetada pela sua classificação de conformidade." />

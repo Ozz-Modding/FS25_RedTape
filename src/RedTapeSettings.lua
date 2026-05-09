@@ -6,7 +6,8 @@ RedTape.menuItems = {
     'policiesAndSchemesEnabled',
     'grantsEnabled',
     'baseTaxRate',
-    'productivityRecovery'
+    'productivityRecovery',
+    'manureStorageLimit'
 }
 
 RedTape.multiplayerPermissions = {
@@ -75,6 +76,20 @@ RedTape.SETTINGS.productivityRecovery = {
         "6x",
         "8x",
         g_i18n:getText("rt_setting_instant")
+    }
+}
+
+RedTape.SETTINGS.manureStorageLimit = {
+    ['default'] = 1,
+    ['serverOnly'] = true,
+    ['permission'] = 'redTapeSettings',
+    ['values'] = { 5000, 10000, 20000, 50000, 100000 },
+    ['strings'] = {
+        "5,000",
+        "10,000",
+        "20,000",
+        "50,000",
+        "100,000"
     }
 }
 

@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="Восстановление продуктивности"/>
 		<text name="rt_toolTip_productivityRecovery" text="Ускорьте восстановление продуктивности животноводства после перемещения животных. Мгновенно устанавливает продуктивность на максимум сразу."/>
 		<text name="rt_setting_instant" text="Мгновенно"/>
+		<text name="rt_setting_manureStorageLimit" text="Лимит хранения навоза"/>
+		<text name="rt_toolTip_manureStorageLimit" text="Минимальное количество навоза (в литрах), которое можно хранить без штрафа по правилам хранения навоза."/>
 		<text name="rt_grant_button" text="Подать заявку на грант" />
 		<text name="rt_grant_application_submitted" text="Ваша заявка на грант была подана и может быть просмотрена во вкладке Гранты." />
 		<text name="rt_grant_confirm_application_dialog" text="Хотите подать заявку на грант для этого строительства? Будут взиматься расходы на подачу заявки в размере %s. Обработка заявок может занять до 6 месяцев и имеет шанс одобрения 35-45%%, который может зависеть от вашего рейтинга соответствия." />

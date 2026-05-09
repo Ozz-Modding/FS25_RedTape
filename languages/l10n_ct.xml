@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="生產力恢復"/>
 		<text name="rt_toolTip_productivityRecovery" text="加快動物搬遷後畜牧業生產力的恢復速度。即時將生產力立即設置為最大值。"/>
 		<text name="rt_setting_instant" text="即時"/>
+		<text name="rt_setting_manureStorageLimit" text="糞肥儲存上限"/>
+		<text name="rt_toolTip_manureStorageLimit" text="您可以儲存的最低糞肥量（公升），低於此量不會因糞肥儲存政策而被罰款。"/>
 		<text name="rt_grant_button" text="申請補助金" />
 		<text name="rt_grant_application_submitted" text="您的補助金申請已提交，可在補助金分頁查看。" />
 		<text name="rt_grant_confirm_application_dialog" text="您要為此建築申請補助金嗎？申請費用為 %s。申請可能需要長達 6 個月的處理時間，批准率約為 35-45%%（受合規評分影響）。" />

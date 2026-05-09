@@ -486,7 +486,8 @@ RTPolicies = {
             end
 
             local reward = 0
-            local maxStoredAmount = math.max(totalProduced * 0.5, 5000)
+            local manureStorageLimit = g_currentMission.RedTape.settings.manureStorageLimit or 5000
+            local maxStoredAmount = math.max(totalProduced * 0.5, manureStorageLimit)
             -- expectedSpread = farmData.rollingAverageManureLevel * 0.5
 
             if currentMonth == 5 or currentMonth == 11 then

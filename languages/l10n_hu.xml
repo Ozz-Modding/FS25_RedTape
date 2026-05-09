@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="Termelékenység helyreállítása"/>
 		<text name="rt_toolTip_productivityRecovery" text="Gyorsítsa fel, milyen gyorsan áll helyre az állattartás termelékenysége az állatok áthelyezése után. Az azonnali beállítás azonnal a maximumra állítja a termelékenységet."/>
 		<text name="rt_setting_instant" text="Azonnali"/>
+		<text name="rt_setting_manureStorageLimit" text="Trágyatárolási limit"/>
+		<text name="rt_toolTip_manureStorageLimit" text="A trágya minimális mennyisége (literben), amelyet bírság nélkül tárolhat a trágyatárolási előírás szerint."/>
 		<text name="rt_grant_button" text="Támogatás igénylése" />
 		<text name="rt_grant_application_submitted" text="A támogatási kérelmedet benyújtottuk, és megtekinthető a Támogatások fülön." />
 		<text name="rt_grant_confirm_application_dialog" text="Szeretnél támogatást igényelni ehhez az építkezéshez? A kérelem díja %s. A kérelmek feldolgozása akár 6 hónapot is igénybe vehet, a jóváhagyás esélye 35–45%, amit befolyásolhat a megfelelőségi értéked." />

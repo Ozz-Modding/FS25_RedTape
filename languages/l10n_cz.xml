@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="Obnova produktivity"/>
 		<text name="rt_toolTip_productivityRecovery" text="Zrychlete obnovu produktivity chovu po přesunu zvířat. Okamžitě nastaví produktivitu na maximum ihned."/>
 		<text name="rt_setting_instant" text="Okamžitě"/>
+		<text name="rt_setting_manureStorageLimit" text="Limit skladování hnoje"/>
+		<text name="rt_toolTip_manureStorageLimit" text="Minimální množství hnoje (v litrech), které můžete skladovat bez pokuty dle předpisu o skladování hnoje."/>
 		<text name="rt_grant_button" text="Požádat o dotaci" />
 		<text name="rt_grant_application_submitted" text="Vaše žádost o dotaci byla podána a lze ji zobrazit na kartě Dotace." />
 		<text name="rt_grant_confirm_application_dialog" text="Chcete požádat o dotaci na tuto stavbu? Budou účtovány poplatky za žádost ve výši %s. Zpracování žádostí může trvat až 6 měsíců a mají šanci na schválení 35-45%%, která může být ovlivněna vaším hodnocením dodržování předpisů." />

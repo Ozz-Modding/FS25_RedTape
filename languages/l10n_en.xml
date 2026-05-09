@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="Productivity Recovery"/>
 		<text name="rt_toolTip_productivityRecovery" text="Speed up how quickly animal husbandry productivity recovers after moving animals. Instant sets productivity to its maximum immediately."/>
 		<text name="rt_setting_instant" text="Instant"/>
+		<text name="rt_setting_manureStorageLimit" text="Manure Storage Limit"/>
+		<text name="rt_toolTip_manureStorageLimit" text="The minimum amount of manure (in liters) you can store without facing a fine from the manure storage policy."/>
 		<text name="rt_grant_button" text="Apply for grant" />
 		<text name="rt_grant_application_submitted" text="Your grant application has been submitted and can be viewed in the Grants tab." />
 		<text name="rt_grant_confirm_application_dialog" text="Do you wish to apply for a grant towards this construction? There will be an application cost of %s. Applications may take up to 6 months to be processed and have an approval chance of 35-45%%, which may be impacted by your compliance rating." />

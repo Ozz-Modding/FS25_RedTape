@@ -211,6 +211,8 @@
 		<text name="rt_setting_productivityRecovery" text="Recuperación de productividad"/>
 		<text name="rt_toolTip_productivityRecovery" text="Acelera la rapidez con la que la productividad ganadera se recupera después de mover animales. Instantáneo establece la productividad al máximo inmediatamente."/>
 		<text name="rt_setting_instant" text="Instantáneo"/>
+		<text name="rt_setting_manureStorageLimit" text="Límite de almacenamiento de estiércol"/>
+		<text name="rt_toolTip_manureStorageLimit" text="La cantidad mínima de estiércol (en litros) que puedes almacenar sin recibir una multa por la política de almacenamiento de estiércol."/>
 		<text name="rt_grant_button" text="Solicitar subvención" />
 		<text name="rt_grant_application_submitted" text="Tu solicitud de subvención ha sido enviada y puede verse en la pestaña Subvenciones." />
 		<text name="rt_grant_confirm_application_dialog" text="¿Deseas solicitar una subvención para esta construcción? Habrá un costo de solicitud de %s. Las solicitudes pueden tardar hasta 6 meses en procesarse y tienen una probabilidad de aprobación del 35-45%%, que puede verse afectada por tu calificación de cumplimiento." />

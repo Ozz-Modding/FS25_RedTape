@@ -27,6 +27,7 @@ https://github.com/sprkem/FS25_RedTape
 Changelog:
 
 1.0.2.5 [WIP]:
+- The minimum amount of stored manure is now configurable in the settings.
 - Add missing translations for scheme actions.
 
 1.0.2.4:
