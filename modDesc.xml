@@ -26,7 +26,7 @@ https://github.com/sprkem/FS25_RedTape
 
 Changelog:
 
-1.0.2.5 [WIP]:
+1.0.2.5:
 - The chance of a grant application being approved has increased to 50-60% depending on your tier.
 - The minimum amount of stored manure is now configurable in the settings.
 - Add missing translations for scheme actions.
@@ -153,6 +153,11 @@ https://github.com/sprkem/FS25_RedTape
 
 Änderungsliste:
 
+1.0.2.5:
+- Die Genehmigungswahrscheinlichkeit für Zuschussanträge wurde auf 50-60% erhöht, abhängig von Ihrer Stufe.
+- Die Mindestmenge an gelagertem Mist ist jetzt in den Einstellungen konfigurierbar.
+- Fehlende Übersetzungen für Programmaktionen hinzugefügt.
+
 1.0.2.4:
 - Überarbeitung der Einbeziehung „sonstiger" Geldarten in die Steuerberechnung, sodass nur bestimmte Arten berücksichtigt werden, z. B. Bodeninformationskäufe von Precision Farming.
 - Unterstützung für Witcombe-Kaninchen im Tierhaltungsabstand hinzugefügt. Außerdem wurden die Platzanforderungen für einige andere Tiere leicht reduziert.
@@ -277,6 +282,11 @@ Consultez le menu d'aide du jeu pour plus d'informations.
 https://github.com/sprkem/FS25_RedTape
 
 Journal des modifications:
+
+1.0.2.5:
+- La probabilité d'approbation des demandes de subvention a été augmentée à 50-60% selon votre niveau.
+- La quantité minimale de fumier stocké est désormais configurable dans les paramètres.
+- Ajout des traductions manquantes pour les actions de programme.
 
 1.0.2.4:
 - Révision de l'inclusion des types de revenus « autres » dans les calculs fiscaux afin de n'inclure que certains types, par ex. les achats d'informations sur les sols de Precision Farming.
