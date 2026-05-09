@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="108">
     <author>Ozz</author>
-    <version>1.0.2.4</version>
+    <version>1.0.2.5</version>
     <iconFilename>icon_RedTape.dds</iconFilename>
     <title>
         <en>Red Tape</en>
@@ -25,6 +25,9 @@ See the help menu in game for more information.
 https://github.com/sprkem/FS25_RedTape
 
 Changelog:
+
+1.0.2.5 [WIP]:
+- Add missing translations for scheme actions.
 
 1.0.2.4:
 - Revised inclusion of 'other' money types in tax calculations to only include certain types, e.g. Precision Farming soil information purchases.

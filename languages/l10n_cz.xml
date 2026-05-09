@@ -149,6 +149,9 @@
         <text name="rt_scheme_report_desc_winter_cover_crops" text="Zpráva ukazuje seznam zemědělských pozemků a částku vyplacenou při posledním hodnocení."/>
         <text name="rt_scheme_report_desc_road_snow_clearing" text="Pro tento dotační program neexistuje žádná zpráva. Jakmile sníh skončí, obdržíte platbu odpovídající množství posypané soli."/>
         <text name="rt_scheme_report_desc_set_aside" text="Zpráva ukazuje výplatu pro každé z vašich polí. Také ukazuje, zda jste se kvalifikovali pro speciální daňovou sazbu 5 %."/>
+        <text name="rt_btn_scheme_action" text="Akce"/>
+        <text name="rt_action_buy_demo_vehicle" text="Prodejce vám nabízí možnost zakoupit předváděcí vozidlo za zvýhodněnou cenu %s. Chcete ho koupit?"/>
+        <text name="rt_action_buy_demo_vehicles" text="Prodejce vám nabízí možnost zakoupit předváděcí vozidla za celkovou zvýhodněnou cenu %s. Chcete je koupit?"/>
         <text name="rt_btn_select_scheme" text="Vybrat dotační program"/>
 		<text name="rt_btn_end_scheme" text="End Scheme"/>
 		<text name="rt_btn_watch_scheme_policy" text="Přepnout sledování"/>

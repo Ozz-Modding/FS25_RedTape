@@ -149,6 +149,9 @@
 		<text name="rt_scheme_report_desc_winter_cover_crops" text="Le rapport montre une liste des terrains agricoles et le montant versé lors de la dernière évaluation."/>
 		<text name="rt_scheme_report_desc_road_snow_clearing" text="Il n'y a pas de rapport pour ce programme. Une fois la neige terminée, vous recevrez un versement proportionnel à la quantité de sel que vous avez épandu."/>
 		<text name="rt_scheme_report_desc_set_aside" text="Le rapport montre le versement pour chacun de vos champs. Il indique également si vous avez bénéficié du taux d'imposition spécial de 5%."/>
+		<text name="rt_btn_scheme_action" text="Action"/>
+		<text name="rt_action_buy_demo_vehicle" text="Le concessionnaire vous propose d'acheter le véhicule de démonstration à un prix réduit de %s. Souhaitez-vous l'acheter ?"/>
+		<text name="rt_action_buy_demo_vehicles" text="Le concessionnaire vous propose d'acheter les véhicules de démonstration à un prix combiné réduit de %s. Souhaitez-vous les acheter ?"/>
 		<text name="rt_btn_select_scheme" text="Sélectionner le programme"/>
 		<text name="rt_btn_end_scheme" text="End Scheme"/>
 		<text name="rt_btn_watch_scheme_policy" text="Activer/Désactiver le suivi"/>

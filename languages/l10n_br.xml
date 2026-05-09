@@ -149,6 +149,9 @@
 		<text name="rt_scheme_report_desc_winter_cover_crops" text="O relatório mostra uma lista de terrenos e o valor pago na última avaliação."/>
 		<text name="rt_scheme_report_desc_road_snow_clearing" text="Não há relatório para este programa. Quando a neve terminar, você receberá um pagamento proporcional à quantidade de sal que espalhou."/>
 		<text name="rt_scheme_report_desc_set_aside" text="O relatório mostra o pagamento para cada um de seus campos. Também mostra se você se qualificou para a alíquota especial de 5%."/>
+		<text name="rt_btn_scheme_action" text="Ação"/>
+		<text name="rt_action_buy_demo_vehicle" text="O revendedor está oferecendo a oportunidade de comprar o veículo de demonstração por um preço com desconto de %s. Gostaria de comprá-lo?"/>
+		<text name="rt_action_buy_demo_vehicles" text="O revendedor está oferecendo a oportunidade de comprar os veículos de demonstração por um preço combinado com desconto de %s. Gostaria de comprá-los?"/>
 		<text name="rt_btn_select_scheme" text="Selecionar Programa"/>
 		<text name="rt_btn_end_scheme" text="End Scheme"/>
 		<text name="rt_btn_watch_scheme_policy" text="Ativar/Desativar Acompanhamento"/>

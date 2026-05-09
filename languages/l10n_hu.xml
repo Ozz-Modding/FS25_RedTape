@@ -149,6 +149,9 @@
 		<text name="rt_scheme_report_desc_winter_cover_crops" text="A jelentés listázza a földterületeket és az utolsó értékelés során kifizetett összegeket."/>
 		<text name="rt_scheme_report_desc_road_snow_clearing" text="Ehhez a programhoz nincs jelentés. A hó elmúltával az elterített só mennyisége alapján kapod a kifizetést."/>
 		<text name="rt_scheme_report_desc_set_aside" text="A jelentés mutatja az egyes táblák kifizetését. Megmutatja, ha jogosult vagy az 5%-os adókulcsra."/>
+		<text name="rt_btn_scheme_action" text="Művelet"/>
+		<text name="rt_action_buy_demo_vehicle" text="A kereskedő felajánlja a bemutató jármű megvásárlását kedvezményes áron: %s. Szeretné megvenni?"/>
+		<text name="rt_action_buy_demo_vehicles" text="A kereskedő felajánlja a bemutató járművek megvásárlását összesített kedvezményes áron: %s. Szeretné megvenni őket?"/>
 		<text name="rt_btn_select_scheme" text="Program kiválasztása"/>
 		<text name="rt_btn_end_scheme" text="End Scheme"/>
 		<text name="rt_btn_watch_scheme_policy" text="Megfigyelés váltása"/>
