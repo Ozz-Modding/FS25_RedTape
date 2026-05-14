@@ -23,3 +23,5 @@ Some rough plans are:
 ## Discord
 
 [![Discord](https://img.shields.io/discord/1415966930799693847?logo=discord)](https://discord.gg/eGyACAan)
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M41K5NPV)
