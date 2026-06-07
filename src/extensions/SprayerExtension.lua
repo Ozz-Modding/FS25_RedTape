@@ -37,6 +37,10 @@ function RTSprayerExtension:processSprayerArea(superFunc, workArea, dt)
     local widthLength = MathUtil.vector3Length(widthVecX, widthVecY, widthVecZ)
     local heightLength = MathUtil.vector3Length(heightVecX, heightVecY, heightVecZ)
 
+    if widthLength == 0 or heightLength == 0 then
+        return superFunc(self, workArea, dt)
+    end
+
     local cellSize = 1
     local coords = {}
 
