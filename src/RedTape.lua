@@ -205,7 +205,11 @@ function RedTape:loadFromXMLFile()
                         end
                     elseif type(defaultValue) == 'boolean' then
                         local xmlBool = getXMLBool(xmlFile, xmlValueKey)
-                        value = xmlBool ~= nil and xmlBool or defaultValue
+                        if xmlBool ~= nil then
+                            value = xmlBool
+                        else
+                            value = defaultValue
+                        end
                         value_string = tostring(value)
                     end
                 end

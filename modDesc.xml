@@ -157,6 +157,10 @@ https://github.com/sprkem/FS25_RedTape
 
 Änderungsliste:
 
+1.0.2.6:
+- Sicherheitsvorkehrung für einen sporadischen Fehler beim Sprühen im Zusammenhang mit PF hinzugefügt.
+- Problem behoben, bei dem Einstellungen unter bestimmten Umständen nicht gespeichert wurden.
+
 1.0.2.5:
 - Die Genehmigungswahrscheinlichkeit für Zuschussanträge wurde auf 50-60% erhöht, abhängig von Ihrer Stufe.
 - Die Mindestmenge an gelagertem Mist ist jetzt in den Einstellungen konfigurierbar.
@@ -286,6 +290,10 @@ Consultez le menu d'aide du jeu pour plus d'informations.
 https://github.com/sprkem/FS25_RedTape
 
 Journal des modifications:
+
+1.0.2.6:
+- Ajout d'une protection de sécurité pour une erreur sporadique lors de la pulvérisation liée à PF.
+- Correction d'un problème où les paramètres n'étaient pas sauvegardés dans certaines circonstances.
 
 1.0.2.5:
 - La probabilité d'approbation des demandes de subvention a été augmentée à 50-60% selon votre niveau.
