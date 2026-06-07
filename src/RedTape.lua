@@ -204,7 +204,8 @@ function RedTape:loadFromXMLFile()
                             value_string = string.format("%.3f", value)
                         end
                     elseif type(defaultValue) == 'boolean' then
-                        value = getXMLBool(xmlFile, xmlValueKey) or defaultValue
+                        local xmlBool = getXMLBool(xmlFile, xmlValueKey)
+                        value = xmlBool ~= nil and xmlBool or defaultValue
                         value_string = tostring(value)
                     end
                 end

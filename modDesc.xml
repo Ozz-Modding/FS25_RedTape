@@ -28,6 +28,7 @@ Changelog:
 
 1.0.2.6:
 - Add safety guard for a sporadic error when spraying related to PF.
+- Fix issue with settings not saving in certain circumstances.
 
 1.0.2.5:
 - The chance of a grant application being approved has increased to 50-60% depending on your tier.
