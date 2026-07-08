@@ -27,6 +27,7 @@ https://github.com/sprkem/FS25_RedTape
 Changelog:
 
 1.0.2.7:
+- Scheme issued equipment is now excluded from the Advanced Damage System mod. The exclusion is removed if vehicles are purchased.
 - Added safety filter for demo schemes to filter out modded equipment which cause rendering issues.
 - Fix mod reference path names for demo schemes in multiplayer.
 

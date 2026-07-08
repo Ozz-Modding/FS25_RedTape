@@ -430,6 +430,13 @@ function RedTape.getGridPosition(x, y, z, gridSize)
     return gridX, gridY, gridZ
 end
 
+function RedTape.setADSExcluded(vehicle, excluded)
+    local spec = vehicle.spec_AdvancedDamageSystem
+    if spec ~= nil then
+        spec.isExcludedVehicle = excluded
+    end
+end
+
 function RedTape.getGrassTypes()
     local result = { FruitType.GRASS, FruitType.MEADOW }
 

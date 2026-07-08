@@ -405,6 +405,7 @@ function RTScheme:onSpawnedVehicle(vehicles, vehicleLoadState, loadingInfo)
         for _, vehicle in pairs(vehicles) do
             vehicle:addWearAmount(math.random() * 0.10 + 0.05)
             vehicle:setOperatingTime(3600000 * (math.random() * 7 + 5))
+            RedTape.setADSExcluded(vehicle, true)
             table.insert(self.vehicles, vehicle)
         end
     else

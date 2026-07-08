@@ -609,6 +609,7 @@ RTSchemes = {
                 for _, vehicle in pairs(scheme.vehicles) do
                     vehicle.propertyState = VehiclePropertyState.OWNED
                     vehicle:setOwnerFarmId(scheme.farmId)
+                    RedTape.setADSExcluded(vehicle, false)
                 end
                 scheme.vehicles = {}
                 scheme.spawnedVehicles = false
@@ -919,6 +920,7 @@ RTSchemes = {
                 for _, vehicle in pairs(scheme.vehicles) do
                     vehicle.propertyState = VehiclePropertyState.OWNED
                     vehicle:setOwnerFarmId(scheme.farmId)
+                    RedTape.setADSExcluded(vehicle, false)
                 end
                 scheme.vehicles = {}
                 scheme.spawnedVehicles = false
