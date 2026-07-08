@@ -420,7 +420,7 @@ RTSchemes = {
                     if chosenCategory == item.categoryNames[i] then
                         if not string.find(item.xmlFilename, "/pdlc/") then
                             local success = pcall(StoreItemUtil.loadSpecsFromXML, item)
-                            if success then
+                            if success and item.brandIndex ~= nil then
                                 table.insert(options, item)
                             end
                         end

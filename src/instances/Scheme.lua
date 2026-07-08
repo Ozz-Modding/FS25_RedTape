@@ -58,7 +58,11 @@ function RTScheme:writeStream(streamId, connection)
     streamWriteInt32(streamId, RedTape.tableCount(self.props))
     for key, value in pairs(self.props) do
         streamWriteString(streamId, key)
-        streamWriteString(streamId, value)
+        if string.startsWith(key, "vehicleToSpawn") then
+            streamWriteString(streamId, NetworkUtil.convertToNetworkFilename(value))
+        else
+            streamWriteString(streamId, value)
+        end
     end
 end
 
@@ -84,6 +88,9 @@ function RTScheme:readStream(streamId, connection)
     for i = 1, propCount do
         local key = streamReadString(streamId)
         local value = streamReadString(streamId)
+        if string.startsWith(key, "vehicleToSpawn") then
+            value = NetworkUtil.convertFromNetworkFilename(value)
+        end
         self.props[key] = value
     end
 end

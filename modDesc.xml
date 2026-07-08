@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="109">
     <author>Ozz</author>
-    <version>1.0.2.6</version>
+    <version>1.0.2.7</version>
     <iconFilename>icon_RedTape.dds</iconFilename>
     <title>
         <en>Red Tape</en>
@@ -25,6 +25,10 @@ See the help menu in game for more information.
 https://github.com/sprkem/FS25_RedTape
 
 Changelog:
+
+1.0.2.7:
+- Added safety filter for demo schemes to filter out modded equipment which cause rendering issues.
+- Fix mod reference path names for demo schemes in multiplayer.
 
 1.0.2.6:
 - Add safety guard for a sporadic error when spraying related to PF.
