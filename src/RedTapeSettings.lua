@@ -331,5 +331,5 @@ end)
 FSBaseMission.sendInitialClientState = Utils.appendedFunction(FSBaseMission.sendInitialClientState,
     function(self, connection, user, farm)
         -- Send all RedTape settings to the new client
-        g_client:getServerConnection():sendEvent(RTSettingsEvent.new())
+        connection:sendEvent(RTSettingsEvent.new())
     end)
