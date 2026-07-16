@@ -95,6 +95,26 @@ RedTape.SETTINGS.manureStorageLimit = {
 
 
 
+function RedTape.SETTINGS.writeToStream(streamId)
+    local settings = g_currentMission.RedTape.settings
+    streamWriteBool(streamId, settings.taxEnabled)
+    streamWriteBool(streamId, settings.policiesAndSchemesEnabled)
+    streamWriteBool(streamId, settings.grantsEnabled)
+    streamWriteFloat32(streamId, settings.baseTaxRate)
+    streamWriteInt32(streamId, settings.productivityRecovery)
+    streamWriteInt32(streamId, settings.manureStorageLimit)
+end
+
+function RedTape.SETTINGS.readFromStream(streamId)
+    local settings = g_currentMission.RedTape.settings
+    settings.taxEnabled = streamReadBool(streamId)
+    settings.policiesAndSchemesEnabled = streamReadBool(streamId)
+    settings.grantsEnabled = streamReadBool(streamId)
+    settings.baseTaxRate = streamReadFloat32(streamId)
+    settings.productivityRecovery = streamReadInt32(streamId)
+    settings.manureStorageLimit = streamReadInt32(streamId)
+end
+
 function RedTape.getStateIndex(id, value)
     local value = value or g_currentMission.RedTape.settings[id]
     local values = RedTape.SETTINGS[id].values
@@ -326,10 +346,3 @@ FocusManager.setGui = Utils.appendedFunction(FocusManager.setGui, function(_, gu
     end
 end)
 
-
---SEND SETTINGS TO CLIENT:
-FSBaseMission.sendInitialClientState = Utils.appendedFunction(FSBaseMission.sendInitialClientState,
-    function(self, connection, user, farm)
-        -- Send all RedTape settings to the new client
-        g_client:getServerConnection():sendEvent(RTSettingsEvent.new())
-    end)

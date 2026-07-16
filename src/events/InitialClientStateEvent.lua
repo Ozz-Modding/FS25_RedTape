@@ -20,6 +20,8 @@ function RTInitialClientStateEvent:writeStream(streamId, connection)
     rt.TaxSystem:writeInitialClientState(streamId, connection)
     rt.GrantSystem:writeInitialClientState(streamId, connection)
     rt.InfoGatherer:writeInitialClientState(streamId, connection)
+
+    RedTape.SETTINGS.writeToStream(streamId)
 end
 
 function RTInitialClientStateEvent:readStream(streamId, connection)
@@ -31,6 +33,8 @@ function RTInitialClientStateEvent:readStream(streamId, connection)
     rt.TaxSystem:readInitialClientState(streamId, connection)
     rt.GrantSystem:readInitialClientState(streamId, connection)
     rt.InfoGatherer:readInitialClientState(streamId, connection)
+
+    RedTape.SETTINGS.readFromStream(streamId)
 
     self:run(connection)
 end

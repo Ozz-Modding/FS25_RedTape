@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="110">
     <author>Ozz</author>
-    <version>1.0.2.7</version>
+    <version>1.0.2.8</version>
     <iconFilename>icon_RedTape.dds</iconFilename>
     <title>
         <en>Red Tape</en>
@@ -25,6 +25,11 @@ See the help menu in game for more information.
 https://github.com/sprkem/FS25_RedTape
 
 Changelog:
+
+1.0.2.8 [WIP]:
+- Reduction of the punishments for the restricted slurry policy. It is now far more lenient.
+- Reworked mp sending of settings. Thanks to KeilerHirsch
+
 
 1.0.2.7:
 - Scheme issued equipment is now excluded from the Advanced Damage System mod. The exclusion is removed if vehicles are purchased.
