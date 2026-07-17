@@ -400,7 +400,7 @@ function RTTaxSystem:categoriseLineItem(lineItem, taxStatement)
         "taxCost"
     }
 
-    if g_modIsLoaded["FS25_RealisticLivestock"] then
+    if g_modIsLoaded["FS25_RealisticLivestock"] or g_modIsLoaded["FS25_RealisticLivestockRM"] then
         table.insert(expenseStats, "herdsmanWages")
         table.insert(expenseStats, "semenPurchase")
         table.insert(expenseStats, "medicine")

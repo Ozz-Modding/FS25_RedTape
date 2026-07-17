@@ -46,7 +46,7 @@ function FarmGatherer:hourChanged()
                 farmData.monthlyEmptyFoodCount = farmData.monthlyEmptyFoodCount + 1
             end
 
-            if not self:isExemptFromProductivityCheck(husbandry) then
+            if not self:isExemptFromProductivityCheck(husbandry) and not self:isAllAnimalsDiseasedHusbandry(husbandry) then
                 if stats.productivity and stats.productivity < 0.40 then
                     if not isFencelessPasture then
                         farmData.monthlyLowProductivityHusbandry = farmData.monthlyLowProductivityHusbandry + 1
@@ -793,6 +793,30 @@ end
 
 function FarmGatherer:isExemptFromProductivityCheck(husbandry)
     return self.productivityExceptions[husbandry.uniqueId] ~= nil
+end
+
+function FarmGatherer:isAllAnimalsDiseasedHusbandry(husbandry)
+    if not (g_modIsLoaded["FS25_RealisticLivestock"] or g_modIsLoaded["FS25_RealisticLivestockRM"]) then
+        return false
+    end
+
+    local clusterSystem = husbandry.spec_husbandryAnimals and husbandry.spec_husbandryAnimals.clusterSystem
+    if clusterSystem == nil or clusterSystem.getAnimals == nil then
+        return false
+    end
+
+    local animals = clusterSystem:getAnimals()
+    if animals == nil or #animals == 0 then
+        return false
+    end
+
+    for _, animal in pairs(animals) do
+        if not animal:getHasAnyDisease() then
+            return false
+        end
+    end
+
+    return true
 end
 
 function FarmGatherer:recordSaltSpread(x, y, z, spline, farmId)
