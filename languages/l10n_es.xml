@@ -200,7 +200,9 @@
 		<text name="rt_help_grants_intro_3" text="Revisa la pantalla de Subvenciones en el menú Red Tape y te dirá cuándo se procesará tu solicitud. Será aprobada o rechazada. Si es aprobada, usa el menú de construcción para colocar el edificio y recibirás los fondos otorgados."/>
 		<text name="rt_help_grants_intro_4" text="Puedes tener una solicitud activa a la vez, y hay un período de espera de 6 meses después de que se procesa una subvención exitosa."/>
 		<text name="rt_setting_taxEnabled" text="Impuestos habilitados"/>
-		<text name="rt_toolTip_taxEnabled" text="Habilitar o deshabilitar el sistema de impuestos"/>
+		<text name="rt_toolTip_taxEnabled" text="Habilitar o deshabilitar el sistema de impuestos. Desactivarlo eliminará permanentemente todos los datos fiscales."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Registrar transacciones"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="Cuando está desactivado, las transacciones financieras no se registran con fines fiscales. Los datos fiscales existentes se conservan. Úsalo para pausar el seguimiento fiscal durante la configuración sin perder tu historial."/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="Políticas/Planes habilitados"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Habilitar o deshabilitar el sistema de Políticas y Planes. Desactivar esto terminará inmediatamente todos los planes activos."/>
 		<text name="rt_setting_baseTaxRate" text="Tasa impositiva base"/>

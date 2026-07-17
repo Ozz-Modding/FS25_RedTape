@@ -200,7 +200,9 @@
 		<text name="rt_help_grants_intro_3" text="Consultez l'écran Subventions dans le menu Paperasserie et il vous indiquera quand votre demande sera traitée. Elle sera soit approuvée soit rejetée. Si elle est approuvée, utilisez le menu de construction pour placer le bâtiment et vous recevrez les fonds attribués."/>
 		<text name="rt_help_grants_intro_4" text="Vous pouvez avoir une demande active à un moment donné, et il y a une période de refroidissement de 6 mois après qu'une subvention réussie soit traitée."/>
 		<text name="rt_setting_taxEnabled" text="Impôts activés"/>
-		<text name="rt_toolTip_taxEnabled" text="Activer ou désactiver le système fiscal"/>
+		<text name="rt_toolTip_taxEnabled" text="Activer ou désactiver le système fiscal. La désactivation effacera définitivement toutes les données fiscales."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Enregistrer les transactions"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="Lorsque désactivé, les transactions financières ne sont pas enregistrées à des fins fiscales. Les données fiscales existantes sont conservées. Utilisez ceci pour mettre en pause le suivi fiscal pendant la configuration sans perdre votre historique."/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="Politiques/Programmes activés"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Activer ou désactiver le système de politiques et programmes. Désactiver ceci terminera immédiatement tous les programmes actifs."/>
 		<text name="rt_setting_baseTaxRate" text="Taux d'imposition de base"/>

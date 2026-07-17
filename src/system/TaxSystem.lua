@@ -169,6 +169,14 @@ function RTTaxSystem:isEnabled()
     return g_currentMission.RedTape.settings.taxEnabled
 end
 
+function RTTaxSystem:onDisabled()
+    self.lineItems = {}
+    self.taxStatements = {}
+    self.farms = {}
+    self.customRates = {}
+    self.lossRollover = {}
+end
+
 function RTTaxSystem:writeInitialClientState(streamId, connection)
     streamWriteInt32(streamId, RedTape.tableCount(self.taxStatements))
     for _, taxStatement in ipairs(self.taxStatements) do
@@ -300,6 +308,7 @@ end
 -- Called via NewTaxLineItemEvent to store on server and client
 function RTTaxSystem:recordLineItem(farmId, lineItem)
     if (not self:isEnabled()) then return end
+    if (not g_currentMission.RedTape.settings.taxRecordingEnabled) then return end
     local cumulativeMonth = RedTape.getCumulativeMonth()
     self.lineItems[farmId] = self.lineItems[farmId] or {}
 

@@ -90,7 +90,7 @@ function RTSchemeSystem:saveToXmlFile(xmlFile)
 end
 
 function RTSchemeSystem:isEnabled()
-    return g_currentMission.RedTape.settings.taxEnabled
+    return g_currentMission.RedTape.settings.policiesAndSchemesEnabled
 end
 
 function RTSchemeSystem:writeInitialClientState(streamId, connection)

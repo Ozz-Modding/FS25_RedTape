@@ -200,7 +200,9 @@
 		<text name="rt_help_grants_intro_3" text="A kérelmed feldolgozásának idejét a Bürokrácia menü Támogatások képernyőjén ellenőrizheted. A kérelem vagy jóváhagyásra, vagy elutasításra kerül. Jóváhagyás esetén az építési menüben helyezd el az épületet, és megkapod a megítélt összeget."/>
 		<text name="rt_help_grants_intro_4" text="Egyszerre csak egy aktív kérelmed lehet, és egy sikeresen feldolgozott támogatás után 6 hónapos várakozási idő lép életbe."/>
 		<text name="rt_setting_taxEnabled" text="Adórendszer engedélyezve"/>
-		<text name="rt_toolTip_taxEnabled" text="Engedélyezd vagy tiltsd az adórendszert"/>
+		<text name="rt_toolTip_taxEnabled" text="Engedélyezd vagy tiltsd az adórendszert. A kikapcsolás véglegesen törli az összes adóadatot."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Tranzakciók rögzítése"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="Ha ki van kapcsolva, a pénzügyi tranzakciók nem kerülnek rögzítésre adózási célból. A meglévő adóadatok megmaradnak. Ezzel szüneteltetheted az adókövetést a beállítás során anélkül, hogy elveszítenéd az előzményeket."/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="Irányelvek/Programok engedélyezve"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Engedélyezd vagy tiltsd az Irányelvek és Programok rendszerét. Kikapcsoláskor minden aktív program azonnal véget ér."/>
 		<text name="rt_setting_baseTaxRate" text="Alap adókulcs"/>

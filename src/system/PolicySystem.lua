@@ -122,7 +122,7 @@ function RTPolicySystem:saveToXmlFile(xmlFile)
 end
 
 function RTPolicySystem:isEnabled()
-    return g_currentMission.RedTape.settings.taxEnabled
+    return g_currentMission.RedTape.settings.policiesAndSchemesEnabled
 end
 
 function RTPolicySystem:writeInitialClientState(streamId, connection)

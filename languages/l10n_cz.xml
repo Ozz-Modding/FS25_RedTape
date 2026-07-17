@@ -200,7 +200,9 @@
         <text name="rt_help_grants_intro_3" text="Zkontrolujte obrazovku Dotace v menu Byrokracie a řekne vám, kdy bude vaše žádost zpracována. Bude buď schválena nebo zamítnuta. Pokud je schválena, použijte stavební menu k umístění budovy a obdržíte přidělené prostředky."/>
         <text name="rt_help_grants_intro_4" text="V daném okamžiku můžete mít jednu aktivní žádost a po zpracování úspěšné dotace existuje ochranná lhůta 6 měsíců."/>
 		<text name="rt_setting_taxEnabled" text="Daně povoleny"/>
-		<text name="rt_toolTip_taxEnabled" text="Povolit nebo zakázat daňový systém"/>
+		<text name="rt_toolTip_taxEnabled" text="Povolit nebo zakázat daňový systém. Zakázání trvale odstraní všechna daňová data."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Zaznamenávat transakce"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="Když je vypnuto, finanční transakce nejsou zaznamenávány pro daňové účely. Stávající daňová data jsou zachována. Použijte to k pozastavení daňového sledování při nastavování bez ztráty historie."/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="Směrnice/Dotační programy povoleny"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Povolit nebo zakázat systém směrnic a dotačních programů. Vypnutím se okamžitě ukončí všechny aktivní dotační programy."/>
 		<text name="rt_setting_baseTaxRate" text="Základní daňová sazba"/>

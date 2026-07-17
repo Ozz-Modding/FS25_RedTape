@@ -200,7 +200,9 @@
 		<text name="rt_help_grants_intro_3" text="在 Red Tape 選單的補助金頁面可查看處理進度。若獲准，請直接購買該建築，隨後將獲得撥款。"/>
 		<text name="rt_help_grants_intro_4" text="您一次只能有一個活躍申請，且在成功獲得補助後有 6 個月的冷卻期。"/>
 		<text name="rt_setting_taxEnabled" text="啟用稅務"/>
-		<text name="rt_toolTip_taxEnabled" text="啟用或停用稅務系統"/>
+		<text name="rt_toolTip_taxEnabled" text="啟用或停用稅務系統。停用將永久清除所有稅務資料。"/>
+		<text name="rt_setting_taxRecordingEnabled" text="記錄交易"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="關閉時，財務交易不會被記錄用於稅務目的。現有的稅務資料將被保留。在設定期間使用此功能暫停稅務追蹤，而不會遺失歷史記錄。"/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="啟用政策與計畫"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="啟用或停用政策與計畫系統。停用將立即終止所有活動中的計畫。"/>
 		<text name="rt_setting_baseTaxRate" text="基礎稅率"/>

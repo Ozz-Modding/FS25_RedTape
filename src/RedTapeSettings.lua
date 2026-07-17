@@ -3,6 +3,7 @@ RedTape.CONTROLS = {}
 
 RedTape.menuItems = {
     'taxEnabled',
+    'taxRecordingEnabled',
     'policiesAndSchemesEnabled',
     'grantsEnabled',
     'baseTaxRate',
@@ -19,6 +20,17 @@ table.insert(Farm.PERMISSIONS, Farm.PERMISSION.RED_TAPE_SETTINGS)
 
 --SERVER SETTINGS
 RedTape.SETTINGS.taxEnabled = {
+    ['default'] = 1,
+    ['serverOnly'] = true,
+    ['permission'] = 'redTapeSettings',
+    ['values'] = { true, false },
+    ['strings'] = {
+        g_i18n:getText("ui_on"),
+        g_i18n:getText("ui_off")
+    }
+}
+
+RedTape.SETTINGS.taxRecordingEnabled = {
     ['default'] = 1,
     ['serverOnly'] = true,
     ['permission'] = 'redTapeSettings',
@@ -98,6 +110,7 @@ RedTape.SETTINGS.manureStorageLimit = {
 function RedTape.SETTINGS.writeToStream(streamId)
     local settings = g_currentMission.RedTape.settings
     streamWriteBool(streamId, settings.taxEnabled)
+    streamWriteBool(streamId, settings.taxRecordingEnabled)
     streamWriteBool(streamId, settings.policiesAndSchemesEnabled)
     streamWriteBool(streamId, settings.grantsEnabled)
     streamWriteFloat32(streamId, settings.baseTaxRate)
@@ -108,6 +121,7 @@ end
 function RedTape.SETTINGS.readFromStream(streamId)
     local settings = g_currentMission.RedTape.settings
     settings.taxEnabled = streamReadBool(streamId)
+    settings.taxRecordingEnabled = streamReadBool(streamId)
     settings.policiesAndSchemesEnabled = streamReadBool(streamId)
     settings.grantsEnabled = streamReadBool(streamId)
     settings.baseTaxRate = streamReadFloat32(streamId)

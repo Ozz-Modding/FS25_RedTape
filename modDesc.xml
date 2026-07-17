@@ -27,8 +27,11 @@ https://github.com/sprkem/FS25_RedTape
 Changelog:
 
 1.0.2.8 [WIP]:
+- Added a new setting to control if tax is currently recording expense/income. This allows players to temporarily disable tax recording if doing game set up etc.
+- Disabling the tax system with the original setting will now clear tax history.
 - Husbandries containing only diseased animals (using Realistic Livestock) will no longer be punished for low productivity.
 - Reduction of the punishments for the restricted slurry policy. It is now far more lenient.
+- Added a fix for enablement of policies and schemes.
 - Reworked mp sending of settings. Thanks to KeilerHirsch
 
 1.0.2.7:

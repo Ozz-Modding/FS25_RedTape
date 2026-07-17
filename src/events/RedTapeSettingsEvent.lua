@@ -26,6 +26,9 @@ function RTSettingsEvent:run(connection)
 
     if not connection:getIsServer() then
         g_server:broadcastEvent(RTSettingsEvent.new())
+        if not rt.settings.taxEnabled then
+            rt.TaxSystem:onDisabled()
+        end
         if not rt.settings.policiesAndSchemesEnabled then
             rt.PolicySystem:onDisabled()
             rt.SchemeSystem:onDisabled()

@@ -200,7 +200,9 @@
 		<text name="rt_help_grants_intro_3" text="Überprüfen Sie den Zuschüsse-Bildschirm im Papierkram-Menü, und er wird Ihnen sagen, wann Ihr Antrag bearbeitet wird. Er wird entweder genehmigt oder abgelehnt. Wenn er genehmigt wird, verwenden Sie das Baumenü, um das Gebäude zu platzieren, und Sie erhalten die zugewiesenen Mittel."/>
 		<text name="rt_help_grants_intro_4" text="Sie können zu einem bestimmten Zeitpunkt einen aktiven Antrag haben, und es gibt eine Abkühlungsperiode von 6 Monaten, nachdem ein erfolgreicher Zuschuss bearbeitet wurde."/>
 		<text name="rt_setting_taxEnabled" text="Steuern aktiviert"/>
-		<text name="rt_toolTip_taxEnabled" text="Steuersystem aktivieren oder deaktivieren"/>
+		<text name="rt_toolTip_taxEnabled" text="Steuersystem aktivieren oder deaktivieren. Deaktivieren löscht alle Steuerdaten dauerhaft."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Transaktionen aufzeichnen"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="Wenn deaktiviert, werden Finanztransaktionen nicht für Steuerzwecke erfasst. Vorhandene Steuerdaten bleiben erhalten. Verwende dies, um die Steuererfassung während der Einrichtung zu pausieren, ohne den Verlauf zu verlieren."/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="Richtlinien/Förderprogramme aktiviert"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Richtlinien- und Förderprogrammsystem aktivieren oder deaktivieren. Das Ausschalten beendet sofort alle aktiven Förderprogramme."/>
 		<text name="rt_setting_baseTaxRate" text="Grundsteuersatz"/>

@@ -200,7 +200,9 @@
 		<text name="rt_help_grants_intro_3" text="Check the Grants screen in the Red Tape menu and it will tell you when your application will be processed. It will either be approved or rejected. If approved, use the construction menu to place the building and you will receive the awarded funds."/>
 		<text name="rt_help_grants_intro_4" text="You can have one active application at a given time, and there is a cooldown period of 6 months after a successful grant is processed."/>
 		<text name="rt_setting_taxEnabled" text="Tax Enabled"/>
-		<text name="rt_toolTip_taxEnabled" text="Enable or disable the Tax System"/>
+		<text name="rt_toolTip_taxEnabled" text="Enable or disable the Tax System. Disabling will permanently clear all tax data."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Record Transactions"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="When off, financial transactions are not recorded for tax purposes. Existing tax data is preserved. Use this to pause tax tracking during setup without losing your history."/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="Policies/Schemes Enabled"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Enable or disable the Policies and Schemes system. Turning this off will immediately end all active Schemes."/>
 		<text name="rt_setting_baseTaxRate" text="Base Tax Rate"/>

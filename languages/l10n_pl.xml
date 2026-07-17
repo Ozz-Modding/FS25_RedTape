@@ -200,7 +200,9 @@
 <text name="rt_help_grants_intro_3" text="Sprawdź zakładkę Dotacje w menu Red Tape – powie ci ona, kiedy twój wniosek zostanie przetworzony. Może on zostać zatwierdzony lub odrzucony. Jeśli zostanie zatwierdzony, użyj menu budowy do postawienia budynku, a otrzymasz przyznane środki."/>
 <text name="rt_help_grants_intro_4" text="Możesz mieć jeden aktywny wniosek w danym momencie, a po pozytywnym przetworzeniu dotacji obowiązuje 6-miesięczny okres przerwy (tzw. cooldown)."/>
 <text name="rt_setting_taxEnabled" text="Włączone podatki"/>
-<text name="rt_toolTip_taxEnabled" text="Włącz lub wyłącz system podatkowy"/>
+<text name="rt_toolTip_taxEnabled" text="Włącz lub wyłącz system podatkowy. Wyłączenie spowoduje trwałe usunięcie wszystkich danych podatkowych."/>
+<text name="rt_setting_taxRecordingEnabled" text="Rejestruj transakcje"/>
+<text name="rt_toolTip_taxRecordingEnabled" text="Gdy wyłączone, transakcje finansowe nie są rejestrowane dla celów podatkowych. Istniejące dane podatkowe są zachowane. Użyj tego, aby wstrzymać śledzenie podatków podczas konfiguracji bez utraty historii."/>
 <text name="rt_setting_policiesAndSchemesEnabled" text="Włączone Polityki/Programy"/>
 <text name="rt_toolTip_policiesAndSchemesEnabled" text="Włącz lub wyłącz system Polityk i Programów. Wyłączenie tej opcji natychmiastowo zakończy wszystkie aktywne Programy."/>
 <text name="rt_setting_baseTaxRate" text="Podstawowa stawka podatku"/>

@@ -201,7 +201,9 @@
 		<text name="rt_help_grants_intro_3" text="Controlla la schermata Contributi nel menu Red Tape per sapere quando la tua domanda verrà elaborata. Sarà approvata o rifiutata. Se approvata, usa il menu costruzioni per posizionare l’edificio e riceverai i fondi assegnati."/>
 		<text name="rt_help_grants_intro_4" text="Puoi avere una sola domanda attiva alla volta e c’è un periodo di attesa di 6 mesi dopo l’approvazione di un contributo."/>
 		<text name="rt_setting_taxEnabled" text="Tasse abilitate"/>
-		<text name="rt_toolTip_taxEnabled" text="Abilita o disabilita il sistema fiscale"/>
+		<text name="rt_toolTip_taxEnabled" text="Abilita o disabilita il sistema fiscale. La disattivazione cancellerà definitivamente tutti i dati fiscali."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Registra transazioni"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="Quando disattivato, le transazioni finanziarie non vengono registrate ai fini fiscali. I dati fiscali esistenti vengono conservati. Usalo per mettere in pausa il monitoraggio fiscale durante la configurazione senza perdere la cronologia."/>
 		<text name="rt_setting_policiesAndSchemesEnabled" text="Politiche/Schemi abilitati"/>
 		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Abilita o disabilita il sistema di Politiche e Schemi. Disattivarlo terminerà immediatamente tutti gli Schemi attivi."/>
 		<text name="rt_setting_baseTaxRate" text="Aliquota fiscale base"/>
