@@ -138,7 +138,7 @@
 		<text name="rt_scheme_desc_natural_grazing" text="鼓勵動物在沒有額外飼料的情況下於牧場覓食。補償金旨在彌補產量損失。您將根據動物放牧的時間獲得獎金，金額視動物類型而定。"/>
 		<text name="rt_scheme_desc_natural_fertiliser" text="鼓勵使用糞肥、泥漿和沼液等天然肥料。相比合成肥料，使用天然肥料將獲得獎金。這適用於您農場或承包合約中的所有施肥行為。"/>
 		<text name="rt_scheme_desc_winter_cover_crops" text="鼓勵在冬季種植覆蓋作物以減少水土流失和養分流失。在冬季期間於田間種植核准的覆蓋作物可獲得獎金。"/>
-		<text name="rt_scheme_desc_road_snow_clearing" text="因近期降雪，地方議會請求農民協助撒鹽除雪。請確保撒鹽時速度不超過 %s%s，以確保覆蓋均勻。"/>
+		<text name="rt_scheme_desc_road_snow_clearing" text="因近期降雪，地方議會請求農民協助保持道路暢通與安全。鹽必須撒在其他車輛經常使用的道路上。請確保撒鹽時速度不超過 %s%s，以確保覆蓋均勻。"/>
 		<text name="rt_scheme_desc_brand_demo" text="%s 提供您的農場試用設備的機會，為期 %s 個月。試用車輛的具體規格將在您加入計畫時確定。"/>
 		<text name="rt_scheme_desc_set_aside" text="鼓勵讓部分農地休耕，提供土地休息機會。若田地至少休耕 %d 個月直到 12 月，將獲得獎金。若符合條件的土地超過 %s，次年所有作物銷售將享有 5%% 的優惠稅率。"/>
 		<text name="rt_scheme_report_desc_delayed_mowing" text="報告顯示農地列表以及上次評估支付的金額。"/>
