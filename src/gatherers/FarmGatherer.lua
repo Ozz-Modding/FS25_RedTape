@@ -840,13 +840,17 @@ function FarmGatherer:recordSaltSpread(x, y, z, spline, farmId)
 end
 
 function FarmGatherer:onSnowApplied()
-    self.snowOnGround = true
-    for _, farmData in pairs(self.data) do
-        farmData.saltCount = 0
+    -- Only reset salt tracking on the first snow event. Subsequent calls fire when
+    -- the snow layer thickens but the scheme is already running, so don't wipe progress.
+    if not self.snowOnGround then
+        self.snowOnGround = true
+        for _, farmData in pairs(self.data) do
+            farmData.saltCount = 0
+        end
+        self.saltData = {}
+        self.saltSyncDirtyFarms = {}
+        self.saltSyncTimer = 0
     end
-    self.saltData = {}
-    self.saltSyncDirtyFarms = {}
-    self.saltSyncTimer = 0
 end
 
 function FarmGatherer:onSnowEnded()

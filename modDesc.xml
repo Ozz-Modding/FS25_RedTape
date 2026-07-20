@@ -35,6 +35,7 @@ Changelog:
 - Reduction of the punishments for the restricted slurry policy. It is now far more lenient.
 - Added a fix for enablement of policies and schemes.
 - Reworked mp sending of settings. Thanks to KeilerHirsch
+- Fix for salt spreading scheme earnings being reset when snow thickens on the ground.
 
 1.0.2.7:
 - Scheme issued equipment is now excluded from the Advanced Damage System mod. The exclusion is removed if vehicles are purchased.
@@ -180,6 +181,7 @@ https://github.com/sprkem/FS25_RedTape
 - Die Strafen für die eingeschränkte Gülle-Richtlinie wurden reduziert. Sie ist jetzt deutlich nachsichtiger.
 - Ein Fix für die Aktivierung von Richtlinien und Programmen wurde hinzugefügt.
 - MP-Übertragung der Einstellungen überarbeitet. Danke an KeilerHirsch.
+- Behebung eines Fehlers, bei dem die verdienten Beträge des Salzstreuungs-Programms zurückgesetzt wurden, wenn der Schnee auf dem Boden dicker wurde.
 
 1.0.2.7:
 - Von Programmen bereitgestellte Ausrüstung ist nun vom Advanced Damage System Mod ausgeschlossen. Der Ausschluss wird aufgehoben, wenn Fahrzeuge gekauft werden.
@@ -329,6 +331,7 @@ Journal des modifications:
 - Les pénalités pour la politique d'épandage de lisier restreint ont été réduites. Elle est désormais bien plus indulgente.
 - Correction du problème d'activation des politiques et programmes.
 - Refonte de l'envoi MP des paramètres. Merci à KeilerHirsch.
+- Correction d'un bug où les gains du programme d'épandage de sel étaient réinitialisés lorsque la neige s'épaississait sur le sol.
 
 1.0.2.7:
 - L'équipement fourni par les programmes est désormais exclu du mod Advanced Damage System. L'exclusion est levée si les véhicules sont achetés.
