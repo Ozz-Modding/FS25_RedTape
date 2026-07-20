@@ -14,6 +14,8 @@ function FarmGatherer.new()
     self.snowOnGround = false
     self.saltData = {}
     self.manureCells = {}
+    self.saltSyncDirtyFarms = {}  -- farmId -> true when saltCount changed since last broadcast
+    self.saltSyncTimer = 0        -- counts up; flush fires every SALT_SYNC_INTERVAL_MS ms
 
     return self
 end
@@ -833,6 +835,7 @@ function FarmGatherer:recordSaltSpread(x, y, z, spline, farmId)
         local farmData = self:getFarmData(farmId)
         farmData.saltCount = (farmData.saltCount or 0) + 1
         self.saltData[spline][key] = true
+        self.saltSyncDirtyFarms[farmId] = true
     end
 end
 
@@ -842,6 +845,8 @@ function FarmGatherer:onSnowApplied()
         farmData.saltCount = 0
     end
     self.saltData = {}
+    self.saltSyncDirtyFarms = {}
+    self.saltSyncTimer = 0
 end
 
 function FarmGatherer:onSnowEnded()
@@ -850,12 +855,86 @@ function FarmGatherer:onSnowEnded()
         farmData.saltCount = 0
     end
     self.saltData = {}
+    self.saltSyncDirtyFarms = {}
+    self.saltSyncTimer = 0
+end
+
+-- Called from RedTape:update on the server every dt ms.
+-- Broadcasts earnings for any farm whose saltCount changed since the last flush,
+-- but at most once per SALT_SYNC_INTERVAL_MS milliseconds.
+FarmGatherer.SALT_SYNC_INTERVAL_MS = 5000
+
+function FarmGatherer:updateSaltSync(dt)
+    if not self.snowOnGround then return end
+
+    self.saltSyncTimer = self.saltSyncTimer + dt
+    if self.saltSyncTimer < FarmGatherer.SALT_SYNC_INTERVAL_MS then return end
+    self.saltSyncTimer = 0
+
+    if next(self.saltSyncDirtyFarms) == nil then return end
+
+    local schemeInfo = RTSchemes[RTSchemeIds.ROAD_SNOW_CLEARING]
+    local schemeSystem = g_currentMission.RedTape.SchemeSystem
+
+    local myFarmId = g_currentMission:getFarmId()
+
+    for farmId, _ in pairs(self.saltSyncDirtyFarms) do
+        local farmData = self:getFarmData(farmId)
+        local scheme = self:_getActiveSaltScheme(schemeSystem, farmId)
+        if scheme ~= nil then
+            local tierInfo = schemeInfo.tiers[scheme.tier]
+            local earnings = (farmData.saltCount or 0) * tierInfo.bonusPerBlock * EconomyManager.getPriceMultiplier()
+            -- broadcastEvent sends to remote clients only, so update the local HUD directly for the server player
+            if farmId == myFarmId then
+                g_currentMission.RedTape.SaltSchemeHUD:refreshEarnings(earnings)
+            end
+            g_server:broadcastEvent(RTSaltSchemeHUDUpdateEvent.new(farmId, earnings))
+        end
+    end
+
+    self.saltSyncDirtyFarms = {}
+end
+
+function FarmGatherer:_getActiveSaltScheme(schemeSystem, farmId)
+    local activeSchemes = schemeSystem:getActiveSchemesForFarm(farmId)
+    for _, scheme in pairs(activeSchemes) do
+        if scheme.schemeIndex == RTSchemeIds.ROAD_SNOW_CLEARING then
+            return scheme
+        end
+    end
+    return nil
 end
 
 function FarmGatherer:writeInitialClientState(streamId, connection)
-    -- Add any data required on clients
+    -- Send current salt earnings for all farms that have an active salt scheme,
+    -- so a joining client can immediately show the HUD if the scheme is active.
+    local schemeSystem = g_currentMission.RedTape.SchemeSystem
+    local schemeInfo = RTSchemes[RTSchemeIds.ROAD_SNOW_CLEARING]
+    local entries = {}
+    for farmId, farmData in pairs(self.data) do
+        local scheme = self:_getActiveSaltScheme(schemeSystem, farmId)
+        if scheme ~= nil then
+            local tierInfo = schemeInfo.tiers[scheme.tier]
+            local earnings = (farmData.saltCount or 0) * tierInfo.bonusPerBlock * EconomyManager.getPriceMultiplier()
+            table.insert(entries, { farmId = farmId, earnings = earnings })
+        end
+    end
+    streamWriteInt32(streamId, #entries)
+    for _, entry in ipairs(entries) do
+        streamWriteInt32(streamId, entry.farmId)
+        streamWriteFloat32(streamId, entry.earnings)
+    end
 end
 
 function FarmGatherer:readInitialClientState(streamId, connection)
-    -- Add any data required on clients
+    local count = streamReadInt32(streamId)
+    local myFarmId = g_currentMission:getFarmId()
+    for _ = 1, count do
+        local farmId   = streamReadInt32(streamId)
+        local earnings = streamReadFloat32(streamId)
+        if farmId == myFarmId then
+            g_currentMission.RedTape.SaltSchemeHUD:activate()
+            g_currentMission.RedTape.SaltSchemeHUD:refreshEarnings(earnings)
+        end
+    end
 end

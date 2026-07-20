@@ -2,6 +2,7 @@
 <l10n language="zh">
 	<translationContributors/>
 	<texts>
+		<text name="rt_salt_scheme_hud_earnings" text="Salt scheme earned: %s"/>
 		<text name="rt_notify_active_policy" text="新政策已啟用：%s"/>
 		<text name="rt_notify_active_scheme" text="有新的計畫可用：%s (等級 %s)"/>
 		<text name="rt_notify_ended_scheme" text="一項計畫已結束：%s"/>

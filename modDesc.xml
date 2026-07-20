@@ -26,10 +26,11 @@ https://github.com/sprkem/FS25_RedTape
 
 Changelog:
 
-1.0.2.8 [WIP]:
+1.0.2.8:
 - Added a new setting to control if tax is currently recording expense/income. This allows players to temporarily disable tax recording if doing game set up etc.
 - Disabling the tax system with the original setting will now clear tax history.
 - Husbandries containing only diseased animals (using Realistic Livestock) will no longer be punished for low productivity.
+- During the Salt Spreading Scheme, the UI will show how much money is earned so far as a clear indicator of progress.
 - Improved the wording for the salt spreading scheme to make it clearer what the player should do.
 - Reduction of the punishments for the restricted slurry policy. It is now far more lenient.
 - Added a fix for enablement of policies and schemes.
@@ -62,7 +63,6 @@ Changelog:
 - Negative policy scores are floored now to prevent reports showing a -0 score.
 - 'Other' income and expenses are now included in the tax system. This includes some things like certain objects and soil information with PF.
 - Significantly reduced the reward for the winter cover crop scheme.
-
 
 1.0.2.2:
 - For crop promotion, save by fruit name to avoid issues if fruit type indices change. Also fix a bug that caused evaluation to fail.
@@ -170,6 +170,21 @@ Weitere Informationen finden Sie im Hilfemenü des Spiels.
 https://github.com/sprkem/FS25_RedTape
 
 Änderungsliste:
+
+1.0.2.8:
+- Eine neue Einstellung wurde hinzugefügt, um zu steuern, ob das Steuersystem aktuell Ausgaben/Einnahmen erfasst. Dies ermöglicht es Spielern, die Steuererfassung vorübergehend zu deaktivieren, z.B. während der Spieleinrichtung.
+- Das Deaktivieren des Steuersystems über die ursprüngliche Einstellung löscht nun den Steuerverlauf.
+- Tierhaltungen, die nur kranke Tiere enthalten (mit Realistic Livestock), werden nicht mehr für niedrige Produktivität bestraft.
+- Während des Salzstreuungs-Programms zeigt die Benutzeroberfläche den bisher verdienten Betrag als klaren Fortschrittsindikator an.
+- Die Formulierungen für das Salzstreuungs-Programm wurden verbessert, um klarer zu machen, was der Spieler tun soll.
+- Die Strafen für die eingeschränkte Gülle-Richtlinie wurden reduziert. Sie ist jetzt deutlich nachsichtiger.
+- Ein Fix für die Aktivierung von Richtlinien und Programmen wurde hinzugefügt.
+- MP-Übertragung der Einstellungen überarbeitet. Danke an KeilerHirsch.
+
+1.0.2.7:
+- Von Programmen bereitgestellte Ausrüstung ist nun vom Advanced Damage System Mod ausgeschlossen. Der Ausschluss wird aufgehoben, wenn Fahrzeuge gekauft werden.
+- Sicherheitsfilter für Demo-Programme hinzugefügt, um modifizierte Ausrüstung herauszufiltern, die Darstellungsprobleme verursacht.
+- Mod-Referenzpfadnamen für Demo-Programme im Mehrspielermodus korrigiert.
 
 1.0.2.6:
 - Sicherheitsvorkehrung für einen sporadischen Fehler beim Sprühen im Zusammenhang mit PF hinzugefügt.
@@ -305,6 +320,21 @@ https://github.com/sprkem/FS25_RedTape
 
 Journal des modifications:
 
+1.0.2.8:
+- Ajout d'un nouveau paramètre pour contrôler si le système fiscal enregistre actuellement les dépenses/revenus. Cela permet aux joueurs de désactiver temporairement l'enregistrement fiscal, par exemple lors de la configuration du jeu.
+- La désactivation du système fiscal via le paramètre d'origine effacera désormais l'historique fiscal.
+- Les élevages ne contenant que des animaux malades (avec Realistic Livestock) ne seront plus pénalisés pour faible productivité.
+- Pendant le programme d'épandage de sel, l'interface utilisateur affiche désormais le montant gagné jusqu'à présent comme indicateur de progression clair.
+- Les formulations du programme d'épandage de sel ont été améliorées pour indiquer plus clairement ce que le joueur doit faire.
+- Les pénalités pour la politique d'épandage de lisier restreint ont été réduites. Elle est désormais bien plus indulgente.
+- Correction du problème d'activation des politiques et programmes.
+- Refonte de l'envoi MP des paramètres. Merci à KeilerHirsch.
+
+1.0.2.7:
+- L'équipement fourni par les programmes est désormais exclu du mod Advanced Damage System. L'exclusion est levée si les véhicules sont achetés.
+- Ajout d'un filtre de sécurité pour les programmes de démonstration afin d'exclure les équipements moddés qui causent des problèmes d'affichage.
+- Correction des chemins de référence des mods pour les programmes de démonstration en multijoueur.
+
 1.0.2.6:
 - Ajout d'une protection de sécurité pour une erreur sporadique lors de la pulvérisation liée à PF.
 - Correction d'un problème où les paramètres n'étaient pas sauvegardés dans certaines circonstances.
@@ -422,6 +452,8 @@ Journal des modifications:
         </fr>
     </description>
     <extraSourceFiles>
+        <sourceFile filename="src/events/SaltSchemeHUDUpdateEvent.lua"/>
+        <sourceFile filename="src/hud/SaltSchemeHUD.lua"/>
         <sourceFile filename="src/events/HarvestHistoryUpdateEvent.lua"/>
         <sourceFile filename="src/events/InitialClientStateEvent.lua"/>
         <sourceFile filename="src/events/GrantApplicationEvent.lua"/>

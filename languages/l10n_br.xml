@@ -2,6 +2,7 @@
 <l10n>
 	<translationContributors>MuhWalker</translationContributors>
 	<texts>
+		<text name="rt_salt_scheme_hud_earnings" text="Salt scheme earned: %s"/>
 		<text name="rt_notify_active_policy" text="Uma nova política foi ativada: %s"/>
 		<text name="rt_notify_active_scheme" text="Um novo programa está disponível: %s (Nível %s)"/>
 		<text name="rt_notify_ended_scheme" text="Um programa foi encerrado: %s"/>

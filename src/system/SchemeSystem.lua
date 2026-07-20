@@ -276,6 +276,7 @@ function RTSchemeSystem:registerSelectedScheme(scheme, farmId)
     table.insert(activeSchemes, schemeForFarm)
     schemeForFarm:selected()
     g_messageCenter:publish(MessageType.RT_DATA_UPDATED)
+
 end
 
 function RTSchemeSystem:storeSelectedSchemeOnClient(scheme)
@@ -283,6 +284,7 @@ function RTSchemeSystem:storeSelectedSchemeOnClient(scheme)
     local activeSchemes = self:getActiveSchemesForFarm(scheme.farmId)
     table.insert(activeSchemes, scheme)
     g_messageCenter:publish(MessageType.RT_DATA_UPDATED)
+
 end
 
 -- Called by SchemeNoLongerAvailableEvent, runs on Client and Server

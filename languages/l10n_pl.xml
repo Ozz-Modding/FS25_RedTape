@@ -2,6 +2,7 @@
 <l10n>
 	<translationContributors/>
 	<texts>
+		<text name="rt_salt_scheme_hud_earnings" text="Salt scheme earned: %s"/>
 <text name="rt_notify_active_policy" text="Aktywowano nową politykę: %s"/>
 <text name="rt_notify_active_scheme" text="Dostępny jest nowy program: %s (Poziom %s)"/>
 <text name="rt_notify_ended_scheme" text="Program zakończył się: %s"/>

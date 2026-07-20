@@ -17,6 +17,8 @@ function RedTape:loadMap()
     self.infrequentChecksUpdateTime = 30000       -- initial interval for infrequent checks
     self.sprayAreaCheckInterval = 500             -- interval for spray area checks
     self.sprayCheckTime = 0                       -- initial time for spray area checks
+    self.saltHUDCheckIntervalMs = 2000
+    self.saltHUDCheckTime = 2000
     self.fillTypeCache = nil
 
     g_gui:loadProfiles(RedTape.dir .. "src/gui/guiProfiles.xml")
@@ -34,6 +36,7 @@ function RedTape:loadMap()
     self.GrantSystem = RTGrantSystem.new()
     self.InfoGatherer = RTInfoGatherer.new()
     self.EventLog = RTEventLog.new()
+    self.SaltSchemeHUD = RTSaltSchemeHUD.new()
     self.RedTapeMenu = guiRedTape
     self.didLoadFromXML = false
     self.missionStarted = false
@@ -121,6 +124,16 @@ function RedTape:update(dt)
     end
 
     self.SchemeSystem:checkPendingVehicles()
+
+    if g_currentMission:getIsServer() then
+        self.InfoGatherer.gatherers[INFO_KEYS.FARMS]:updateSaltSync(dt)
+    end
+
+    self.saltHUDCheckTime = self.saltHUDCheckTime - dt
+    if self.saltHUDCheckTime <= 0 then
+        self.saltHUDCheckTime = self.saltHUDCheckIntervalMs
+        self.SaltSchemeHUD:syncVisibility()
+    end
 end
 
 function RedTape:makeCheckEnabledPredicate()
@@ -453,6 +466,7 @@ function RedTape:onStartMission()
     MissionManager.getIsMissionWorkAllowed = Utils.overwrittenFunction(MissionManager.getIsMissionWorkAllowed,
         RTMissionManagerExtension.getIsMissionWorkAllowed)
     Farm.changeBalance = Utils.appendedFunction(Farm.changeBalance, RTFarmExtension.changeBalance)
+
     local rt = g_currentMission.RedTape
     rt.missionStarted = true
     local ig = rt.InfoGatherer
@@ -477,6 +491,13 @@ function RedTape:onStartMission()
 
             rt:periodChanged()
         end
+
+    end
+end
+
+function RedTape:draw()
+    if g_currentMission.RedTape ~= nil and g_currentMission.RedTape.SaltSchemeHUD ~= nil then
+        g_currentMission.RedTape.SaltSchemeHUD:draw()
     end
 end
 
