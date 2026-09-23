@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<l10n>
+	<translationContributors/>
+	<texts>
+		<text name="rt_salt_scheme_hud_earnings" text="Зароблено за програмою посипання доріг: %s"/>
+		<text name="rt_notify_active_policy" text="Активовано нову політику: %s"/>
+		<text name="rt_notify_active_scheme" text="Стала доступною нова програма: %s (рівень %s)"/>
+		<text name="rt_notify_ended_scheme" text="Програму завершено: %s"/>
+		<text name="rt_notify_expired_scheme" text="Програма більше недоступна: %s (рівень %s)"/>
+		<text name="rt_policy_reason_evaluation" text="Нараховано %s балів під час оцінювання політики %s"/>
+		<text name="rt_policy_custom" text="Користувацька"/>
+		<text name="rt_notify_scheme_payout" text="За програмою %s вам виплачено: %s"/>
+		<text name="rt_notify_policy_warning" text="Ви отримали попередження за порушення політики %s"/>
+		<text name="rt_notify_policy_fine" text="Ви отримали штраф у розмірі %s за порушення політики %s"/>
+		<text name="rt_label_active_policies" text="Активні політики"/>
+		<text name="rt_label_tax_statement" text="Податкова декларація"/>
+		<text name="rt_header_policies" text="Політики"/>
+		<text name="rt_header_schemes" text="Програми"/>
+		<text name="rt_header_tax" text="Податки"/>
+		<text name="rt_header_eventlog" text="Журнал подій"/>
+		<text name="rt_header_croprotation" text="Сівозміна"/>
+		<text name="rt_header_croprotation_mostrecent" text="Остання культура"/>
+		<text name="rt_header_croprotation_previous" text="Попередня"/>
+		<text name="rt_header_croprotation_previous1" text="Попередня -1"/>
+		<text name="rt_header_croprotation_previous2" text="Попередня -2"/>
+		<text name="rt_header_croprotation_previous3" text="Попередня -3"/>
+		<text name="rt_header_croprotation_view_title" text="Історія врожаїв"/>
+		<text name="rt_header_croprotation_view_subtitle" text="Наведені нижче дані використовуються політикою сівозміни. Плануючи наступну культуру на полі, для дотримання вимог оберіть іншу культуру, ніж та, що вказана нижче як остання."/>
+		<text name="rt_header_current_tier" text="Поточний рівень: %s"/>
+		<text name="rt_header_compliance_tier" text="Рівень дотримання вимог"/>
+		<text name="rt_header_policy_information" text="Інформація про політику"/>
+		<text name="rt_header_scheme_information" text="Інформація про програму"/>
+		<text name="rt_header_latest_report" text="Останній звіт"/>
+		<text name="rt_header_no_selected_policy" text="Виберіть активну політику, щоб переглянути відповідну інформацію"/>
+		<text name="rt_header_no_report_information" text="Інформація для звіту відсутня. Або немає про що звітувати, або оцінювання ще не проводилося."/>
+		<text name="rt_header_scheme_equipment" text="На час дії програми буде надано таку техніку:"/>
+		<text name="rt_header_next_evaluation_date" text="Наступна дата оцінювання: %s"/>
+		<text name="rt_header_no_tax_statement" text="Наразі податкова декларація відсутня. Декларації формуються щороку у квітні, а сплата податку відбувається у вересні."/>
+		<text name="rt_header_finalised_statement" text="Декларація за попередній рік:"/>
+		<text name="rt_header_tax_estimate" text="Поточні підсумки за рік:"/>
+		<text name="rt_header_tax_notes" text="Податкові примітки:"/>
+		<text name="rt_header_tax_notes_info" text="Перелік приміток, які можуть допомогти пояснити вашу податкову декларацію."/>
+		<text name="rt_header_no_tax_notes" text="У декларації немає податкових приміток."/>
+		<text name="rt_header_total_expenses" text="Витрати:"/>
+		<text name="rt_header_total_taxable_income" text="Оподатковуваний дохід:"/>
+		<text name="rt_header_total_taxed_income" text="Дохід після оподаткування:"/>
+		<text name="rt_header_total_tax_rate" text="Ставка податку:"/>
+		<text name="rt_header_total_tax_due" text="Податок до сплати:"/>
+		<text name="rt_header_tax_status" text="Статус податку:"/>
+		<text name="rt_header_tax_payment_info" text="Податкові декларації розраховуються у квітні, а сплата відбувається у вересні."/>
+		<text name="rt_tax_statement_status_paid" text="Сплачено"/>
+		<text name="rt_tax_statement_status_unpaid" text="Не сплачено"/>
+		<text name="rt_event_type_none" text="-"/>
+		<text name="rt_event_type_policypoints" text="Бали політики"/>
+		<text name="rt_event_type_policyactivated" text="Політику активовано"/>
+		<text name="rt_event_type_policycompleted" text="Політику завершено"/>
+		<text name="rt_event_type_schemeactivated" text="Програму активовано"/>
+		<text name="rt_event_type_schemepayout" text="Виплата за програмою"/>
+		<text name="rt_event_type_schemeexpired" text="Термін програми минув"/>
+		<text name="rt_event_type_policywarning" text="Попередження за політикою"/>
+		<text name="rt_event_type_policyfine" text="Штраф за політикою"/>
+		<text name="rt_tableheader_timestamp" text="Час"/>
+		<text name="rt_tableheader_eventtype" text="Тип події"/>
+		<text name="rt_tableheader_detail" text="Подробиці"/>
+		<text name="rt_tableheader_name" text="Назва"/>
+		<text name="rt_tableheader_description" text="Опис"/>
+		<text name="rt_tableheader_next" text="Наступна перевірка"/>
+		<text name="rt_policy_croprotation" text="Сівозміна"/>
+		<text name="rt_policy_sprayviolation" text="Забруднення води"/>
+		<text name="rt_policy_empty_food" text="Годівля тварин"/>
+		<text name="rt_policy_empty_straw" text="Підстилка для тварин"/>
+		<text name="rt_policy_full_slurry" text="Управління рідким гноєм"/>
+		<text name="rt_policy_animal_productivity" text="Умови утримання тварин"/>
+		<text name="rt_policy_animal_space" text="Простір для тварин"/>
+		<text name="rt_policy_manure_spreading" text="Управління гноєм"/>
+		<text name="rt_policy_restricted_slurry" text="Обмеження внесення рідкого гною"/>
+		<text name="rt_policy_sustainable_forestry" text="Стале лісове господарство"/>
+		<text name="rt_policy_description_croprotation" text="Вимагає чергувати культури між полями та сезонами, щоб підтримувати родючість ґрунту, переривати цикли шкідників і хвороб, покращувати баланс поживних речовин та зберігати врожайність у довгостроковій перспективі."/>
+		<text name="rt_policy_description_sprayviolation" text="Забороняє внесення хімічних речовин (твердих добрив, рідкого гною, вапна, гною та гербіцидів) у межах 14-метрової захисної зони навколо водойм, щоб запобігти стоку й забрудненню, яке може шкодити водним організмам, погіршувати якість води та загрожувати здоров'ю людей. За порушення передбачено покарання."/>
+		<text name="rt_policy_description_empty_food" text="Вимагає, щоб тварини завжди мали достатньо корму. Підтримуйте годівниці наповненими та доступними, щоб запобігати голоду й дотримуватися стандартів добробуту тварин."/>
+		<text name="rt_policy_description_empty_straw" text="Вимагає забезпечувати тварин достатньою кількістю солом'яної підстилки для комфорту, теплоізоляції та гігієни. Солома зменшує ризик травм і стресу, допомагає підтримувати температуру тіла та вбирає вологу."/>
+		<text name="rt_policy_description_full_slurry" text="Вимагає не допускати переповнення резервуарів рідкого гною. Переливи можуть спричинити потрапляння рідкого гною на поля та у водойми, забруднюючи ґрунт і воду та завдаючи шкоди довкіллю."/>
+		<text name="rt_policy_description_animal_productivity" text="Заохочує підтримувати продуктивність тварин, яка є загальним показником належного добробуту тварин."/>
+		<text name="rt_policy_description_animal_space" text="Вимагає надавати тваринам достатньо простору для руху, відпочинку та доступу до корму й води. Запобігання перенаселенню зменшує стрес, травми та поширення хвороб. Не застосовується, якщо в господарстві лише одна тварина. Молодим тваринам потрібно менше простору, ніж дорослим."/>
+		<text name="rt_policy_description_manure_spreading" text="Не слід зберігати гній без використання необмежено довго. Переконайтеся, що ви не зберігаєте більше 50% гною, виробленого за 6-місячний період. Якщо ви не виробляєте гній, ця політика вас не стосується. Звіт оновлюється щомісяця, а повне оцінювання та виплата або штраф відбуваються у травні та листопаді."/>
+		<text name="rt_policy_description_restricted_slurry" text="Заборонено вносити рідкий гній у період з вересня по грудень. За кожне порушення передбачено штраф."/>
+		<text name="rt_policy_description_sustainable_forestry" text="Заохочує сталі методи лісового господарства: винагороджує за чистий приріст кількості висаджених дерев і штрафує за загальне вирубування лісу. Політика застосовується лише до вашої власної землі. Контрактні роботи не впливають на оцінювання. Звіт оновлюється щомісяця з піврічними підсумками, а повне оцінювання та виплата або штраф відбуваються у червні та грудні."/>
+		<text name="rt_policy_report_description_croprotation" text="У звіті показано загальну площу землі, що відповідає та не відповідає вимогам."/>
+		<text name="rt_policy_report_description_sprayviolation" text="У звіті показано кількість порушень правил обприскування за останній місяць."/>
+		<text name="rt_policy_report_description_empty_food" text="У звіті показано сумарну кількість годин, протягом яких у загонах для тварин не було корму."/>
+		<text name="rt_policy_report_description_empty_straw" text="У звіті показано сумарну кількість годин, протягом яких у загонах для тварин не було соломи."/>
+		<text name="rt_policy_report_description_full_slurry" text="У звіті показано сумарну кількість годин, протягом яких резервуари рідкого гною були заповнені."/>
+		<text name="rt_policy_report_description_animal_productivity" text="У звіті показано сумарну кількість годин, протягом яких тварини мали низьку продуктивність."/>
+		<text name="rt_policy_report_description_animal_space" text="Спочатку у звіті показано кількість годин порушення. Далі для кожного тваринницького об'єкта наведено доступну площу та найбільшу необхідну площу за попередній місяць."/>
+		<text name="rt_policy_report_description_manure_spreading" text="У звіті показано кількість гною, виробленого за останні 6 місяців, а також загальний обсяг виробництва та максимально дозволений обсяг зберігання за цей період. Зверніть увагу: дані за Місяць 1, показані у звіті, не будуть включені до наступного звіту, а гній, вироблений у поточному місяці, необхідно буде врахувати."/>
+		<text name="rt_policy_report_description_restricted_slurry" text="У звіті показано, скільки разів рідкий гній вносився протягом заборонених місяців."/>
+		<text name="rt_policy_report_description_sustainable_forestry" text="У звіті показано кількість висаджених і зрубаних дерев у поточному піврічному періоді."/>
+		<text name="rt_report_name_farmland" text="Ділянка %s"/>
+		<text name="rt_report_name_total_area" text="Загальна площа"/>
+		<text name="rt_report_name_non_compliant_area" text="Площа з порушеннями"/>
+		<text name="rt_report_name_spray_violations" text="Порушення під час обприскування"/>
+		<text name="rt_report_name_empty_food" text="Годин без корму"/>
+		<text name="rt_report_name_empty_straw" text="Годин без соломи"/>
+		<text name="rt_report_name_full_slurry" text="Годин із повним резервуаром рідкого гною"/>
+		<text name="rt_report_name_low_productivity_hours" text="Годин із низькою продуктивністю"/>
+		<text name="rt_report_name_animal_space_violations" text="Порушення вимог до простору тварин"/>
+		<text name="rt_report_name_manure_total_produced" text="Усього вироблено гною"/>
+		<text name="rt_report_name_manure_stored_amount" text="Поточний запас гною"/>
+		<text name="rt_report_name_manure_max_stored_amount" text="Максимально дозволений запас"/>
+		<text name="rt_report_name_restricted_slurry_violations" text="Порушення обмежень на рідкий гній"/>
+		<text name="rt_report_name_bale_penalty" text="Штраф за тюки"/>
+		<text name="rt_report_name_total_payout" text="Загальна сума виплат"/>
+		<text name="rt_report_name_animal_count" text="Кількість відповідних тварин"/>
+		<text name="rt_report_name_harvest_reward" text="Винагорода за врожай"/>
+		<text name="rt_report_name_natural_usage" text="Використання органічних добрив"/>
+		<text name="rt_report_name_other_usage" text="Використання інших добрив"/>
+		<text name="rt_report_name_points" text="Бали"/>
+		<text name="rt_report_name_trees_planted" text="Висаджено дерев"/>
+		<text name="rt_report_name_trees_cut" text="Зрубано дерев"/>
+		<text name="rt_report_name_note" text="Примітка:"/>
+		<text name="rt_report_name_additional_tax_benefit" text="Право на податкову пільгу"/>
+		<text name="rt_report_value_true" text="Так"/>
+		<text name="rt_report_value_false" text="Ні"/>
+		<text name="rt_report_value_not_enough_months_elapsed" text="Повне оцінювання цього місяця пропущено."/>
+		<text name="rt_scheme_delayed_mowing" text="Відмова від косіння навесні"/>
+		<text name="rt_scheme_crop_promotion" text="Підтримка вирощування культури"/>
+		<text name="rt_scheme_reduce_bale_wrapping" text="Зменшення обгортання тюків"/>
+		<text name="rt_scheme_tractor_demo" text="Демонстрація трактора"/>
+		<text name="rt_scheme_natural_grazing" text="Природний випас"/>
+		<text name="rt_scheme_natural_fertiliser" text="Органічні добрива"/>
+		<text name="rt_scheme_winter_cover_crops" text="Озимі покривні культури"/>
+		<text name="rt_scheme_road_snow_clearing" text="Очищення доріг від снігу"/>
+		<text name="rt_scheme_brand_demo" text="Демонстрація техніки бренду"/>
+		<text name="rt_scheme_set_aside" text="Земля під паром"/>
+		<text name="rt_scheme_desc_delayed_mowing" text="Не косіть траву у весняні місяці (з березня по червень), щоб захистити дику природу. У липні ви отримаєте компенсацію за нескошену траву."/>
+		<text name="rt_scheme_desc_crop_promotion" text="Державна ініціатива з підтримки вирощування культури %s за допомогою фінансових стимулів. На час дії програми вам можуть надати техніку, а також виплачуватиметься бонус за кожне поле, на якому ви посієте цю культуру."/>
+		<text name="rt_scheme_desc_reduce_bale_wrapping" text="Обгортання тюків потребує пластику та перешкоджає розсіюванню насіння під час транспортування. Ця програма штрафує за обгортання тюків, але винагороджує за альтернативи, наприклад виготовлення тюків сіна або використання кормозбирального причепа."/>
+		<text name="rt_scheme_desc_tractor_demo" text="%s пропонує вашому господарству випробувати %s протягом %s міс.%s Точна комплектація демонстраційної машини визначається під час приєднання до програми."/>
+		<text name="rt_scheme_desc_natural_grazing" text="Програма заохочує випас тварин на пасовищі без додаткового корму. Виплата покликана компенсувати можливу втрату доходу. Ви отримуватимете бонус за час, який тварини проводять на випасі. Розмір бонусу залежить від виду тварин."/>
+		<text name="rt_scheme_desc_natural_fertiliser" text="Програма заохочує використання органічних добрив, таких як гній, рідкий гній і дигестат. Ви отримуватимете бонус залежно від кількості органічних добрив, використаних порівняно із синтетичними альтернативами. Це стосується всіх внесених вами добрив — як на власній фермі, так і під час контрактних робіт."/>
+		<text name="rt_scheme_desc_winter_cover_crops" text="Заохочує висівання покривних культур у зимові місяці для зменшення ерозії ґрунту та вимивання поживних речовин. Ви отримаєте бонус за кожне поле, на якому протягом зимового сезону посієте дозволену покривну культуру."/>
+		<text name="rt_scheme_desc_road_snow_clearing" text="Через нещодавній снігопад місцева рада просить фермерів допомогти підтримувати дороги чистими та безпечними. Сіль потрібно розкидати на дорогах, якими регулярно користується інший транспорт. Під час розкидання не перевищуйте швидкість %s%s, щоб забезпечити належне покриття."/>
+		<text name="rt_scheme_desc_brand_demo" text="%s пропонує вашому господарству випробувати техніку протягом %s міс.%s Точна комплектація демонстраційної машини визначається під час приєднання до програми."/>
+		<text name="rt_scheme_desc_set_aside" text="Заохочує залишати частину сільськогосподарських угідь під паром, даючи землі відпочити від постійного використання. Ви отримаєте бонус за землю, на якій щонайменше %d місяців перед груднем не вирощувалися культури. Якщо вимогам відповідатиме понад %s, усі культури, продані в наступному податковому році, оподатковуватимуться за ставкою 5%%."/>
+		<text name="rt_scheme_report_desc_delayed_mowing" text="У звіті наведено список земельних ділянок і суму виплат під час останнього оцінювання."/>
+		<text name="rt_scheme_report_desc_crop_promotion" text="У звіті наведено список земельних ділянок і суму виплат під час останнього оцінювання."/>
+		<text name="rt_scheme_report_desc_reduce_bale_wrapping" text="У звіті наведено список земельних ділянок і суму виплат під час останнього оцінювання."/>
+		<text name="rt_scheme_report_desc_natural_grazing" text="У звіті показано загальну суму виплат під час останнього оцінювання."/>
+		<text name="rt_scheme_report_desc_natural_fertiliser" text="У звіті показано використання органічних та інших добрив за останній місяць."/>
+		<text name="rt_scheme_report_desc_winter_cover_crops" text="У звіті наведено список земельних ділянок і суму виплат під час останнього оцінювання."/>
+		<text name="rt_scheme_report_desc_road_snow_clearing" text="Для цієї програми звіт не формується. Після завершення снігопаду ви отримаєте виплату, що залежить від кількості розкиданої солі."/>
+		<text name="rt_scheme_report_desc_set_aside" text="У звіті показано виплату для кожного вашого поля, а також чи отримали ви право на спеціальну ставку податку 5%."/>
+		<text name="rt_btn_scheme_action" text="Дія"/>
+		<text name="rt_action_buy_demo_vehicle" text="Дилер пропонує придбати демонстраційну машину за зниженою ціною %s. Бажаєте купити її?"/>
+		<text name="rt_action_buy_demo_vehicles" text="Дилер пропонує придбати демонстраційні машини за загальною зниженою ціною %s. Бажаєте купити їх?"/>
+		<text name="rt_btn_select_scheme" text="Приєднатися до програми"/>
+		<text name="rt_btn_end_scheme" text="Завершити програму"/>
+		<text name="rt_btn_watch_scheme_policy" text="Увімк./вимк. відстеження"/>
+		<text name="rt_unit_meter_square" text="м²"/>
+		<text name="rt_ui_schemePayout" text="Виплата за програмою"/>
+		<text name="finance_schemePayout" text="Виплата за програмою"/>
+		<text name="rt_ui_policyFine" text="Штраф за політикою"/>
+		<text name="finance_policyFine" text="Штраф за політикою"/>
+		<text name="rt_ui_taxCost" text="Податок"/>
+		<text name="finance_taxCost" text="Податок"/>
+		<text name="rt_ui_grantReceived" text="Отримано грант"/>
+		<text name="finance_grantReceived" text="Отримано грант"/>
+		<text name="rt_ui_grantApplicationCost" text="Плата за подання заявки на грант"/>
+		<text name="finance_grantApplicationCost" text="Плата за подання заявки на грант"/>
+		<text name="rt_no_vehicle_room" text="Недостатньо місця для доставки техніки за програмою. Звільніть місце та спробуйте ще раз."/>
+		<text name="rt_info_scheme_selected" text="Ви приєдналися до програми. Заберіть надану техніку в магазині."/>
+		<text name="rt_misc_year" text="Рік"/>
+		<text name="rt_misc_month" text="Місяць"/>
+		<text name="rt_misc_month_plural_suffix" text=""/>
+		<text name="rt_misc_spreading_too_fast" text="Ви їдете надто швидко для ефективного розкидання солі. Обмежте швидкість до %s%s."/>
+		<text name="rt_misc_confirm_scheme_selection" text="Ви впевнені, що хочете приєднатися до цієї програми?"/>
+		<text name="rt_misc_confirm_scheme_end" text="Ви впевнені, що хочете достроково завершити цю програму? Ви втратите всі невикористані переваги."/>
+		<text name="rt_notes_additional_tax_benefit" text="Ефективна ставка податку"/>
+		<text name="rt_notes_loss_generated" text="Збитки за рік: %s (загальна сума перенесених збитків: %s)"/>
+		<text name="rt_notes_loss_applied" text="Прибуток зменшено на попередні збитки: %s (залишок: %s)"/>
+		<text name="rt_help_title_red_tape" text="Red Tape"/>
+		<text name="rt_help_title_intro" text="Вступ"/>
+		<text name="rt_help_title_policies" text="Політики"/>
+		<text name="rt_help_title_schemes" text="Програми"/>
+		<text name="rt_help_title_tax" text="Податки"/>
+		<text name="rt_help_title_grants" text="Гранти"/>
+		<text name="rt_help_intro_intro" text="Red Tape — мод, який додає до Farming Simulator політики, програми та оподаткування. Ці системи створені для більшої глибини й складності ігрового процесу, заохочуючи сталі методи господарювання та стратегічне планування."/>
+		<text name="rt_help_intro_intro_2" text="Уся інформація, пов'язана з Red Tape, міститься в новому меню, доданому до головного меню. Шукайте піктограму урядової будівлі."/>
+		<text name="rt_help_policies_intro" text="Політики фактично є законами, яких потрібно дотримуватися під час ведення господарства. Вони регулюють, зокрема, поводження з тваринами та належне використання землі."/>
+		<text name="rt_help_policies_intro_2" text="На вкладці «Політики» ви побачите список політик. Виберіть кожну з них, щоб прочитати умови дотримання. Нижче відображається звіт про ваші результати. Деякі політики перевіряються щомісяця, інші — рідше. У більшості випадків звіт формується щомісяця, щоб ви могли стежити за прогресом."/>
+		<text name="rt_help_policies_intro_3" text="За дотримання політики ви отримуєте бали, які впливають на ваш рівень відповідності. Вищі рівні дають переваги, наприклад кращі винагороди за програми та, можливо, податкові пільги. За порушення політики ви можете отримати попередження або штраф залежно від серйозності порушення. Якщо винесено попередження, біля назви політики з'явиться значок, а в грі ви отримаєте сповіщення. Усуньте проблему, щоб уникнути штрафу надалі."/>
+		<text name="rt_help_schemes_intro" text="Програми є добровільними та стають доступними протягом року. Ви можете приєднатися до будь-якої з них. Зазвичай програми вимагають виконання певних умов, щоб отримати відповідні переваги. Як і для політик, формуються звіти з поясненням ваших результатів. Усі винагороди масштабуються відповідно до налаштування економічної складності."/>
+		<text name="rt_help_schemes_intro_2" text="Програми також можуть бути ситуативними, наприклад коли виробник проводить демонстрацію й дозволяє певний час безкоштовно користуватися технікою. У всіх випадках ваш рівень дотримання політик безпосередньо впливає на доступні винагороди. Програми рівня D дають найменші винагороди, а рівня A — найбільші."/>
+		<text name="rt_help_schemes_intro_3" text="Програми зазвичай діють протягом визначеного часу — часто рік або кілька періодів оцінювання. Згодом вони знову стають доступними, але для участі потрібно приєднатися повторно. Деякі програми мають обмежене вікно доступності. Наприклад, програма підтримки вирощування культури доступна лише в перші кілька місяців року."/>
+		<text name="rt_help_tax_intro" text="Податкова система передає частину вашого прибутку державі. Податкова декларація остаточно формується у квітні кожного року, а належний податок автоматично сплачується у вересні. Якщо грошей для сплати недостатньо, ваш баланс стане від'ємним."/>
+		<text name="rt_help_tax_intro_2" text="На вкладці «Податки» ліворуч можна переглянути остаточно сформовану декларацію. Праворуч відображаються поточні підсумки за поточний фінансовий рік. Це допомагає планувати витрати та зменшувати податковий рахунок. Наприклад, якщо прибуток за рік високий, можна придбати нову техніку, зменшивши прибуток, а отже й податок."/>
+		<text name="rt_help_tax_intro_3" text="Іноді відображаються податкові примітки. Вони повідомляють, коли декларацію змінено через нестандартну умову. Наприклад, певна програма може надати майбутню податкову пільгу. Це буде зазначено у податкових примітках, щоб допомогти зрозуміти розрахунок."/>
+		<text name="rt_help_tax_intro_4" text="Якщо за фінансовий рік ви зазнали збитків, вони переносяться на наступні роки. Якщо згодом ви отримаєте прибуток, попередні збитки зменшать податкову базу. Через це податок може бути нульовим навіть за наявності прибутку. Перенесені збитки обмежені сумою 5 мільйонів."/>
+		<text name="rt_help_grants_intro" text="Гранти дають змогу подати державі заявку на додаткове фінансування нового будівництва, наприклад нового корівника."/>
+		<text name="rt_help_grants_intro_2" text="Щоб почати, відкрийте меню будівництва для відповідного об'єкта. Там буде кнопка «Подати заявку на грант». Натисніть її та підтвердьте — заявку буде створено."/>
+		<text name="rt_help_grants_intro_3" text="Перевіряйте вкладку «Гранти» в меню Red Tape: там буде вказано, коли вашу заявку розглянуть. Її буде схвалено або відхилено. Якщо заявку схвалено, розмістіть будівлю через меню будівництва й отримаєте надані кошти."/>
+		<text name="rt_help_grants_intro_4" text="Одночасно може бути активна лише одна заявка. Після успішного отримання гранту діє 6-місячний період очікування."/>
+		<text name="rt_setting_taxEnabled" text="Податки ввімкнено"/>
+		<text name="rt_toolTip_taxEnabled" text="Увімкнути або вимкнути податкову систему. Вимкнення назавжди видалить усі податкові дані."/>
+		<text name="rt_setting_taxRecordingEnabled" text="Облік транзакцій"/>
+		<text name="rt_toolTip_taxRecordingEnabled" text="Коли вимкнено, фінансові операції не записуються для розрахунку податків. Наявні податкові дані зберігаються. Використовуйте це, щоб тимчасово призупинити облік під час налаштування гри без втрати історії."/>
+		<text name="rt_setting_policiesAndSchemesEnabled" text="Політики/програми ввімкнено"/>
+		<text name="rt_toolTip_policiesAndSchemesEnabled" text="Увімкнути або вимкнути систему політик і програм. Вимкнення негайно завершить усі активні програми."/>
+		<text name="rt_setting_baseTaxRate" text="Базова ставка податку"/>
+		<text name="rt_toolTip_baseTaxRate" text="Установити базову ставку податку"/>
+		<text name="rt_system_disabled" text="Цю систему наразі вимкнено. Перевірте налаштування гри, щоб увімкнути її знову."/>
+		<text name="rt_setting_grantsEnabled" text="Гранти ввімкнено"/>
+		<text name="rt_toolTip_grantsEnabled" text="Увімкнути або вимкнути систему державних грантів"/>
+		<text name="rt_setting_productivityRecovery" text="Відновлення продуктивності"/>
+		<text name="rt_toolTip_productivityRecovery" text="Прискорює відновлення продуктивності тваринницького об'єкта після переміщення тварин. Значення «Миттєво» одразу встановлює максимальну продуктивність."/>
+		<text name="rt_setting_instant" text="Миттєво"/>
+		<text name="rt_setting_manureStorageLimit" text="Ліміт зберігання гною"/>
+		<text name="rt_toolTip_manureStorageLimit" text="Мінімальна кількість гною (у літрах), яку можна зберігати без штрафу за політикою зберігання гною."/>
+		<text name="rt_grant_button" text="Подати заявку на грант"/>
+		<text name="rt_grant_application_submitted" text="Вашу заявку на грант подано. Її можна переглянути на вкладці «Гранти»."/>
+		<text name="rt_grant_confirm_application_dialog" text="Подати заявку на грант для цього будівництва? Вартість подання заявки становитиме %s. Розгляд може тривати до 6 місяців, а ймовірність схвалення становить 50-60%% і може залежати від вашого рейтингу дотримання вимог."/>
+		<text name="rt_grant_existing_application" text="Одночасно дозволена лише одна активна заявка. Подати нову можна після розгляду поточної."/>
+		<text name="rt_grant_approved_notification" text="Вашу заявку на грант схвалено! Після придбання будівлі ви отримаєте %s."/>
+		<text name="rt_grant_rejected_notification" text="Вашу заявку на грант відхилено."/>
+		<text name="rt_grant_completed_notification" text="Вашій фермі надано грантову виплату в розмірі %s."/>
+		<text name="rt_event_type_grantapproved" text="Грант схвалено"/>
+		<text name="rt_event_type_grantrejected" text="Грант відхилено"/>
+		<text name="rt_event_type_grantcompleted" text="Грант виплачено"/>
+		<text name="permission_redTape_redTapeSettings" text="Налаштування Red Tape"/>
+		<text name="rt_header_grants" text="Гранти"/>
+		<text name="rt_label_pending_grants" text="Заявки на розгляді"/>
+		<text name="rt_label_approved_grants" text="Схвалені гранти"/>
+		<text name="rt_label_historical_grants" text="Історія грантів"/>
+		<text name="rt_tableheader_building" text="Будівля"/>
+		<text name="rt_tableheader_price" text="Ціна"/>
+		<text name="rt_tableheader_applied" text="Подано"/>
+		<text name="rt_tableheader_assessment" text="Розгляд"/>
+		<text name="rt_tableheader_amount" text="Сума"/>
+		<text name="rt_tableheader_approved" text="Схвалено"/>
+		<text name="rt_tableheader_status" text="Статус"/>
+		<text name="rt_no_pending_grants" text="Немає заявок на грант, що очікують розгляду"/>
+		<text name="rt_no_approved_grants" text="Немає схвалених грантів"/>
+		<text name="rt_no_historical_grants" text="Історія грантів відсутня"/>
+		<text name="rt_grant_status_pending" text="На розгляді"/>
+		<text name="rt_grant_status_approved" text="Схвалено"/>
+		<text name="rt_grant_status_rejected" text="Відхилено"/>
+		<text name="rt_grant_status_completed" text="Завершено"/>
+		<text name="rt_grant_eligible" text="СТАТУС: ДОСТУПНО"/>
+		<text name="rt_grant_not_eligible" text="СТАТУС: НЕДОСТУПНО"/>
+		<text name="rt_grant_eligible_description" text="Можливість подати заявку на нові гранти залежить від багатьох умов. Ви не можете подати заявку, якщо маєте поточну заявку на розгляді або схвалену заявку, яка очікує завершення. Також після отримання гранту (тобто після отримання коштів) діє період очікування тривалістю 6 місяців. Зверніть увагу: гранти недоступні для будівництва, вартість якого становить менше 80 000."/>
+	</texts>
+</l10n>
