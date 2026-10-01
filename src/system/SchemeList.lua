@@ -68,7 +68,10 @@ RTSchemes = {
             local grassTypes = RedTape.getGrassTypes()
             local grassTypeNames = {}
             for _, f in pairs(grassTypes) do
-                table.insert(grassTypeNames, g_fruitTypeManager:getFruitTypeByIndex(f).name)
+                local fruitType = g_fruitTypeManager:getFruitTypeByIndex(f)
+                if fruitType ~= nil then
+                    table.insert(grassTypeNames, fruitType.name)
+                end
             end
 
             local report = {}
@@ -197,7 +200,9 @@ RTSchemes = {
                 end
             end
 
-            if cumulativeMonth >= endMonth then
+            if endMonth == nil then
+                scheme:endForMissingProp('endMonth')
+            elseif cumulativeMonth >= endMonth then
                 g_client:getServerConnection():sendEvent(RTSchemeEndedEvent.new(scheme.id, scheme.farmId))
             end
             return report
@@ -233,7 +238,7 @@ RTSchemes = {
             scheme:setProp('endMonth', RedTape.getCumulativeMonth() + 12)
         end,
         evaluate = function(schemeInfo, scheme, tier)
-            local daysPerPeriod = g_currentMission.environment.daysPerPeriod
+            local daysPerPeriod = RedTape.getDaysPerPeriod()
 
             local ig = g_currentMission.RedTape.InfoGatherer
             local gatherer = ig.gatherers[INFO_KEYS.FARMS]
@@ -260,7 +265,9 @@ RTSchemes = {
                 g_client:getServerConnection():sendEvent(RTSchemePayoutEvent.new(scheme, scheme.farmId, payout))
             end
 
-            if cumulativeMonth >= endMonth then
+            if endMonth == nil then
+                scheme:endForMissingProp('endMonth')
+            elseif cumulativeMonth >= endMonth then
                 g_client:getServerConnection():sendEvent(RTSchemeEndedEvent.new(scheme.id, scheme.farmId))
             end
             return report
@@ -303,26 +310,30 @@ RTSchemes = {
             local cumulativeMonth = RedTape.getCumulativeMonth()
             local endMonth = tonumber(scheme.props['endMonth'])
 
-            local naturalFertilisers = {
-                g_fillTypeManager:getFillTypeNameByIndex(FillType.MANURE),
-                g_fillTypeManager:getFillTypeNameByIndex(FillType.LIQUIDMANURE),
-                g_fillTypeManager:getFillTypeNameByIndex(FillType.DIGESTATE)
-            }
-            local otherFertilisers = {
-                g_fillTypeManager:getFillTypeNameByIndex(FillType.FERTILIZER),
-                g_fillTypeManager:getFillTypeNameByIndex(FillType.LIQUIDFERTILIZER)
-            }
+            -- Built without holes: a fill type missing on this map would otherwise cut ipairs short
+            local function fillTypeNames(fillTypeIndices)
+                local names = {}
+                for _, fillTypeIndex in pairs(fillTypeIndices) do
+                    local name = g_fillTypeManager:getFillTypeNameByIndex(fillTypeIndex)
+                    if name ~= nil then
+                        table.insert(names, name)
+                    end
+                end
+                return names
+            end
+            local naturalFertilisers = fillTypeNames({ FillType.MANURE, FillType.LIQUIDMANURE, FillType.DIGESTATE })
+            local otherFertilisers = fillTypeNames({ FillType.FERTILIZER, FillType.LIQUIDFERTILIZER })
             local totalNaturalUsage = 0
             local totalOtherUsage = 0
-            local sprayHistory = farmData.sprayHistory
+            local sprayHistory = farmData.sprayHistory or {}
 
             local previousMonth = cumulativeMonth - 1
             if sprayHistory[previousMonth] ~= nil then
                 for fillType, amount in pairs(sprayHistory[previousMonth]) do
                     if RedTape.tableHasValue(naturalFertilisers, fillType) then
-                        totalNaturalUsage = totalNaturalUsage + amount
+                        totalNaturalUsage = totalNaturalUsage + (tonumber(amount) or 0)
                     elseif RedTape.tableHasValue(otherFertilisers, fillType) then
-                        totalOtherUsage = totalOtherUsage + amount
+                        totalOtherUsage = totalOtherUsage + (tonumber(amount) or 0)
                     end
                 end
             end
@@ -351,7 +362,9 @@ RTSchemes = {
                 g_client:getServerConnection():sendEvent(RTSchemePayoutEvent.new(scheme, scheme.farmId, payout))
             end
 
-            if cumulativeMonth >= endMonth then
+            if endMonth == nil then
+                scheme:endForMissingProp('endMonth')
+            elseif cumulativeMonth >= endMonth then
                 g_client:getServerConnection():sendEvent(RTSchemeEndedEvent.new(scheme.id, scheme.farmId))
             end
             return report
@@ -382,8 +395,9 @@ RTSchemes = {
         selectionProbability = 1,
         availabilityProbability = 1,
         descriptionFunction = function(schemeInfo, scheme)
-            local fruit = g_fruitTypeManager.nameToFruitType[scheme.props['fruitType']]
-            local title = fruit.fillType.title
+            local fruitName = scheme.props['fruitType']
+            local fruit = fruitName ~= nil and g_fruitTypeManager.nameToFruitType[fruitName] or nil
+            local title = fruit ~= nil and fruit.fillType ~= nil and fruit.fillType.title or tostring(fruitName or "")
             return string.format(g_i18n:getText("rt_scheme_desc_crop_promotion"), title)
         end,
         getNextEvaluationMonth = function(schemeInfo, scheme)
@@ -392,51 +406,53 @@ RTSchemes = {
         initialise = function(schemeInfo, scheme)
             -- Init of an available scheme, prior to selection by a farm
 
+            -- A list rather than a FruitType keyed table: a fruit missing on this map would be a nil key
             local fruitTypes = {
-                [FruitType.SUGARBEET] = "BEETHARVESTERS",
-                [FruitType.POTATO] = "POTATOHARVESTING",
-                [FruitType.PARSNIP] = "VEGETABLEHARVESTERS",
-                [FruitType.GREENBEAN] = "GREENBEANHARVESTERS",
-                [FruitType.PEA] = "PEAHARVESTERS",
-                [FruitType.SPINACH] = "SPINACHHARVESTERS",
-                [FruitType.CARROT] = "VEGETABLEHARVESTERS",
+                { FruitType.SUGARBEET, "BEETHARVESTERS" },
+                { FruitType.POTATO, "POTATOHARVESTING" },
+                { FruitType.PARSNIP, "VEGETABLEHARVESTERS" },
+                { FruitType.GREENBEAN, "GREENBEANHARVESTERS" },
+                { FruitType.PEA, "PEAHARVESTERS" },
+                { FruitType.SPINACH, "SPINACHHARVESTERS" },
+                { FruitType.CARROT, "VEGETABLEHARVESTERS" },
             }
-            local chosenIndex = math.random(1, RedTape.tableCount(fruitTypes))
-            local chosenCategory = nil
-            local i = 1
-            for fruitType, category in pairs(fruitTypes) do
-                if i == chosenIndex then
-                    local fruit = g_fruitTypeManager:getFruitTypeByIndex(fruitType)
-                    scheme:setProp('fruitType', fruit.name)
-                    chosenCategory = category
-                    break
+            local candidates = {}
+            for _, entry in ipairs(fruitTypes) do
+                local fruit = entry[1] ~= nil and g_fruitTypeManager:getFruitTypeByIndex(entry[1]) or nil
+                if fruit ~= nil then
+                    table.insert(candidates, { fruit = fruit, category = entry[2] })
                 end
-                i = i + 1
             end
+            if #candidates == 0 then
+                RedTape.logWarning("crop promotion scheme has no fruit types available on this map")
+                return false
+            end
+            local chosen = candidates[math.random(1, #candidates)]
+            scheme:setProp('fruitType', chosen.fruit.name)
+            local chosenCategory = chosen.category
 
             local options = {}
             for _, item in pairs(g_storeManager:getItems()) do
-                for i = 1, #item.categoryNames do
-                    if chosenCategory == item.categoryNames[i] then
-                        if not string.find(item.xmlFilename, "/pdlc/") then
-                            local success = pcall(StoreItemUtil.loadSpecsFromXML, item)
-                            if success and item.brandIndex ~= nil then
-                                table.insert(options, item)
-                            end
-                        end
-                    end
+                if RedTape.tableHasValue(item.categoryNames or {}, chosenCategory) and RedTape.isUsableStoreItem(item) then
+                    table.insert(options, item)
                 end
+            end
+            if #options == 0 then
+                RedTape.logWarning("crop promotion scheme found no store items in category " .. tostring(chosenCategory))
+                return false
             end
             local harvester = options[math.random(1, #options)]
             scheme:setProp('vehicleToSpawn1', harvester.xmlFilename)
 
             local skipCategories = { "WEIGHTS" }
             local spawnIndex = 2
-            if harvester.specs ~= nil and harvester.specs.combinations ~= nil then
-                local items = g_shopController:getItemsFromCombinations(harvester.specs.combinations)
+            local combinations = RedTape.loadStoreItemSpec(harvester, "combinations")
+            if combinations ~= nil then
+                local items = g_shopController:getItemsFromCombinations(combinations)
                 for _, item in pairs(items) do
                     local storeItem = item.storeItem
-                    if not RedTape.tableHasValue(skipCategories, storeItem.categoryName) then
+                    if storeItem ~= nil and type(storeItem.xmlFilename) == "string"
+                        and not RedTape.tableHasValue(skipCategories, storeItem.categoryName) then
                         scheme:setProp('vehicleToSpawn' .. spawnIndex, storeItem.xmlFilename)
                         spawnIndex = spawnIndex + 1
                     end
@@ -457,6 +473,11 @@ RTSchemes = {
             local gatherer = ig.gatherers[INFO_KEYS.FARMLANDS]
             local farmId = scheme.farmId
 
+            if evaluationYear == nil then
+                scheme:endForMissingProp('evaluationYear')
+                return
+            end
+
             -- As we eval in december, we can end if the year has advanced
             if currentYear > evaluationYear then
                 g_client:getServerConnection():sendEvent(RTSchemeEndedEvent.new(scheme.id, farmId))
@@ -467,7 +488,13 @@ RTSchemes = {
                 return
             end
 
-            local fruit = g_fruitTypeManager.nameToFruitType[scheme.props['fruitType']]
+            local fruitName = scheme.props['fruitType']
+            local fruit = fruitName ~= nil and g_fruitTypeManager.nameToFruitType[fruitName] or nil
+            if fruit == nil then
+                -- The promoted crop no longer exists (map or mod changed), so it can never be grown
+                scheme:endForMissingProp('fruitType')
+                return
+            end
 
             local report = {}
             for _, farmland in pairs(g_farmlandManager.farmlands) do
@@ -523,11 +550,7 @@ RTSchemes = {
         selectionProbability = 1,
         availabilityProbability = 0.2,
         descriptionFunction = function(schemeInfo, scheme)
-            local storeItem = g_storeManager:getItemByXMLFilename(scheme.props["vehicleToSpawn1"])
-            pcall(StoreItemUtil.loadSpecsFromXML, storeItem)
-
-            local brand = g_brandManager.indexToBrand[storeItem.brandIndex].title
-            local vehicleName = storeItem.name
+            local brand, vehicleName = RedTape.getStoreItemDisplayInfo(scheme.props["vehicleToSpawn1"])
             local suffix = ""
 
             if (tonumber(scheme.props['durationMonths']) or 1) > 1 then
@@ -537,11 +560,13 @@ RTSchemes = {
             return string.format(g_i18n:getText("rt_scheme_desc_tractor_demo"),
                 brand,
                 vehicleName,
-                scheme.props['durationMonths'],
+                tostring(scheme.props['durationMonths'] or 1),
                 suffix)
         end,
         getNextEvaluationMonth = function(schemeInfo, scheme)
-            local m = tonumber(scheme.props['endMonth']) % 12
+            local endMonth = tonumber(scheme.props['endMonth'])
+            if endMonth == nil then return nil end
+            local m = endMonth % 12
             return m == 0 and 12 or m
         end,
         getExpiryMonth = function(schemeInfo, scheme)
@@ -553,16 +578,13 @@ RTSchemes = {
 
             local options = {}
             for _, item in pairs(g_storeManager:getItems()) do
-                for i = 1, #item.categoryNames do
-                    if chosenCategory == item.categoryNames[i] then
-                        if not string.find(item.xmlFilename, "/pdlc/") then
-                            local success = pcall(StoreItemUtil.loadSpecsFromXML, item)
-                            if success then
-                                table.insert(options, item)
-                            end
-                        end
-                    end
+                if RedTape.tableHasValue(item.categoryNames or {}, chosenCategory) and RedTape.isUsableStoreItem(item) then
+                    table.insert(options, item)
                 end
+            end
+            if #options == 0 then
+                RedTape.logWarning("tractor demo scheme found no store items in category " .. tostring(chosenCategory))
+                return false
             end
             local chosenItem = options[math.random(1, #options)]
             scheme:setProp('vehicleToSpawn1', chosenItem.xmlFilename)
@@ -573,12 +595,16 @@ RTSchemes = {
         end,
         selected = function(schemeInfo, scheme, tier)
             -- Any action when applying the scheme to a farm, e.g. initial payout or equipment
-            local endMonth = RedTape.getCumulativeMonth() + tonumber(scheme.props['durationMonths'])
+            local endMonth = RedTape.getCumulativeMonth() + (tonumber(scheme.props['durationMonths']) or 1)
             scheme:setProp('endMonth', endMonth)
             scheme:spawnVehicles()
         end,
         evaluate = function(schemeInfo, scheme, tier)
             local endMonth = tonumber(scheme.props['endMonth'])
+            if endMonth == nil then
+                scheme:endForMissingProp('endMonth')
+                return {}
+            end
             local cumulativeMonth = RedTape.getCumulativeMonth()
 
             if cumulativeMonth >= endMonth then
@@ -663,12 +689,25 @@ RTSchemes = {
             local farmId = scheme.farmId
             local cumulativeMonth = RedTape.getCumulativeMonth()
 
-            if cumulativeMonth >= tonumber(scheme.props['endMonth']) then
+            local endMonth = tonumber(scheme.props['endMonth'])
+            if endMonth == nil then
+                scheme:endForMissingProp('endMonth')
+                return
+            end
+
+            if cumulativeMonth >= endMonth then
                 g_client:getServerConnection():sendEvent(RTSchemeEndedEvent.new(scheme.id, scheme.farmId))
                 return
             end
 
             if currentMonth ~= 3 then return end -- Only evaluate in March
+
+            local radish = FruitType.OILSEEDRADISH ~= nil and g_fruitTypeManager:getFruitTypeByIndex(FruitType.OILSEEDRADISH) or nil
+            if radish == nil then
+                RedTape.logWarning("winter cover crops scheme cannot evaluate, oilseed radish is not on this map")
+                return
+            end
+            local radishName = radish.name
 
             local report = {}
             local totalReward = 0
@@ -676,7 +715,6 @@ RTSchemes = {
                 if farmland.farmId == farmId then
                     local farmlandData = gatherer:getFarmlandData(farmland.id)
 
-                    local radishName = g_fruitTypeManager:getFruitTypeByIndex(FruitType.OILSEEDRADISH).name
                     local febFruit = farmlandData.fruitHistory[cumulativeMonth - 1]
                     local janFruit = farmlandData.fruitHistory[cumulativeMonth - 2]
                     local decFruit = farmlandData.fruitHistory[cumulativeMonth - 3]
@@ -742,16 +780,16 @@ RTSchemes = {
             local chosenCategory = "WINTEREQUIPMENT"
             local options = {}
             for _, item in pairs(g_storeManager:getItems()) do
-                for i = 1, #item.categoryNames do
-                    if chosenCategory == item.categoryNames[i] then
-                        local success = pcall(StoreItemUtil.loadSpecsFromXML, item)
-                        if success and item.specs and item.specs.fillTypes and item.specs.fillTypes.fillTypeNames == "roadsalt" then
-                            if not string.find(item.xmlFilename, "/pdlc/") then
-                                table.insert(options, item)
-                            end
-                        end
+                if RedTape.tableHasValue(item.categoryNames or {}, chosenCategory) and RedTape.isUsableStoreItem(item) then
+                    local fillTypes = RedTape.loadStoreItemSpec(item, "fillTypes")
+                    if fillTypes ~= nil and fillTypes.fillTypeNames == "roadsalt" then
+                        table.insert(options, item)
                     end
                 end
+            end
+            if #options == 0 then
+                RedTape.logWarning("road snow clearing scheme found no salt spreaders in the store")
+                return false
             end
             local chosenItem = options[math.random(1, #options)]
             scheme:setProp('vehicleToSpawn1', chosenItem.xmlFilename)
@@ -767,8 +805,14 @@ RTSchemes = {
             local gatherer = ig.gatherers[INFO_KEYS.FARMS]
             local farmData = gatherer:getFarmData(scheme.farmId)
             local clearedBlocks = farmData.saltCount or 0
-            local payout = clearedBlocks * tierInfo.bonusPerBlock * EconomyManager.getPriceMultiplier()
+            local payout = 0
+            if tierInfo ~= nil then
+                payout = clearedBlocks * tierInfo.bonusPerBlock * EconomyManager.getPriceMultiplier()
+            else
+                RedTape.logWarning("snow clearing scheme " .. tostring(scheme.id) .. " has unknown tier " .. tostring(tier))
+            end
 
+            -- Always end the scheme, so the spreader is removed even when no payout could be worked out
             if payout ~= 0 then
                 g_client:getServerConnection():sendEvent(RTSchemePayoutEvent.new(scheme, scheme.farmId, payout))
             end
@@ -818,10 +862,7 @@ RTSchemes = {
         selectionProbability = 1,
         availabilityProbability = 0.1,
         descriptionFunction = function(schemeInfo, scheme)
-            local storeItem = g_storeManager:getItemByXMLFilename(scheme.props["vehicleToSpawn1"])
-            pcall(StoreItemUtil.loadSpecsFromXML, storeItem)
-
-            local brand = g_brandManager.indexToBrand[storeItem.brandIndex].title
+            local brand, _ = RedTape.getStoreItemDisplayInfo(scheme.props["vehicleToSpawn1"])
             local suffix = ""
 
             if (tonumber(scheme.props['durationMonths']) or 1) > 1 then
@@ -830,11 +871,13 @@ RTSchemes = {
 
             return string.format(g_i18n:getText("rt_scheme_desc_brand_demo"),
                 brand,
-                scheme.props['durationMonths'],
+                tostring(scheme.props['durationMonths'] or 1),
                 suffix)
         end,
         getNextEvaluationMonth = function(schemeInfo, scheme)
-            local m = tonumber(scheme.props['endMonth']) % 12
+            local endMonth = tonumber(scheme.props['endMonth'])
+            if endMonth == nil then return nil end
+            local m = endMonth % 12
             return m == 0 and 12 or m
         end,
         getExpiryMonth = function(schemeInfo, scheme)
@@ -842,26 +885,41 @@ RTSchemes = {
         end,
         initialise = function(schemeInfo, scheme)
             local tierInfo = schemeInfo.tiers[scheme.tier]
-            local chosenBrand = tierInfo.brands[math.random(1, #tierInfo.brands)]
-            local chosenBrandIndex = g_brandManager.nameToBrand[chosenBrand].index
+
+            -- Only brands actually installed; a map or game version can lack some of the listed ones
+            local installedBrandIndices = {}
+            for _, brandName in ipairs(tierInfo.brands) do
+                local brand = g_brandManager.nameToBrand[brandName]
+                if brand ~= nil and brand.index ~= nil then
+                    table.insert(installedBrandIndices, brand.index)
+                end
+            end
+            if #installedBrandIndices == 0 then
+                RedTape.logWarning("brand demo scheme found none of its brands installed")
+                return false
+            end
+            local chosenBrandIndex = installedBrandIndices[math.random(1, #installedBrandIndices)]
             local chosenDuration = tierInfo.durationMonths[math.random(1, #tierInfo.durationMonths)]
             local maxItems = tierInfo.itemCounts[math.random(1, #tierInfo.itemCounts)]
             local skipCategories = { "FRONTLOADERS" }
 
             local options = {}
             for _, item in pairs(g_storeManager:getItems()) do
-                local success = pcall(StoreItemUtil.loadSpecsFromXML, item)
-                if success and item.brandIndex == chosenBrandIndex then
+                if item.brandIndex == chosenBrandIndex and RedTape.isUsableStoreItem(item) then
                     local skip = false
-                    for _, name in pairs(item.categoryNames) do
+                    for _, name in pairs(item.categoryNames or {}) do
                         if RedTape.tableHasValue(skipCategories, name) then
                             skip = true
                         end
                     end
-                    if not skip and not string.find(item.xmlFilename, "/pdlc/") then
+                    if not skip then
                         table.insert(options, item)
                     end
                 end
+            end
+            if #options == 0 then
+                RedTape.logWarning("brand demo scheme found no store items for brand index " .. tostring(chosenBrandIndex))
+                return false
             end
 
             local pickedItems = {}
@@ -882,12 +940,16 @@ RTSchemes = {
         end,
         selected = function(schemeInfo, scheme, tier)
             -- Any action when applying the scheme to a farm, e.g. initial payout or equipment
-            local endMonth = RedTape.getCumulativeMonth() + tonumber(scheme.props['durationMonths'])
+            local endMonth = RedTape.getCumulativeMonth() + (tonumber(scheme.props['durationMonths']) or 1)
             scheme:setProp('endMonth', endMonth)
             scheme:spawnVehicles()
         end,
         evaluate = function(schemeInfo, scheme, tier)
             local endMonth = tonumber(scheme.props['endMonth'])
+            if endMonth == nil then
+                scheme:endForMissingProp('endMonth')
+                return {}
+            end
             local cumulativeMonth = RedTape.getCumulativeMonth()
 
             if cumulativeMonth >= endMonth then
@@ -979,8 +1041,14 @@ RTSchemes = {
             local currentMonth = RedTape.periodToMonth(g_currentMission.environment.currentPeriod)
             local cumulativeMonth = RedTape.getCumulativeMonth()
 
+            local endMonth = tonumber(scheme.props['endMonth'])
+            if endMonth == nil then
+                scheme:endForMissingProp('endMonth')
+                return
+            end
+
             -- End in January, allowing player to see report in December
-            if cumulativeMonth >= tonumber(scheme.props['endMonth']) then
+            if cumulativeMonth >= endMonth then
                 g_client:getServerConnection():sendEvent(RTSchemeEndedEvent.new(scheme.id, farmId))
                 return
             end

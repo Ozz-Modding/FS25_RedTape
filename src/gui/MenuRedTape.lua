@@ -121,8 +121,9 @@ function MenuRedTape:displaySelectedScheme()
                 self.schemeEquipmentBox:setVisible(false)
 
                 local nextEval = scheme:getNextEvaluationMonth()
+                -- nil when the scheme lacks the saved data to work it out (it ends at the next month end)
                 self.selectedSchemeReportNextDate:setText(string.format(g_i18n:getText("rt_header_next_evaluation_date"),
-                    RedTape.monthToString(nextEval)))
+                    tostring(RedTape.monthToString(nextEval) or "-")))
 
                 if rt.tableCount(scheme.lastEvaluationReport) == 0 then
                     self.schemeReportContainer:setVisible(false)
@@ -636,8 +637,8 @@ function MenuRedTape:updateContent()
             end
         end
 
-        -- Visibility is applied before the lists are rebuilt, and each rebuild is isolated, so a
-        -- single unrenderable grant can never leave the page half updated.
+        -- Visibility is applied before the lists are rebuilt, and RTGrantsRenderer tolerates
+        -- malformed grants, so a single bad grant can never leave the page half updated.
         local hasPendingGrants = #grantsData.pending > 0
         self.pendingGrantsContainer:setVisible(hasPendingGrants)
         self.noPendingGrantsContainer:setVisible(not hasPendingGrants)
@@ -655,12 +656,7 @@ function MenuRedTape:updateContent()
         self.historicalGrantsRenderer:setData(grantsData)
 
         for _, grantsTable in pairs({ self.pendingGrantsTable, self.approvedGrantsTable, self.historicalGrantsTable }) do
-            local ok, err = pcall(function()
-                grantsTable:reloadData()
-            end)
-            if not ok then
-                print("RedTape Error: failed to populate grants table: " .. tostring(err))
-            end
+            grantsTable:reloadData()
         end
     end
 

@@ -41,9 +41,10 @@ function RTGrantsRenderer:getNumberOfItemsInSection(list, section)
 end
 
 function RTGrantsRenderer:getBuildingName(grant)
+    local xmlFile = type(grant.xmlFile) == "string" and grant.xmlFile or nil
     local storeItem = nil
-    if grant.xmlFile ~= nil and grant.xmlFile ~= "" then
-        storeItem = g_storeManager:getItemByXMLFilename(grant.xmlFile)
+    if xmlFile ~= nil and xmlFile ~= "" then
+        storeItem = g_storeManager:getItemByXMLFilename(xmlFile)
     end
 
     if storeItem ~= nil and storeItem.name ~= nil then
@@ -52,7 +53,7 @@ function RTGrantsRenderer:getBuildingName(grant)
 
     -- The store item is gone (mod removed or updated, map placeable, ...). Fall back to the
     -- file name so the row still tells the player which building the grant was for.
-    local fileName = grant.xmlFile ~= nil and grant.xmlFile:match("([^/\]+)%.xml$") or nil
+    local fileName = xmlFile ~= nil and xmlFile:match("([^/\\]+)%.xml$") or nil
     if fileName ~= nil then
         return fileName
     end
@@ -60,34 +61,43 @@ function RTGrantsRenderer:getBuildingName(grant)
     return g_i18n:getText("rt_grant_unknown_building")
 end
 
+-- Numbers are coerced so a malformed saved or streamed value can never break the list
+local function toNumber(value)
+    return tonumber(value) or 0
+end
+
+local function toMonth(cumulativeMonth)
+    local month = math.floor(toNumber(cumulativeMonth)) % 12
+    if month == 0 then month = 12 end
+    return month
+end
+
+local function setCellText(cell, name, text)
+    local element = cell:getAttribute(name)
+    if element ~= nil then
+        element:setText(text or "")
+    end
+end
+
 function RTGrantsRenderer:populateCellForItemInSection(list, section, index, cell)
-    local grant = self.data[self.currentSection][index]
+    local sectionData = self.data[self.currentSection]
+    local grant = sectionData ~= nil and sectionData[index] or nil
     if not grant then
         return
     end
 
-    cell:getAttribute("building"):setText(self:getBuildingName(grant))
+    setCellText(cell, "building", self:getBuildingName(grant))
 
-    cell:getAttribute("price"):setText(g_i18n:formatMoney(grant.price or 0, 0, true, true))
+    setCellText(cell, "price", g_i18n:formatMoney(toNumber(grant.price), 0, true, true))
 
     if self.currentSection == "pending" then
-        local applied = (grant.applicationMonth or 0) % 12
-        if applied == 0 then applied = 12 end
-
-        local assessment = (grant.assessmentMonth or 0) % 12
-        if assessment == 0 then assessment = 12 end
-
-        cell:getAttribute("applied"):setText(RedTape.monthToString(applied))
-        cell:getAttribute("assessment"):setText(RedTape.monthToString(assessment))
+        setCellText(cell, "applied", RedTape.monthToString(toMonth(grant.applicationMonth)))
+        setCellText(cell, "assessment", RedTape.monthToString(toMonth(grant.assessmentMonth)))
     elseif self.currentSection == "approved" then
-        local assessment = (grant.assessmentMonth or 0) % 12
-        if assessment == 0 then assessment = 12 end
-
-        cell:getAttribute("amount"):setText(g_i18n:formatMoney(grant.amount or 0, 0, true, true))
-        cell:getAttribute("approved"):setText(RedTape.monthToString(assessment))
+        setCellText(cell, "amount", g_i18n:formatMoney(toNumber(grant.amount), 0, true, true))
+        setCellText(cell, "approved", RedTape.monthToString(toMonth(grant.assessmentMonth)))
     elseif self.currentSection == "historical" then
-        local amount = grant.amount or 0
-        cell:getAttribute("amount"):setText(g_i18n:formatMoney(amount, 0, true, true))
+        setCellText(cell, "amount", g_i18n:formatMoney(toNumber(grant.amount), 0, true, true))
 
         local statusText = ""
         if grant.status == RTGrantSystem.STATUS.COMPLETE then
@@ -95,7 +105,7 @@ function RTGrantsRenderer:populateCellForItemInSection(list, section, index, cel
         elseif grant.status == RTGrantSystem.STATUS.REJECTED then
             statusText = g_i18n:getText("rt_grant_status_rejected")
         end
-        cell:getAttribute("status"):setText(statusText)
+        setCellText(cell, "status", statusText)
     end
 end
 

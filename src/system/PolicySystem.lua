@@ -80,7 +80,7 @@ function RTPolicySystem:loadFromXMLFile(xmlFile)
 
         local farmId = getXMLInt(xmlFile, warningsKey .. "#farmId")
         local policyIndex = getXMLInt(xmlFile, warningsKey .. "#policyIndex")
-        local warningCount = getXMLInt(xmlFile, warningsKey .. "#warningCount")
+        local warningCount = getXMLInt(xmlFile, warningsKey .. "#warningCount") or 0
         table.insert(self.warnings, {
             farmId = farmId,
             policyIndex = policyIndex,
@@ -191,13 +191,10 @@ function RTPolicySystem:periodChanged()
     if (not self:isEnabled()) then return end
     local policySystem = g_currentMission.RedTape.PolicySystem
 
+    -- RTPolicy:evaluate guards itself: an error here would abort the rest of month end,
+    -- including the monthly data reset (see RedTape:periodChanged)
     for _, policy in ipairs(policySystem.policies) do
-        local ok, err = pcall(policy.evaluate, policy)
-        if not ok then
-            local policyInfo = RTPolicies[policy.policyIndex]
-            local policyName = policyInfo and policyInfo.name or ("index=" .. tostring(policy.policyIndex))
-            print("RedTape Error: policy evaluate failed for '" .. policyName .. "' (id=" .. tostring(policy.id) .. "): " .. tostring(err))
-        end
+        policy:evaluate()
     end
 
     policySystem:generatePolicies()
@@ -342,7 +339,7 @@ end
 function RTPolicySystem:recordWarning(farmId, policyIndex)
     for _, warning in pairs(self.warnings) do
         if warning.farmId == farmId and warning.policyIndex == policyIndex then
-            warning.warningCount = warning.warningCount + 1
+            warning.warningCount = (warning.warningCount or 0) + 1
             return
         end
     end
@@ -374,10 +371,18 @@ end
 
 -- Called by RTPolicyFineEvent, runs on client and server
 function RTPolicySystem:recordFine(farmId, policyIndex, amount)
+    -- On the server this runs synchronously inside policy evaluation, so a farm deleted in
+    -- multiplayer must not throw here
+    local farm = g_farmManager:getFarmById(farmId)
+    if farm == nil then
+        RedTape.logWarning("skipping policy fine for missing farm " .. tostring(farmId))
+        return
+    end
+
     if g_currentMission:getIsServer() then
         g_currentMission:addMoneyChange(-amount, farmId, MoneyType.POLICY_FINE, true)
     end
-    g_farmManager:getFarmById(farmId):changeBalance(-amount, MoneyType.POLICY_FINE)
+    farm:changeBalance(-amount, MoneyType.POLICY_FINE)
 
     for _, p in pairs(self.policies) do
         if p.policyIndex == policyIndex then
@@ -430,7 +435,7 @@ end
 function RTPolicySystem:getWarningCountForFarmPolicy(farmId, policyIndex)
     for _, warning in pairs(self.warnings) do
         if warning.farmId == farmId and warning.policyIndex == policyIndex then
-            return warning.warningCount
+            return warning.warningCount or 0
         end
     end
 

@@ -349,12 +349,15 @@ function FarmGatherer:loadFromXMLFile(xmlFile, key)
 
             local month = getXMLInt(xmlFile, sprayKey .. "#month")
             local name = getXMLString(xmlFile, sprayKey .. "#name")
-            local amount = getXMLInt(xmlFile, sprayKey .. "#amount")
+            local amount = getXMLInt(xmlFile, sprayKey .. "#amount") or 0
 
-            if self.data[farmId].sprayHistory[month] == nil then
-                self.data[farmId].sprayHistory[month] = {}
+            -- An entry missing its month or fill type cannot be placed, so it is dropped
+            if month ~= nil and name ~= nil then
+                if self.data[farmId].sprayHistory[month] == nil then
+                    self.data[farmId].sprayHistory[month] = {}
+                end
+                self.data[farmId].sprayHistory[month][name] = amount
             end
-            self.data[farmId].sprayHistory[month][name] = amount
 
             j = j + 1
         end
@@ -512,9 +515,17 @@ function FarmGatherer:checkCreekByOverlap(sprayer, workingWidth)
     local ig = self
     local overlapResult = {
         overlapCallback = function(self, hitObjectId, x, y, z, distance)
+            -- Overlap hits can be stale or already deleted (other mods create and remove nodes
+            -- freely), so every id is checked with entityExists before any engine call on it
+            local function isLiveEntity(id)
+                return type(id) == "number" and id ~= 0 and entityExists(id)
+            end
+
             local originalHitObjectId = hitObjectId
-            if hitObjectId == 0 or not entityExists(hitObjectId) then
-                ig.knownCreeks[originalHitObjectId] = nil
+            if not isLiveEntity(hitObjectId) then
+                if originalHitObjectId ~= nil then
+                    ig.knownCreeks[originalHitObjectId] = nil
+                end
                 return
             end
 
@@ -524,22 +535,22 @@ function FarmGatherer:checkCreekByOverlap(sprayer, workingWidth)
                 isCreek = true
             end
 
-            if not isCreek and hitObjectId ~= 0 then
-                local ok, name = pcall(getName, hitObjectId)
-                if ok and name ~= nil and string.find(name, "creek") then
+            if not isCreek then
+                local name = getName(hitObjectId)
+                if name ~= nil and string.find(name, "creek") then
                     isCreek = true
-                    self.knownCreeks[originalHitObjectId] = true
+                    ig.knownCreeks[originalHitObjectId] = true
                 end
             end
 
-            if not isCreek and hitObjectId ~= 0 then
+            if not isCreek then
                 local maxTraverse = 3
                 for i = 1, maxTraverse, 1 do
-                    local ok, parentId = pcall(getParent, hitObjectId)
-                    if not ok or parentId == nil or parentId == 0 then break end
+                    local parentId = getParent(hitObjectId)
+                    if not isLiveEntity(parentId) then break end
                     hitObjectId = parentId
-                    local ok2, name = pcall(getName, hitObjectId)
-                    if ok2 and name ~= nil and string.find(name, "creek") then
+                    local name = getName(hitObjectId)
+                    if name ~= nil and string.find(name, "creek") then
                         isCreek = true
                         ig.knownCreeks[originalHitObjectId] = true
                         break

@@ -146,14 +146,17 @@ function RTSchemeSystem:periodChanged()
     if (not self:isEnabled()) then return end
     local schemeSystem = g_currentMission.RedTape.SchemeSystem
 
-    for farm, schemes in pairs(schemeSystem.activeSchemesByFarm) do
+    -- RTScheme:evaluate guards itself: an error here would abort the rest of month end,
+    -- including the monthly data reset (see RedTape:periodChanged).
+    -- Iterate a copy: an ending scheme is removed from the farm's list synchronously on the
+    -- server (RTSchemeEndedEvent runs immediately), which would otherwise skip the next scheme.
+    for _, schemes in pairs(schemeSystem.activeSchemesByFarm) do
+        local toEvaluate = {}
         for _, scheme in pairs(schemes) do
-            local ok, err = pcall(scheme.evaluate, scheme)
-            if not ok then
-                local schemeInfo = RTSchemes[scheme.schemeIndex]
-                local schemeName = schemeInfo and schemeInfo.name or ("index=" .. tostring(scheme.schemeIndex))
-                print("RedTape Error: scheme evaluate failed for '" .. schemeName .. "' (id=" .. tostring(scheme.id) .. ", farm=" .. tostring(farm) .. "): " .. tostring(err))
-            end
+            table.insert(toEvaluate, scheme)
+        end
+        for _, scheme in ipairs(toEvaluate) do
+            scheme:evaluate()
         end
     end
 
@@ -163,7 +166,9 @@ function RTSchemeSystem:periodChanged()
     for tier, schemes in pairs(self.availableSchemes) do
         for _, scheme in pairs(schemes) do
             local schemeInfo = RTSchemes[scheme.schemeIndex]
-            if schemeInfo.offerMonths ~= nil and not RedTape.tableHasValue(schemeInfo.offerMonths, currentMonth) then
+            if schemeInfo == nil then
+                table.insert(expired, scheme)
+            elseif schemeInfo.offerMonths ~= nil and not RedTape.tableHasValue(schemeInfo.offerMonths, currentMonth) then
                 table.insert(expired, scheme)
             elseif schemeInfo.getExpiryMonth ~= nil then
                 local expiryMonth = schemeInfo.getExpiryMonth(schemeInfo, scheme)
@@ -205,8 +210,10 @@ function RTSchemeSystem:generateSchemes()
                 end
 
                 scheme.schemeIndex = nextIndex
-                scheme:initialise()
-                g_client:getServerConnection():sendEvent(RTSchemeActivatedEvent.new(scheme))
+                -- A scheme that could not set itself up (e.g. no matching store items) is not offered
+                if scheme:initialise() then
+                    g_client:getServerConnection():sendEvent(RTSchemeActivatedEvent.new(scheme))
+                end
             end
         end
     end
@@ -217,7 +224,10 @@ function RTSchemeSystem:getNextSchemeIndex(tier)
     local currentMonth = rt.periodToMonth(g_currentMission.environment.currentPeriod)
     local currentSchemeDupeKeys = {}
     for _, scheme in pairs(self.availableSchemes[tier]) do
-        table.insert(currentSchemeDupeKeys, RTSchemes[scheme.schemeIndex].duplicationKey)
+        local schemeInfo = RTSchemes[scheme.schemeIndex]
+        if schemeInfo ~= nil then
+            table.insert(currentSchemeDupeKeys, schemeInfo.duplicationKey)
+        end
     end
 
     local availableSchemes = {}
@@ -307,13 +317,17 @@ end
 -- Called by RTSchemeEndedEvent, runs on Client and Server
 function RTSchemeSystem:endActiveScheme(id, farmId)
     local currentFarmId = g_currentMission:getFarmId()
-    for i, scheme in pairs(self.activeSchemesByFarm[farmId]) do
+    local farmSchemes = self.activeSchemesByFarm[farmId]
+    if farmSchemes == nil then
+        return
+    end
+    for i, scheme in pairs(farmSchemes) do
         if scheme.id == id then
             scheme:endScheme()
-            table.remove(self.activeSchemesByFarm[farmId], i)
+            table.remove(farmSchemes, i)
             -- The scheme ended for a single farm, so only that farm should see the entry
             g_currentMission.RedTape.EventLog:addEvent(farmId, RTEventLogItem.EVENT_TYPE.SCHEME_ACTIVATED,
-                string.format(g_i18n:getText("rt_notify_ended_scheme"), scheme:getName()), farmId == currentFarmId)
+                string.format(g_i18n:getText("rt_notify_ended_scheme"), tostring(scheme:getName() or "")), farmId == currentFarmId)
             return
         end
     end
@@ -413,8 +427,9 @@ function RTSchemeSystem:onSnowApplied()
             local scheme = RTScheme.new()
             scheme.tier = tier
             scheme.schemeIndex = RTSchemeIds.ROAD_SNOW_CLEARING
-            scheme:initialise()
-            g_client:getServerConnection():sendEvent(RTSchemeActivatedEvent.new(scheme))
+            if scheme:initialise() then
+                g_client:getServerConnection():sendEvent(RTSchemeActivatedEvent.new(scheme))
+            end
         end
     end
 end

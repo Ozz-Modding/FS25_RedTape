@@ -131,7 +131,9 @@ function RedTape:consoleCommandTriggerDemo(demoType)
     local scheme = RTScheme.new()
     scheme.tier = farmTier
     scheme.schemeIndex = schemeIndex
-    scheme:initialise()
+    if not scheme:initialise() then
+        return string.format("Could not create %s demo scheme, see log for details", demoType)
+    end
 
     g_client:getServerConnection():sendEvent(RTSchemeActivatedEvent.new(scheme))
     return string.format("Created %s demo scheme at tier %s", demoType, RTPolicySystem.TIER_NAMES[farmTier])
@@ -428,6 +430,106 @@ function RedTape.tableCount(tab)
     return count
 end
 
+function RedTape.logWarning(message)
+    print("RedTape Warning: " .. tostring(message))
+end
+
+-- A store item we can safely offer and spawn: a vehicle whose xml is present and whose brand
+-- is installed. Checked from data the store already holds, so no third-party code runs.
+function RedTape.isUsableStoreItem(item)
+    if item == nil or type(item.xmlFilename) ~= "string" then
+        return false
+    end
+    if string.find(item.xmlFilename, "/pdlc/") then
+        return false
+    end
+    if item.species ~= StoreSpecies.VEHICLE then
+        return false
+    end
+    if item.brandIndex == nil or g_brandManager:getBrandByIndex(item.brandIndex) == nil then
+        return false
+    end
+    return fileExists(item.xmlFilename)
+end
+
+function RedTape.getStoreItemBrandTitle(item)
+    if item == nil or item.brandIndex == nil then
+        return nil
+    end
+    local brand = g_brandManager:getBrandByIndex(item.brandIndex)
+    return brand ~= nil and brand.title or nil
+end
+
+-- Brand and name for a store item referenced by a saved xml filename. The item can be missing
+-- (its mod was removed since the scheme was offered), so both fall back to something printable.
+function RedTape.getStoreItemDisplayInfo(xmlFilename)
+    local storeItem = nil
+    if type(xmlFilename) == "string" then
+        storeItem = g_storeManager:getItemByXMLFilename(xmlFilename)
+    end
+
+    local brand = RedTape.getStoreItemBrandTitle(storeItem)
+    if brand == nil and storeItem ~= nil then
+        brand = storeItem.brandNameRaw
+    end
+
+    local name = storeItem ~= nil and storeItem.name or nil
+    if name == nil and type(xmlFilename) == "string" then
+        name = xmlFilename:match("([^/\\]+)%.xml$")
+    end
+
+    return brand or "", name or ""
+end
+
+-- Loads one store spec (e.g. "combinations", "fillTypes") without StoreItemUtil.loadSpecsFromXML,
+-- which runs every registered spec loader including those added by other mods. Results are
+-- cached here rather than written to item.specs, so the shop still loads the full specs itself.
+RedTape.storeItemSpecCache = {}
+local SPEC_NOT_FOUND = {}
+
+function RedTape.loadStoreItemSpec(item, specName)
+    if item == nil or type(item.xmlFilename) ~= "string" then
+        return nil
+    end
+    if item.specs ~= nil then
+        return item.specs[specName]
+    end
+
+    local itemCache = RedTape.storeItemSpecCache[item.xmlFilename]
+    if itemCache == nil then
+        itemCache = {}
+        RedTape.storeItemSpecCache[item.xmlFilename] = itemCache
+    end
+    local cached = itemCache[specName]
+    if cached ~= nil then
+        if cached == SPEC_NOT_FOUND then
+            return nil
+        end
+        return cached
+    end
+    itemCache[specName] = SPEC_NOT_FOUND
+
+    local specType = g_storeManager:getSpecTypeByName(specName)
+    if specType == nil or specType.loadFunc == nil or specType.species ~= item.species then
+        return nil
+    end
+    if item.xmlSchema == nil or not fileExists(item.xmlFilename) then
+        return nil
+    end
+
+    local xmlFile = XMLFile.load("rtStoreItemSpec", item.xmlFilename, item.xmlSchema)
+    if xmlFile == nil then
+        return nil
+    end
+    local value = specType.loadFunc(xmlFile, item.customEnvironment, item.baseDir)
+    xmlFile:delete()
+
+    if value ~= nil then
+        itemCache[specName] = value
+    end
+    return value
+end
+
 function RedTape.generateId()
     local template = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
     return (string.gsub(template, '[xy]', function(c)
@@ -445,6 +547,11 @@ function RedTape.getCumulativeMonth()
     end
 
     return (year * 12) + month
+end
+
+-- Never below 1, so it is always safe to divide by
+function RedTape.getDaysPerPeriod()
+    return math.max(1, g_currentMission.environment.daysPerPeriod or 1)
 end
 
 function RedTape.getElapsedMonths()

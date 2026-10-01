@@ -100,8 +100,8 @@ end
 
 function RTPolicy:loadFromXMLFile(xmlFile, key)
     self.id = getXMLString(xmlFile, key .. "#id") or RedTape.generateId()
-    self.policyIndex = getXMLInt(xmlFile, key .. "#policyIndex")
-    self.nextEvaluationMonth = getXMLInt(xmlFile, key .. "#nextEvaluationMonth")
+    self.policyIndex = getXMLInt(xmlFile, key .. "#policyIndex") or -1
+    self.nextEvaluationMonth = getXMLInt(xmlFile, key .. "#nextEvaluationMonth") or 0
 
     self.evaluationCount = getXMLInt(xmlFile, key .. "#evaluationCount") or 0
 
@@ -131,7 +131,9 @@ function RTPolicy:loadFromXMLFile(xmlFile, key)
             j = j + 1
         end
 
-        self.evaluationReports[farmId] = report
+        if farmId ~= nil then
+            self.evaluationReports[farmId] = report
+        end
 
         i = i + 1
     end
@@ -145,7 +147,9 @@ function RTPolicy:loadFromXMLFile(xmlFile, key)
         end
 
         local farmId = getXMLInt(xmlFile, watchKey .. "#farmId")
-        self.watchingFarms[farmId] = true
+        if farmId ~= nil then
+            self.watchingFarms[farmId] = true
+        end
 
         k = k + 1
     end
@@ -157,6 +161,9 @@ function RTPolicy:getName()
     end
 
     local policyInfo = RTPolicies[self.policyIndex]
+    if policyInfo == nil then
+        return nil
+    end
 
     return g_i18n:getText(policyInfo.name)
 end
@@ -167,6 +174,9 @@ function RTPolicy:getDescription()
     end
 
     local policyInfo = RTPolicies[self.policyIndex]
+    if policyInfo == nil then
+        return nil
+    end
 
     -- Policies whose text depends on a setting build their own description
     if policyInfo.getDescription ~= nil then
@@ -198,6 +208,9 @@ function RTPolicy:getReportDescription()
     end
 
     local policyInfo = RTPolicies[self.policyIndex]
+    if policyInfo == nil then
+        return nil
+    end
 
     return g_i18n:getText(policyInfo.report_description)
 end
@@ -221,10 +234,18 @@ end
 function RTPolicy:evaluate()
     local rt = g_currentMission.RedTape
 
+    -- Month end runs every system in sequence, so evaluate must never throw: anything it cannot
+    -- make sense of is logged and skipped rather than allowed to abort the rest of month end.
     local policyInfo = RTPolicies[self.policyIndex]
+    if policyInfo == nil or policyInfo.evaluate == nil then
+        RedTape.logWarning("skipping evaluation of unknown policy index " .. tostring(self.policyIndex)
+            .. " (id=" .. tostring(self.id) .. ")")
+        return
+    end
+
     local cumulativeMonth = RedTape.getCumulativeMonth()
     -- Accounts for possible skipping of time
-    if cumulativeMonth < self.nextEvaluationMonth then
+    if cumulativeMonth < (self.nextEvaluationMonth or 0) then
         return
     end
 
@@ -244,21 +265,18 @@ function RTPolicy:evaluate()
         end
 
         local farmTier = progress.tier
-        local report = policyInfo.evaluate(policyInfo, self, farm.farmId, farmTier)
-        if report ~= nil then
-            report = report or {}
+        local report = policyInfo.evaluate(policyInfo, self, farm.farmId, farmTier) or {}
 
-            -- Ensure all report values are strings
-            for _, reportLine in pairs(report) do
-                reportLine.cell1 = tostring(reportLine.cell1 or "")
-                reportLine.cell2 = tostring(reportLine.cell2 or "")
-                reportLine.cell3 = tostring(reportLine.cell3 or "")
-            end
+        -- Ensure all report values are strings
+        for _, reportLine in pairs(report) do
+            reportLine.cell1 = tostring(reportLine.cell1 or "")
+            reportLine.cell2 = tostring(reportLine.cell2 or "")
+            reportLine.cell3 = tostring(reportLine.cell3 or "")
         end
 
         g_client:getServerConnection():sendEvent(RTPolicyReportEvent.new(self.policyIndex, farm.farmId, report))
     end
 
-    self.evaluationCount = self.evaluationCount + 1
+    self.evaluationCount = (self.evaluationCount or 0) + 1
     self.nextEvaluationMonth = cumulativeMonth + policyInfo.evaluationInterval
 end

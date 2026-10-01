@@ -44,8 +44,13 @@ touching — its settings toggle is generated automatically (see below).
    list up to `DESIRED_POLICY_COUNT` (10). `getNextPolicyIndex()` picks from policies not already
    active, weighted by `probability`.
 2. **Evaluation** — `RTPolicySystem:periodChanged()` (server only) calls `RTPolicy:evaluate()` on
-   every active policy, inside a `pcall` so one broken policy cannot break the rest. A policy only
-   evaluates once `RedTape.getCumulativeMonth() >= policy.nextEvaluationMonth`.
+   every active policy. A policy only evaluates once
+   `RedTape.getCumulativeMonth() >= policy.nextEvaluationMonth`.
+   **`evaluate` must never throw.** `RedTape:periodChanged` runs the policy, scheme, tax and grant
+   systems in sequence and then `InfoGatherer:resetMonthlyData()`, so an uncaught error skips the
+   rest of month end, including the reset (next month would then fine the same violations again).
+   `pcall` is not available, so missing or malformed data (unknown policy index, nil values from
+   an old or edited savegame) must be guarded: log with `RedTape.logWarning` and skip.
 3. **Consequences** — `evaluate` sends `RTPolicyPointsEvent`, `RTPolicyClearWarningsEvent`, and
    (via `RTPolicySystem:WarnAndFine`) `RTPolicyWarningEvent` / `RTPolicyFineEvent`. Reports go out
    as `RTPolicyReportEvent`. All state changes go through events so the server stays authoritative

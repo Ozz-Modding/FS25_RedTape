@@ -192,9 +192,14 @@ function RTScheme:loadFromXMLFile(xmlFile, key)
 end
 
 -- Called by the SchemeSystem when generating schemes
+-- Returns false when the scheme could not be set up and must not be offered. A scheme's own
+-- initialise signals this by returning false; returning nothing counts as success.
 function RTScheme:initialise()
     local schemeInfo = RTSchemes[self.schemeIndex]
-    schemeInfo.initialise(schemeInfo, self)
+    if schemeInfo == nil or schemeInfo.initialise == nil then
+        return false
+    end
+    return schemeInfo.initialise(schemeInfo, self) ~= false
 end
 
 function RTScheme:setProp(key, value)
@@ -207,6 +212,9 @@ function RTScheme:getName()
     end
 
     local schemeInfo = RTSchemes[self.schemeIndex]
+    if schemeInfo == nil then
+        return nil
+    end
 
     return g_i18n:getText(schemeInfo.name)
 end
@@ -231,13 +239,16 @@ function RTScheme:getReportDescription()
     end
 
     local schemeInfo = RTSchemes[self.schemeIndex]
+    if schemeInfo == nil then
+        return nil
+    end
 
     return g_i18n:getText(schemeInfo.report_description)
 end
 
 function RTScheme:getNextEvaluationMonth()
     local schemeInfo = RTSchemes[self.schemeIndex]
-    if schemeInfo.getNextEvaluationMonth ~= nil then
+    if schemeInfo ~= nil and schemeInfo.getNextEvaluationMonth ~= nil then
         return schemeInfo.getNextEvaluationMonth(schemeInfo, self)
     end
     local currentMonth = RedTape.periodToMonth(g_currentMission.environment.currentPeriod)
@@ -276,8 +287,22 @@ function RTScheme:availableForCurrentFarm()
     return true
 end
 
+-- Month end runs every system in sequence, so evaluate must never throw: anything it cannot
+-- make sense of is logged and skipped rather than allowed to abort the rest of month end.
 function RTScheme:evaluate()
     local schemeInfo = RTSchemes[self.schemeIndex]
+    if schemeInfo == nil or schemeInfo.evaluate == nil then
+        RedTape.logWarning("skipping evaluation of unknown scheme index " .. tostring(self.schemeIndex)
+            .. " (id=" .. tostring(self.id) .. ", farm=" .. tostring(self.farmId) .. ")")
+        return
+    end
+    -- Checked once here so no scheme's evaluate can fail part way through a payout loop
+    if schemeInfo.tiers == nil or schemeInfo.tiers[self.tier] == nil then
+        RedTape.logWarning("skipping evaluation of scheme '" .. tostring(schemeInfo.name) .. "' (id="
+            .. tostring(self.id) .. ") with unknown tier " .. tostring(self.tier))
+        return
+    end
+
     local report = schemeInfo.evaluate(schemeInfo, self, self.tier)
 
     if report ~= nil then
@@ -301,6 +326,17 @@ function  RTScheme:snowSchemeEnded()
 
     local schemeInfo = RTSchemes[self.schemeIndex]
     schemeInfo.onSnowEnded(schemeInfo, self, self.tier)
+end
+
+-- Ends a scheme whose saved data lacks something it needs to be evaluated (e.g. a savegame from
+-- an older version, or a crop or vehicle whose mod has since been removed). Without it the
+-- scheme can never be judged or finish, so ending it is the only safe outcome.
+function RTScheme:endForMissingProp(propName)
+    local schemeInfo = RTSchemes[self.schemeIndex]
+    local schemeName = schemeInfo ~= nil and schemeInfo.name or ("index=" .. tostring(self.schemeIndex))
+    RedTape.logWarning("ending scheme '" .. schemeName .. "' (id=" .. tostring(self.id) .. ", farm="
+        .. tostring(self.farmId) .. "): missing or invalid '" .. tostring(propName) .. "'")
+    g_client:getServerConnection():sendEvent(RTSchemeEndedEvent.new(self.id, self.farmId))
 end
 
 -- Called by SchemeSelectedEvent, runs on client and server
@@ -340,7 +376,13 @@ function RTScheme:getVehiclesToSpawn()
             break
         end
         local storeItem = g_storeManager:getItemByXMLFilename(self.props[vehicleKey])
-        table.insert(vehicles, storeItem)
+        -- The item is gone if its mod was removed after the scheme was offered
+        if storeItem ~= nil and type(storeItem.xmlFilename) == "string" then
+            table.insert(vehicles, storeItem)
+        else
+            RedTape.logWarning("scheme " .. tostring(self.id) .. " cannot spawn missing store item "
+                .. tostring(self.props[vehicleKey]))
+        end
         vehicleSpawnIndex = vehicleSpawnIndex + 1
     end
 
@@ -376,8 +418,9 @@ function RTScheme:spawnVehicles()
 end
 
 function RTScheme:getVehicleConfiguration(storeItem)
+    -- Configurations are read when the store item loads, so the specs (whose loaders include
+    -- other mods' code) are not needed here
     local result = {}
-    StoreItemUtil.loadSpecsFromXML(storeItem)
 
     if storeItem.defaultConfigurationIds ~= nil then
         for k, v in pairs(storeItem.defaultConfigurationIds) do
@@ -420,7 +463,9 @@ function RTScheme:onSpawnedVehicle(vehicles, vehicleLoadState, loadingInfo)
             loadingData:cancelLoading()
         end
         table.clear(self.pendingVehicleLoadingData)
-        table.clear(self.vehiclesToLoad)
+        if self.vehiclesToLoad ~= nil then
+            table.clear(self.vehiclesToLoad)
+        end
         self.spawnedVehicles = false
         for _, vehicle in pairs(self.vehicles) do
             vehicle:delete()
@@ -440,12 +485,14 @@ end
 function RTScheme:removeVehicles()
     if g_currentMission:getIsServer() then
         for _, vehicle in pairs(self.vehicles) do
-            if not vehicle:getIsBeingDeleted() then
-                pcall(function()
-                    if vehicle.spec_fillUnit ~= nil then
-                        vehicle.spec_fillUnit:unloadFillUnits(true)
-                    end
-                end)
+            if vehicle ~= nil and vehicle.getIsBeingDeleted ~= nil and not vehicle:getIsBeingDeleted() then
+                -- Unload what the player put in the vehicle before it goes. FillUnit:unloadFillUnits
+                -- iterates spec.unloading, which only exists when the vehicle xml defines an
+                -- <unloading> block, so it throws without one; the base game checks the same.
+                local spec = vehicle.spec_fillUnit
+                if vehicle.unloadFillUnits ~= nil and spec ~= nil and spec.unloading ~= nil then
+                    vehicle:unloadFillUnits(true)
+                end
                 vehicle:delete()
             end
         end

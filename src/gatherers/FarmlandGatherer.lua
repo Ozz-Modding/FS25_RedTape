@@ -167,10 +167,13 @@ function FarmlandGatherer:loadFromXMLFile(xmlFile, key)
 
             local month = getXMLInt(xmlFile, fruitKey .. "#month")
 
-            self.data[farmlandId].fruitHistory[month] = {
-                name = getXMLString(xmlFile, fruitKey .. "#name"),
-                growthState = getXMLInt(xmlFile, fruitKey .. "#growthState")
-            }
+            -- An entry without a month cannot be placed in the history, so it is dropped
+            if month ~= nil then
+                self.data[farmlandId].fruitHistory[month] = {
+                    name = getXMLString(xmlFile, fruitKey .. "#name") or "",
+                    growthState = getXMLInt(xmlFile, fruitKey .. "#growthState")
+                }
+            end
 
             j = j + 1
         end
@@ -186,7 +189,9 @@ function FarmlandGatherer:loadFromXMLFile(xmlFile, key)
                 name = getXMLString(xmlFile, harvestKey .. "#name"),
                 month = getXMLInt(xmlFile, harvestKey .. "#month")
             }
-            table.insert(self.data[farmlandId].harvestedCropsHistory, harvestEntry)
+            if harvestEntry.month ~= nil then
+                table.insert(self.data[farmlandId].harvestedCropsHistory, harvestEntry)
+            end
 
             k = k + 1
         end
@@ -351,13 +356,17 @@ function FarmlandGatherer:hasRecordedFruit(farmlandId, startMonth, endMonth, ign
         local fruitEntry = farmlandData.fruitHistory[month]
 
         if fruitEntry ~= nil then
-            local fruit = g_fruitTypeManager.nameToFruitType[fruitEntry.name]
+            local fruit = fruitEntry.name ~= nil and g_fruitTypeManager.nameToFruitType[fruitEntry.name] or nil
 
-            if ignoreHarvestedOrWithered and fruitEntry.growthState > fruit.maxHarvestingGrowthState then
+            -- Only skip when it is known to be harvested or withered; a fruit that no longer exists
+            -- on the map, or an entry without a growth state, still counts as a recorded crop
+            if ignoreHarvestedOrWithered and fruit ~= nil and fruitEntry.growthState ~= nil
+                and fruit.maxHarvestingGrowthState ~= nil
+                and fruitEntry.growthState > fruit.maxHarvestingGrowthState then
                 continue
             end
 
-            if fruitEntry.name ~= "" then
+            if fruitEntry.name ~= nil and fruitEntry.name ~= "" then
                 return true
             end
         end

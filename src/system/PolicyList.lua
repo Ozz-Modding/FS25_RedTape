@@ -65,7 +65,7 @@ RTPolicies = {
 
                     local history = {}
                     for _, harvestEntry in ipairs(farmLandData.harvestedCropsHistory) do
-                        if harvestEntry.month > firstTrackedMonth then
+                        if harvestEntry.month ~= nil and harvestEntry.month > firstTrackedMonth then
                             table.insert(history, harvestEntry)
                         end
                     end
@@ -195,10 +195,10 @@ RTPolicies = {
             local monthlyEmptyStrawCount = farmData.monthlyEmptyStrawCount or 0
             local reward = 0
             if monthlyEmptyStrawCount > 0 then
-                reward = (policyInfo.pointsPenaltyPerViolation / g_currentMission.environment.daysPerPeriod) *
+                reward = (policyInfo.pointsPenaltyPerViolation / RedTape.getDaysPerPeriod()) *
                     monthlyEmptyStrawCount
 
-                local normalisedCount = monthlyEmptyStrawCount / g_currentMission.environment.daysPerPeriod
+                local normalisedCount = monthlyEmptyStrawCount / RedTape.getDaysPerPeriod()
                 local fineAmount = normalisedCount * policyInfo.finePerViolation
                 local skipWarning = normalisedCount > policyInfo.warningThreshold
                 g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, skipWarning)
@@ -248,10 +248,10 @@ RTPolicies = {
             local monthlyFullSlurryCount = farmData.monthlyFullSlurryCount or 0
             local reward = 0
             if monthlyFullSlurryCount > 0 then
-                reward = (policyInfo.periodicPenaltyPerViolation / g_currentMission.environment.daysPerPeriod) *
+                reward = (policyInfo.periodicPenaltyPerViolation / RedTape.getDaysPerPeriod()) *
                     monthlyFullSlurryCount
 
-                local normalisedViolations = monthlyFullSlurryCount / g_currentMission.environment.daysPerPeriod
+                local normalisedViolations = monthlyFullSlurryCount / RedTape.getDaysPerPeriod()
                 local fineAmount = policyInfo.finePerViolation * normalisedViolations
                 local skipWarning = normalisedViolations > policyInfo.warningThreshold
                 g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, skipWarning)
@@ -301,10 +301,10 @@ RTPolicies = {
             local monthlyEmptyFoodCount = farmData.monthlyEmptyFoodCount or 0
             local reward = 0
             if monthlyEmptyFoodCount > 0 then
-                reward = (policyInfo.periodicPenaltyPerViolation / g_currentMission.environment.daysPerPeriod) *
+                reward = (policyInfo.periodicPenaltyPerViolation / RedTape.getDaysPerPeriod()) *
                     monthlyEmptyFoodCount
 
-                local normalisedViolations = monthlyEmptyFoodCount / g_currentMission.environment.daysPerPeriod
+                local normalisedViolations = monthlyEmptyFoodCount / RedTape.getDaysPerPeriod()
                 local fineAmount = normalisedViolations * policyInfo.finePerViolation
                 local skipWarning = normalisedViolations > policyInfo.warningThreshold
                 g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, skipWarning)
@@ -357,11 +357,11 @@ RTPolicies = {
             local reward = 0
             if pendingViolations > 0 then
                 if policy:getWarningCount(farmId) > 0 then
-                    reward = (policyInfo.periodicPenaltyPerViolation / g_currentMission.environment.daysPerPeriod) *
+                    reward = (policyInfo.periodicPenaltyPerViolation / RedTape.getDaysPerPeriod()) *
                         pendingViolations
                 end
 
-                local normalisedViolations = pendingViolations / g_currentMission.environment.daysPerPeriod
+                local normalisedViolations = pendingViolations / RedTape.getDaysPerPeriod()
                 local fineAmount = normalisedViolations * policyInfo.finePerViolation
                 local skipWarning = normalisedViolations > policyInfo.warningThreshold
                 g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, skipWarning)
@@ -386,8 +386,8 @@ RTPolicies = {
                 if entry.updated >= cumulativeMonth - 1 then
                     table.insert(report, {
                         cell1 = entry.key,
-                        cell2 = string.format("%s%s", entry.value1, g_i18n:getText("rt_unit_meter_square")),
-                        cell3 = string.format("%s%s", entry.value2, g_i18n:getText("rt_unit_meter_square"))
+                        cell2 = string.format("%s%s", tostring(entry.value1 or ""), g_i18n:getText("rt_unit_meter_square")),
+                        cell3 = string.format("%s%s", tostring(entry.value2 or ""), g_i18n:getText("rt_unit_meter_square"))
                     })
                 end
             end
@@ -422,10 +422,10 @@ RTPolicies = {
             local pendingViolations = farmData.monthlyLowProductivityHusbandry or 0
             local reward = 0
             if pendingViolations > 0 then
-                reward = (policyInfo.periodicPenaltyPerViolation / g_currentMission.environment.daysPerPeriod) *
+                reward = (policyInfo.periodicPenaltyPerViolation / RedTape.getDaysPerPeriod()) *
                     pendingViolations
 
-                local normalisedViolations = pendingViolations / g_currentMission.environment.daysPerPeriod
+                local normalisedViolations = pendingViolations / RedTape.getDaysPerPeriod()
                 local fineAmount = normalisedViolations * policyInfo.finePerViolation
                 local skipWarning = normalisedViolations > policyInfo.warningThreshold
                 g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, skipWarning)
