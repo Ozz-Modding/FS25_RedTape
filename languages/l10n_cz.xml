@@ -75,6 +75,7 @@
         <text name="rt_policy_manure_spreading" text="Management hnoje"/>
         <text name="rt_policy_restricted_slurry" text="Omezené rozmetání kejdy"/>
         <text name="rt_policy_sustainable_forestry" text="Udržitelné lesnictví"/>
+        <text name="rt_policy_spreading_conditions" text="Podmínky hnojení"/>
 		<text name="rt_policy_description_croprotation" text="Vyžaduje střídání plodin mezi poli a ročními obdobími, aby se zachovala úrodnost půdy, přerušily cykly škůdců a chorob, zlepšila rovnováha živin a ochránily dlouhodobé výnosy."/>
         <text name="rt_policy_description_sprayviolation" text="Zakazuje aplikaci chemikálií (pevná hnojiva, kejda, vápno, hnůj, herbicidy) ve 14m nárazníkových zónách vodních ploch, aby se zabránilo odtoku a kontaminaci, která může poškodit vodní život, zhoršit kvalitu vody a ohrozit lidské zdraví. Porušení se trestá pokutou."/>
         <text name="rt_policy_description_empty_food" text="Vyžaduje, aby zvířata měla vždy dostatek potravy; udržujte koryta na krmení neustále plná a přístupná, abyste předešli hladu a splnili standardy ochrany zvířat."/>
@@ -85,6 +86,7 @@
         <text name="rt_policy_description_manure_spreading" text="Neměli byste hnůj nechávat neomezeně ležet. Zajistěte, abyste neskladovali více než 50 % hnoje, který vyprodukujete, v období 6 měsíců. Pokud neprodukujete žádný hnůj, tato směrnice se vás netýká. Zpráva je aktualizována měsíčně, avšak úplné hodnocení a výplata nebo pokuta probíhají v květnu a listopadu."/>
         <text name="rt_policy_description_restricted_slurry" text="V měsících %s až %s nesmíte rozmetávat kejdu. Za každé porušení budete pokutováni."/>
         <text name="rt_policy_description_sustainable_forestry" text="Podporuje udržitelné postupy v lesnictví, odměňuje čistou pozitivní výsadbu stromů a trestá celkové odlesňování. Směrnice se vztahuje na vaši vlastní půdu. Zakázkové práce neovlivní vaše hodnocení. Zpráva je aktualizována měsíčně s pololetními součty, avšak úplné hodnocení a výplata nebo pokuta probíhají v červnu a prosinci."/>
+        <text name="rt_policy_description_spreading_conditions" text="Nesmíte aplikovat hnojiva, kejdu, digestát ani hnůj, když prší, 2 herní hodiny po dešti, kdy je půda podmáčená, když je teplota na bodu mrazu nebo pod ním, nebo když leží sníh. Živiny aplikované za těchto podmínek odtékají do vodních toků, místo aby vyživovaly plodinu. Za každé porušení budete pokutováni."/>
         <text name="rt_policy_report_description_croprotation" text="Zpráva ukazuje součty pro vyhovující a nevyhovující plochy."/>
         <text name="rt_policy_report_description_sprayviolation" text="Zpráva ukazuje, kolik porušení postřikem nastalo v minulém měsíci."/>
         <text name="rt_policy_report_description_empty_food" text="Zpráva ukazuje, kolik kombinovaných hodin bylo krmivo v ohradách pro zvířata prázdné."/>
@@ -95,6 +97,7 @@
         <text name="rt_policy_report_description_manure_spreading" text="Zpráva ukazuje množství vyprodukovaného hnoje za posledních 6 měsíců. Dále ukazuje celkovou produkci a maximální povolené skladování za posledních 6 měsíců. Všimněte si, že data z Měsíce 1 nebudou zahrnuta do další zprávy a každý hnůj vyrobený v aktuálním měsíci musí být zohledněn."/>
         <text name="rt_policy_report_description_restricted_slurry" text="Zpráva ukazuje, kolikrát byla kejda aplikována během omezených měsíců."/>
         <text name="rt_policy_report_description_sustainable_forestry" text="Zpráva ukazuje, kolik stromů bylo zasazeno a pokáceno v aktuálním pololetí."/>
+        <text name="rt_policy_report_description_spreading_conditions" text="Zpráva ukazuje, kolikrát byla hnojiva, kejda, digestát nebo hnůj aplikovány za nevhodných podmínek, rozděleno podle příčiny."/>
 		<text name="rt_report_name_farmland" text="Zemědělská půda %s"/>
         <text name="rt_report_name_total_area" text="Celková plocha"/>
         <text name="rt_report_name_non_compliant_area" text="Nevyhovující plocha"/>
@@ -108,6 +111,10 @@
         <text name="rt_report_name_manure_stored_amount" text="Aktuálně uskladněný hnůj"/>
         <text name="rt_report_name_manure_max_stored_amount" text="Maximální povolené uskladnění"/>
         <text name="rt_report_name_restricted_slurry_violations" text="Porušení omezené kejdy"/>
+        <text name="rt_report_name_spread_snow" text="Aplikace na sníh"/>
+        <text name="rt_report_name_spread_frozen" text="Aplikace na zmrzlou půdu"/>
+        <text name="rt_report_name_spread_rain" text="Aplikace za deště"/>
+        <text name="rt_report_name_spread_waterlogged" text="Aplikace na podmáčenou půdu"/>
         <text name="rt_report_name_bale_penalty" text="Pokuta za balíky"/>
         <text name="rt_report_name_total_payout" text="Celková vyplacena částka"/>
         <text name="rt_report_name_animal_count" text="Počet oprávněných zvířat"/>

@@ -75,6 +75,7 @@
 		<text name="rt_policy_manure_spreading" text="糞肥管理"/>
 		<text name="rt_policy_restricted_slurry" text="泥漿施灑限制"/>
 		<text name="rt_policy_sustainable_forestry" text="永續林業"/>
+		<text name="rt_policy_spreading_conditions" text="施肥條件"/>
 		<text name="rt_policy_description_croprotation" text="要求在不同田地和季節之間輪換作物，以維持土壤肥力、打破病蟲害循環、改善養分平衡並保護長期產量。"/>
 		<text name="rt_policy_description_sprayviolation" text="禁止在距離水源 14 公尺範圍內噴灑化學物質（固體肥料、泥漿、石灰、糞肥、除草劑），以防止溢流污染損害水生生物、降解水質並危害人體健康。違規將受處罰。"/>
 		<text name="rt_policy_description_empty_food" text="要求動物隨時有充足飼料；請始終保持飼料槽填滿且易於取用，以防止飢餓並符合福利標準。"/>
@@ -85,6 +86,7 @@
 		<text name="rt_policy_description_manure_spreading" text="不可無限期堆放糞肥。確保在 6 個月內儲存的糞肥不超過產量的 50%。如果您不生產糞肥，則不受此政策影響。報告每月更新，但完整評估與獎懲將於 5 月和 11 月進行。"/>
 		<text name="rt_policy_description_restricted_slurry" text="%s至%s期間不允許施灑泥漿。每次違規都將受到處罰。"/>
 		<text name="rt_policy_description_sustainable_forestry" text="鼓勵永續林業實踐，獎勵淨植樹為正數的行為，並對整體砍伐森林進行罰款。政策適用於您擁有的土地。承包工作不會影響您的評估。報告每月更新，完整評估與獎懲於 6 月和 12 月進行。"/>
+		<text name="rt_policy_description_spreading_conditions" text="下雨時、雨後2個遊戲小時內土壤積水時、氣溫在冰點或以下時，或地面有積雪時，不得施灑肥料、泥漿、沼渣或糞肥。在這些條件下施用的養分會被沖入水道，而不是供作物吸收。每次違規都將受到處罰。"/>
 		<text name="rt_policy_report_description_croprotation" text="報告顯示合規與不合規土地的總量。"/>
 		<text name="rt_policy_report_description_sprayviolation" text="報告顯示上個月發生的噴灑違規次數。"/>
 		<text name="rt_policy_report_description_empty_food" text="報告顯示動物圈舍中飼料耗盡的累計小時數。"/>
@@ -95,6 +97,7 @@
 		<text name="rt_policy_report_description_manure_spreading" text="報告顯示過去 6 個月的糞肥產量、目前儲存量及最大許可儲存量。請注意，顯示的第 1 個月數據將不計入下次報告。"/>
 		<text name="rt_policy_report_description_restricted_slurry" text="報告顯示在限制月份內施灑泥漿的次數。"/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="報告顯示當前半年期內種植與砍伐的樹木數量。"/>
+		<text name="rt_policy_report_description_spreading_conditions" text="報告顯示在不良條件下施灑肥料、泥漿、沼渣或糞肥的次數，並依原因分類。"/>
 		<text name="rt_report_name_farmland" text="農地 %s"/>
 		<text name="rt_report_name_total_area" text="總面積"/>
 		<text name="rt_report_name_non_compliant_area" text="不合規面積"/>
@@ -108,6 +111,10 @@
 		<text name="rt_report_name_manure_stored_amount" text="當前糞肥儲存量"/>
 		<text name="rt_report_name_manure_max_stored_amount" text="最大許可儲存量"/>
 		<text name="rt_report_name_restricted_slurry_violations" text="限制期泥漿違規"/>
+		<text name="rt_report_name_spread_snow" text="於積雪上施灑"/>
+		<text name="rt_report_name_spread_frozen" text="於結凍土壤上施灑"/>
+		<text name="rt_report_name_spread_rain" text="於雨中施灑"/>
+		<text name="rt_report_name_spread_waterlogged" text="於積水土壤上施灑"/>
 		<text name="rt_report_name_bale_penalty" text="草捆處罰"/>
 		<text name="rt_report_name_total_payout" text="總支付金額"/>
 		<text name="rt_report_name_animal_count" text="合資格動物數量"/>

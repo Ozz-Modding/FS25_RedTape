@@ -75,6 +75,7 @@
 		<text name="rt_policy_manure_spreading" text="Trágya kijuttatás"/>
 		<text name="rt_policy_restricted_slurry" text="Korlátozott trágyázás"/>
 		<text name="rt_policy_sustainable_forestry" text="Fenntartható erdőgazdálkodás"/>
+		<text name="rt_policy_spreading_conditions" text="Kijuttatási feltételek"/>
 		<text name="rt_policy_description_croprotation" text="Megköveteli a vetésforgó alkalmazását a talaj termékenységének megőrzésére, a kártevők és betegségek ciklusának megszakítására, a tápanyag-egyensúly javítására és a hosszú távú hozam védelmére."/>
 		<text name="rt_policy_description_sprayviolation" text="Tiltja a vegyszerek (műtrágya, trágyalé, mész, trágyázó anyag, gyomirtó) kijuttatását 14 méteres vízparti védőzónán belül, hogy megakadályozza a vízszennyezést. A szabályszegéseket büntetik."/>
 		<text name="rt_policy_description_empty_food" text="Megköveteli, hogy az állatoknak mindig elegendő takarmány álljon rendelkezésre; a tálakat folyamatosan töltsd fel, hogy elkerüld az éhezést és biztosítsd a jólétet."/>
@@ -85,6 +86,7 @@
 		<text name="rt_policy_description_manure_spreading" text="Ne hagyd a trágyát állandóan tárolva. Legfeljebb a termelt trágya 50%-át tárold 6 hónapon belül. Ha nem termelsz trágyát, nem érint ez az irányelv. A jelentés havonta frissül, a teljes értékelés és kifizetés/bírság májusban és novemberben történik."/>
 		<text name="rt_policy_description_restricted_slurry" text="%s és %s között nem alkalmazhatsz trágyát. Minden szabályszegésért büntetést kapsz."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Bátorítja a fenntartható erdőgazdálkodást, jutalmazza a fák ültetését és bünteti az erdőirtást. Az irányelv a saját földedre vonatkozik; szerződéses munka nem befolyásolja az értékelést. A jelentés havonta frissül, a teljes értékelés és kifizetés/bírság júniusban és decemberben történik."/>
+		<text name="rt_policy_description_spreading_conditions" text="Nem juttathatsz ki műtrágyát, hígtrágyát, digestátumot vagy istállótrágyát esőben, az esőt követő 2 játékórában átázott talajra, fagyponton vagy az alatti hőmérsékleten, illetve ha hó borítja a talajt. Az ilyen körülmények között kijuttatott tápanyagok a vízfolyásokba mosódnak ahelyett, hogy a növényt táplálnák. Minden szabályszegésért büntetést kapsz."/>
 		<text name="rt_policy_report_description_croprotation" text="A jelentés összesíti a szabálykövető és nem szabálykövető területeket."/>
 		<text name="rt_policy_report_description_sprayviolation" text="A jelentés mutatja, hány permetezési szabálysértés történt az elmúlt hónapban."/>
 		<text name="rt_policy_report_description_empty_food" text="A jelentés mutatja, hány órán keresztül volt üres az állatok etetője."/>
@@ -95,6 +97,7 @@
 		<text name="rt_policy_report_description_manure_spreading" text="A jelentés mutatja a termelt trágya mennyiségét az elmúlt 6 hónapban, valamint a maximálisan tárolható mennyiséget. Az 1. havi adat nem kerül bele a következő jelentésbe, a jelenlegi hónapban termelt trágya később kerül elszámolásra."/>
 		<text name="rt_policy_report_description_restricted_slurry" text="A jelentés mutatja, hányszor történt trágyázás a korlátozott hónapokban."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="A jelentés mutatja, hány fát ültettek és vágtak ki az aktuális félévben."/>
+		<text name="rt_policy_report_description_spreading_conditions" text="A jelentés mutatja, hányszor történt műtrágya, hígtrágya, digestátum vagy istállótrágya kijuttatása kedvezőtlen körülmények között, okok szerint bontva."/>
 		<text name="rt_report_name_farmland" text="Földterület %s"/>
 		<text name="rt_report_name_total_area" text="Teljes terület"/>
 		<text name="rt_report_name_non_compliant_area" text="Nem megfelelő terület"/>
@@ -108,6 +111,10 @@
 		<text name="rt_report_name_manure_stored_amount" text="Jelenleg tárolt trágya"/>
 		<text name="rt_report_name_manure_max_stored_amount" text="Maximálisan engedélyezett tárolás"/>
 		<text name="rt_report_name_restricted_slurry_violations" text="Korlátozott trágyázás szabálysértések"/>
+		<text name="rt_report_name_spread_snow" text="Kijuttatás hóra"/>
+		<text name="rt_report_name_spread_frozen" text="Kijuttatás fagyott talajra"/>
+		<text name="rt_report_name_spread_rain" text="Kijuttatás esőben"/>
+		<text name="rt_report_name_spread_waterlogged" text="Kijuttatás átázott talajra"/>
 		<text name="rt_report_name_bale_penalty" text="Bálabírság"/>
 		<text name="rt_report_name_total_payout" text="Összes kifizetés"/>
 		<text name="rt_report_name_animal_count" text="Jogosult állatok száma"/>

@@ -9,6 +9,7 @@ RTPolicyIds = {
     MANURE_SPREADING = 8,
     RESTRICTED_SLURRY = 9,
     SUSTAINABLE_FORESTRY = 10,
+    SPREADING_CONDITIONS = 11,
 }
 
 RTPolicies = {
@@ -695,6 +696,87 @@ RTPolicies = {
                 { cell1 = g_i18n:getText("rt_report_name_trees_cut"), cell2 = cutTrees })
             table.insert(report,
                 { cell1 = g_i18n:getText("rt_report_name_points"), cell2 = reward })
+
+            if reward ~= 0 then
+                g_client:getServerConnection():sendEvent(RTPolicyPointsEvent.new(farmId, reward, policy:getName()))
+            end
+
+            return report
+        end,
+    },
+
+    [RTPolicyIds.SPREADING_CONDITIONS] = {
+        id = RTPolicyIds.SPREADING_CONDITIONS,
+        name = "rt_policy_spreading_conditions",
+        description = "rt_policy_description_spreading_conditions",
+        report_description = "rt_policy_report_description_spreading_conditions",
+        probability = 0.5,
+        periodicReward = 10,
+        periodicPenaltyPerViolation = -0.25,
+        evaluationInterval = 1,
+        finePerViolation = 5,
+        warningThreshold = 90,
+        maxWarnings = 1,
+        -- Report label for each FarmGatherer.BAD_SPREAD_REASONS entry
+        reasonNames = {
+            snow = "rt_report_name_spread_snow",
+            frozen = "rt_report_name_spread_frozen",
+            rain = "rt_report_name_spread_rain",
+            waterlogged = "rt_report_name_spread_waterlogged",
+        },
+        activate = function(policyInfo, policy, farmId)
+        end,
+        evaluate = function(policyInfo, policy, farmId, currentTier)
+            local ig = g_currentMission.RedTape.InfoGatherer
+            local gatherer = ig.gatherers[INFO_KEYS.FARMS]
+            local farmData = gatherer:getFarmData(farmId)
+            local counts = farmData.monthlyBadConditionsSpread or {}
+            local pendingViolations = FarmGatherer.getBadConditionsSpreadTotal(farmData)
+
+            local reward = 0
+            if pendingViolations > 0 then
+                reward = policyInfo.periodicPenaltyPerViolation * pendingViolations
+
+                local fineAmount = pendingViolations * policyInfo.finePerViolation
+                local skipWarning = pendingViolations > policyInfo.warningThreshold
+                g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, skipWarning)
+            else
+                -- Only reward a clean month if the farm actually spread something in it
+                local spreadLastMonth = false
+                local regulatedNames = {}
+                for _, fillTypeIndex in pairs({ FillType.FERTILIZER, FillType.LIQUIDFERTILIZER, FillType.LIQUIDMANURE,
+                    FillType.DIGESTATE, FillType.MANURE }) do
+                    local name = g_fillTypeManager:getFillTypeNameByIndex(fillTypeIndex)
+                    if name ~= nil then
+                        table.insert(regulatedNames, name)
+                    end
+                end
+                local lastMonthHistory = (farmData.sprayHistory or {})[RedTape.getCumulativeMonth() - 1] or {}
+                for fillTypeName, amount in pairs(lastMonthHistory) do
+                    if RedTape.tableHasValue(regulatedNames, fillTypeName) and (tonumber(amount) or 0) > 0 then
+                        spreadLastMonth = true
+                        break
+                    end
+                end
+
+                if spreadLastMonth or currentTier == RTPolicySystem.TIER.D then
+                    reward = policyInfo.periodicReward
+                end
+                g_client:getServerConnection():sendEvent(RTPolicyClearWarningsEvent.new(farmId, policy.policyIndex))
+            end
+
+            if reward < 0 then
+                reward = math.floor(reward)
+            else
+                reward = math.ceil(reward)
+            end
+
+            local report = {}
+            for _, reason in ipairs(FarmGatherer.BAD_SPREAD_REASONS) do
+                table.insert(report,
+                    { cell1 = g_i18n:getText(policyInfo.reasonNames[reason]), cell2 = counts[reason] or 0 })
+            end
+            table.insert(report, { cell1 = g_i18n:getText("rt_report_name_points"), cell2 = reward })
 
             if reward ~= 0 then
                 g_client:getServerConnection():sendEvent(RTPolicyPointsEvent.new(farmId, reward, policy:getName()))

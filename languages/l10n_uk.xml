@@ -75,6 +75,7 @@
 		<text name="rt_policy_manure_spreading" text="Управління гноєм"/>
 		<text name="rt_policy_restricted_slurry" text="Обмеження внесення рідкого гною"/>
 		<text name="rt_policy_sustainable_forestry" text="Стале лісове господарство"/>
+		<text name="rt_policy_spreading_conditions" text="Умови внесення добрив"/>
 		<text name="rt_policy_description_croprotation" text="Вимагає чергувати культури між полями та сезонами, щоб підтримувати родючість ґрунту, переривати цикли шкідників і хвороб, покращувати баланс поживних речовин та зберігати врожайність у довгостроковій перспективі."/>
 		<text name="rt_policy_description_sprayviolation" text="Забороняє внесення хімічних речовин (твердих добрив, рідкого гною, вапна, гною та гербіцидів) у межах 14-метрової захисної зони навколо водойм, щоб запобігти стоку й забрудненню, яке може шкодити водним організмам, погіршувати якість води та загрожувати здоров'ю людей. За порушення передбачено покарання."/>
 		<text name="rt_policy_description_empty_food" text="Вимагає, щоб тварини завжди мали достатньо корму. Підтримуйте годівниці наповненими та доступними, щоб запобігати голоду й дотримуватися стандартів добробуту тварин."/>
@@ -85,6 +86,7 @@
 		<text name="rt_policy_description_manure_spreading" text="Не слід зберігати гній без використання необмежено довго. Переконайтеся, що ви не зберігаєте більше 50% гною, виробленого за 6-місячний період. Якщо ви не виробляєте гній, ця політика вас не стосується. Звіт оновлюється щомісяця, а повне оцінювання та виплата або штраф відбуваються у травні та листопаді."/>
 		<text name="rt_policy_description_restricted_slurry" text="Заборонено вносити рідкий гній у період: %s – %s. За кожне порушення передбачено штраф."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Заохочує сталі методи лісового господарства: винагороджує за чистий приріст кількості висаджених дерев і штрафує за загальне вирубування лісу. Політика застосовується лише до вашої власної землі. Контрактні роботи не впливають на оцінювання. Звіт оновлюється щомісяця з піврічними підсумками, а повне оцінювання та виплата або штраф відбуваються у червні та грудні."/>
+		<text name="rt_policy_description_spreading_conditions" text="Заборонено вносити добрива, рідкий гній, дигестат або гній під час дощу, на перезволожений ґрунт протягом 2 ігрових годин після дощу, за температури нуль градусів і нижче, а також коли на землі лежить сніг. Поживні речовини, внесені за таких умов, змиваються у водойми замість того, щоб живити посіви. За кожне порушення передбачено штраф."/>
 		<text name="rt_policy_report_description_croprotation" text="У звіті показано загальну площу землі, що відповідає та не відповідає вимогам."/>
 		<text name="rt_policy_report_description_sprayviolation" text="У звіті показано кількість порушень правил обприскування за останній місяць."/>
 		<text name="rt_policy_report_description_empty_food" text="У звіті показано сумарну кількість годин, протягом яких у загонах для тварин не було корму."/>
@@ -95,6 +97,7 @@
 		<text name="rt_policy_report_description_manure_spreading" text="У звіті показано кількість гною, виробленого за останні 6 місяців, а також загальний обсяг виробництва та максимально дозволений обсяг зберігання за цей період. Зверніть увагу: дані за Місяць 1, показані у звіті, не будуть включені до наступного звіту, а гній, вироблений у поточному місяці, необхідно буде врахувати."/>
 		<text name="rt_policy_report_description_restricted_slurry" text="У звіті показано, скільки разів рідкий гній вносився протягом заборонених місяців."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="У звіті показано кількість висаджених і зрубаних дерев у поточному піврічному періоді."/>
+		<text name="rt_policy_report_description_spreading_conditions" text="У звіті показано, скільки разів добрива, рідкий гній, дигестат або гній вносилися за несприятливих умов, з розбивкою за причинами."/>
 		<text name="rt_report_name_farmland" text="Ділянка %s"/>
 		<text name="rt_report_name_total_area" text="Загальна площа"/>
 		<text name="rt_report_name_non_compliant_area" text="Площа з порушеннями"/>
@@ -108,6 +111,10 @@
 		<text name="rt_report_name_manure_stored_amount" text="Поточний запас гною"/>
 		<text name="rt_report_name_manure_max_stored_amount" text="Максимально дозволений запас"/>
 		<text name="rt_report_name_restricted_slurry_violations" text="Порушення обмежень на рідкий гній"/>
+		<text name="rt_report_name_spread_snow" text="Внесення по снігу"/>
+		<text name="rt_report_name_spread_frozen" text="Внесення на мерзлий ґрунт"/>
+		<text name="rt_report_name_spread_rain" text="Внесення під час дощу"/>
+		<text name="rt_report_name_spread_waterlogged" text="Внесення на перезволожений ґрунт"/>
 		<text name="rt_report_name_bale_penalty" text="Штраф за тюки"/>
 		<text name="rt_report_name_total_payout" text="Загальна сума виплат"/>
 		<text name="rt_report_name_animal_count" text="Кількість відповідних тварин"/>

@@ -75,6 +75,7 @@
 		<text name="rt_policy_manure_spreading" text="Gestione letame"/>
 		<text name="rt_policy_restricted_slurry" text="Applicazione liquami limitata"/>
 		<text name="rt_policy_sustainable_forestry" text="Silvicoltura sostenibile"/>
+		<text name="rt_policy_spreading_conditions" text="Condizioni di spandimento"/>
 		<text name="rt_policy_description_croprotation" text="Richiede la rotazione delle colture tra campi e stagioni per mantenere la fertilità del suolo, interrompere cicli di parassiti e malattie, migliorare l’equilibrio dei nutrienti e proteggere le rese a lungo termine."/>
 		<text name="rt_policy_description_sprayviolation" text="Vieta l’uso di prodotti chimici (fertilizzante solido, liquami, calce, letame, erbicida) entro 14 m dai corsi d’acqua per prevenire ruscellamento e contaminazione che possono danneggiare la fauna acquatica, degradare la qualità dell’acqua e mettere a rischio la salute umana. Le violazioni sono penalizzate."/>
 		<text name="rt_policy_description_empty_food" text="Richiede che gli animali abbiano sempre cibo sufficiente; mantieni le mangiatoie sempre piene e accessibili per prevenire la fame e rispettare gli standard di benessere."/>
@@ -85,6 +86,7 @@
 		<text name="rt_policy_description_manure_spreading" text="Non dovresti lasciare il letame inutilizzato indefinitamente. Assicurati di non immagazzinare più del 50% del letame prodotto in un periodo di 6 mesi. Se non produci letame, questa politica non ti riguarda. Il rapporto si aggiorna mensilmente, mentre valutazione completa e pagamenti o multe avverranno a maggio e novembre."/>
 		<text name="rt_policy_description_restricted_slurry" text="Non è consentito applicare liquami nei mesi da %s a %s. Ogni violazione sarà penalizzata."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Incoraggia pratiche forestali sostenibili, premiando la piantumazione netta positiva e multando la deforestazione complessiva. La politica si applica ai tuoi terreni. Il lavoro in conto terzi non influisce sulla valutazione. Il rapporto si aggiorna mensilmente con totali semestrali, mentre valutazione completa e pagamenti o multe avverranno a giugno e dicembre."/>
+		<text name="rt_policy_description_spreading_conditions" text="Non è consentito spandere fertilizzanti, liquami, digestato o letame mentre piove, nelle 2 ore di gioco successive alla pioggia, quando il terreno è saturo d'acqua, quando la temperatura è pari o inferiore a zero o quando c'è neve al suolo. I nutrienti distribuiti in queste condizioni finiscono nei corsi d'acqua invece di nutrire la coltura. Ogni violazione sarà penalizzata."/>
 		<text name="rt_policy_report_description_croprotation" text="Il rapporto mostra i totali delle superfici conformi e non conformi."/>
 		<text name="rt_policy_report_description_sprayviolation" text="Il rapporto mostra quante violazioni di irrorazione sono avvenute nell’ultimo mese."/>
 		<text name="rt_policy_report_description_empty_food" text="Il rapporto mostra quante ore complessive il cibo è mancato nei recinti degli animali."/>
@@ -95,6 +97,7 @@
 		<text name="rt_policy_report_description_manure_spreading" text="Il rapporto mostra la quantità di letame prodotta negli ultimi 6 mesi. Mostra anche il totale prodotto e il massimo consentito in stoccaggio negli ultimi 6 mesi. Nota che i dati del Mese 1 non saranno inclusi nel prossimo rapporto e che qualsiasi letame prodotto nel mese corrente dovrà essere considerato."/>
 		<text name="rt_policy_report_description_restricted_slurry" text="Il rapporto mostra quante volte i liquami sono stati applicati durante i mesi con restrizioni."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="Il rapporto mostra quanti alberi sono stati piantati e abbattuti nel periodo semestrale corrente."/>
+		<text name="rt_policy_report_description_spreading_conditions" text="Il rapporto mostra quante volte fertilizzanti, liquami, digestato o letame sono stati sparsi in condizioni sfavorevoli, suddivise per causa."/>
 		<text name="rt_report_name_farmland" text="Terreno agricolo %s"/>
 		<text name="rt_report_name_total_area" text="Area totale"/>
 		<text name="rt_report_name_non_compliant_area" text="Area non conforme"/>
@@ -108,6 +111,10 @@
 		<text name="rt_report_name_manure_stored_amount" text="Letame attualmente stoccato"/>
 		<text name="rt_report_name_manure_max_stored_amount" text="Massimo stoccaggio consentito"/>
 		<text name="rt_report_name_restricted_slurry_violations" text="Violazioni applicazione liquami"/>
+		<text name="rt_report_name_spread_snow" text="Sparso sulla neve"/>
+		<text name="rt_report_name_spread_frozen" text="Sparso su terreno gelato"/>
+		<text name="rt_report_name_spread_rain" text="Sparso sotto la pioggia"/>
+		<text name="rt_report_name_spread_waterlogged" text="Sparso su terreno saturo"/>
 		<text name="rt_report_name_bale_penalty" text="Penalità balle"/>
 		<text name="rt_report_name_total_payout" text="Importo totale pagato"/>
 		<text name="rt_report_name_animal_count" text="Numero animali idonei"/>

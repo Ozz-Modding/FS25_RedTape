@@ -75,6 +75,7 @@
 <text name="rt_policy_manure_spreading" text="Zarządzanie obornikiem"/>
 <text name="rt_policy_restricted_slurry" text="Ograniczenia w rozlewaniu gnojowicy"/>
 <text name="rt_policy_sustainable_forestry" text="Zrównoważone leśnictwo"/>
+<text name="rt_policy_spreading_conditions" text="Warunki nawożenia"/>
 <text name="rt_policy_description_croprotation" text="Wymaga rotacji upraw na polach i między sezonami w celu utrzymania żyzności gleby, przerywania cykli szkodników i chorób, poprawy bilansu składników odżywczych oraz ochrony długoterminowych plonów."/>
 <text name="rt_policy_description_sprayviolation" text="Zabrania rozpylania środków chemicznych (nawóz stały, gnojowica, wapno, obornik, herbicyd) w 14-metrowych strefach buforowych wokół zbiorników wodnych, aby zapobiec spływom i zanieczyszczeniom, które mogą szkodzić organizmom wodnym, obniżać jakość wody i zagrażać zdrowiu ludzkiemu. Naruszenia są karane."/>
 <text name="rt_policy_description_empty_food" text="Wymaga, aby zwierzęta zawsze miały dostęp do wystarczającej ilości paszy; utrzymuj koryta napełnione i łatwo dostępne przez cały czas, aby zapobiec głodowi i spełnić normy dobrostanu."/>
@@ -85,6 +86,7 @@
 <text name="rt_policy_description_manure_spreading" text="Nie powinieneś pozwalać, aby obornik leżał bezczynnie w nieskończoność. Upewnij się, że nie przechowujesz więcej niż 50% produkowanego obornika w okresie 6 miesięcy. Jeśli nie produkujesz obornika, ta polityka cię nie dotyczy. Raport będzie aktualizowany co miesiąc, jednak pełna ocena, wypłaty lub grzywny będą miały miejsce w maju i listopadzie."/>
 <text name="rt_policy_description_restricted_slurry" text="Nie wolno ci rozlewać gnojowicy w miesiącach od %s do %s. Zostaniesz ukarany za każde naruszenie."/>
 <text name="rt_policy_description_sustainable_forestry" text="Zachęca do zrównoważonych praktyk leśnych, nagradzając za dodatni bilans sadzenia drzew i karząc za ogólne wylesianie. Polityka dotyczy tylko twojej własnej ziemi. Wykonywanie prac kontraktowych nie wpłynie na twoją ocenę. Raport będzie aktualizowany co miesiąc i zliczał wartości półroczne, jednak pełna ocena, wypłaty lub grzywny będą miały miejsce w czerwcu i grudniu."/>
+<text name="rt_policy_description_spreading_conditions" text="Nie wolno ci rozsiewać nawozu, rozlewać gnojowicy, pofermentu ani rozrzucać obornika podczas deszczu, przez 2 godziny gry po deszczu, gdy gleba jest podmokła, gdy temperatura wynosi zero stopni lub mniej albo gdy na ziemi leży śnieg. Składniki pokarmowe zastosowane w takich warunkach spływają do cieków wodnych zamiast odżywiać uprawę. Zostaniesz ukarany za każde naruszenie."/>
 <text name="rt_policy_report_description_croprotation" text="Raport przedstawia sumy dla ziemi zgodnej i niezgodnej z przepisami."/>
 <text name="rt_policy_report_description_sprayviolation" text="Raport pokazuje, ile naruszeń dotyczących oprysków miało miejsce w ostatnim miesiącu."/>
 <text name="rt_policy_report_description_empty_food" text="Raport pokazuje, przez ile łącznie godzin brakowało jedzenia w zagrodach dla zwierząt."/>
@@ -95,6 +97,7 @@
 <text name="rt_policy_report_description_manure_spreading" text="Raport pokazuje ilość wyprodukowanego obornika w ciągu ostatnich 6 miesięcy. Pokazuje również łączną produkcję oraz maksymalną dozwoloną ilość przechowywanego obornika w ciągu ostatnich 6 miesięcy. Pamiętaj, że wyświetlane dane za miesiąc 1 nie zostaną uwzględnione w następnym raporcie, a każdy obornik wyprodukowany w bieżącym miesiącu będzie musiał zostać rozliczony."/>
 <text name="rt_policy_report_description_restricted_slurry" text="Raport pokazuje, ile razy rozlewano gnojowicę w miesiącach z ograniczeniami."/>
 <text name="rt_policy_report_description_sustainable_forestry" text="Raport pokazuje, ile drzew zasadzono i wycięto w bieżącym okresie półrocznym."/>
+<text name="rt_policy_report_description_spreading_conditions" text="Raport pokazuje, ile razy nawóz, gnojowica, poferment lub obornik zostały zastosowane w złych warunkach, z podziałem na przyczyny."/>
 <text name="rt_report_name_farmland" text="Działka %s"/>
 <text name="rt_report_name_total_area" text="Całkowita powierzchnia"/>
 <text name="rt_report_name_non_compliant_area" text="Obszar niezgodny z przepisami"/>
@@ -108,6 +111,10 @@
 <text name="rt_report_name_manure_stored_amount" text="Obecnie przechowywany obornik"/>
 <text name="rt_report_name_manure_max_stored_amount" text="Maks. dozwolone przechowywanie"/>
 <text name="rt_report_name_restricted_slurry_violations" text="Naruszenia zakazu gnojowicy"/>
+<text name="rt_report_name_spread_snow" text="Nawożenie na śniegu"/>
+<text name="rt_report_name_spread_frozen" text="Nawożenie na zamarzniętej glebie"/>
+<text name="rt_report_name_spread_rain" text="Nawożenie w deszczu"/>
+<text name="rt_report_name_spread_waterlogged" text="Nawożenie na podmokłej glebie"/>
 <text name="rt_report_name_bale_penalty" text="Kara za bele"/>
 <text name="rt_report_name_total_payout" text="Łączna kwota wypłacona"/>
 <text name="rt_report_name_animal_count" text="Kwalifikująca się liczba zwierząt"/>

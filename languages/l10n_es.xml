@@ -75,6 +75,7 @@
 		<text name="rt_policy_manure_spreading" text="Gestión de estiércol"/>
 		<text name="rt_policy_restricted_slurry" text="Aplicación restringida de purines"/>
 		<text name="rt_policy_sustainable_forestry" text="Silvicultura sostenible"/>
+		<text name="rt_policy_spreading_conditions" text="Condiciones de aplicación"/>
 		<text name="rt_policy_description_croprotation" text="Requiere rotar cultivos entre campos y temporadas para mantener la fertilidad del suelo, romper ciclos de plagas y enfermedades, mejorar el equilibrio de nutrientes y proteger los rendimientos a largo plazo."/>
 		<text name="rt_policy_description_sprayviolation" text="Prohíbe la aplicación de productos químicos (fertilizante sólido, purín, cal, estiércol, herbicida) dentro de zonas de amortiguamiento de 14m de cuerpos de agua para prevenir escorrentía y contaminación que puede dañar la vida acuática, degradar la calidad del agua y poner en peligro la salud humana. Las violaciones son penalizadas."/>
 		<text name="rt_policy_description_empty_food" text="Requiere que los animales siempre tengan suficiente alimento disponible; mantén los comederos llenos y accesibles en todo momento para prevenir el hambre y cumplir con los estándares de bienestar."/>
@@ -85,6 +86,7 @@
 		<text name="rt_policy_description_manure_spreading" text="No debes dejar el estiércol inactivo indefinidamente. Asegúrate de no almacenar más del 50% del estiércol que produces en un período de 6 meses. Si no produces estiércol, no te afectará esta política. El informe se actualizará mensualmente, sin embargo, la evaluación completa y el pago o multas ocurrirán en mayo y noviembre."/>
 		<text name="rt_policy_description_restricted_slurry" text="No está permitido aplicar purín durante los meses de %s a %s. Serás penalizado por cada violación."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Fomenta prácticas forestales sostenibles, recompensando la plantación neta positiva de árboles y multando por la deforestación general. La política se aplica a tu propia tierra. Hacer trabajo por contrato no afectará tu evaluación. El informe se actualizará mensualmente con totales semestrales, sin embargo, la evaluación completa y el pago o multas ocurrirán en junio y diciembre."/>
+		<text name="rt_policy_description_spreading_conditions" text="No debes aplicar fertilizante, purín, digestato ni estiércol mientras llueve, durante las 2 horas de juego posteriores a la lluvia, cuando el suelo está encharcado, cuando la temperatura está a cero grados o por debajo, o cuando hay nieve en el suelo. Los nutrientes aplicados en estas condiciones acaban en los cursos de agua en lugar de alimentar el cultivo. Serás penalizado por cada violación."/>
 		<text name="rt_policy_report_description_croprotation" text="El informe muestra totales de tierra cumpliente y no cumpliente."/>
 		<text name="rt_policy_report_description_sprayviolation" text="El informe muestra cuántas violaciones de fumigación ocurrieron en el último mes."/>
 		<text name="rt_policy_report_description_empty_food" text="El informe muestra cuántas horas combinadas estuvo vacía la comida en los corrales de animales."/>
@@ -95,6 +97,7 @@
 		<text name="rt_policy_report_description_manure_spreading" text="El informe muestra la cantidad de estiércol producido durante los últimos 6 meses. También muestra el total producido y el almacenamiento máximo permitido durante los últimos 6 meses. Ten en cuenta que los datos del Mes 1 mostrados no se incluirán en el próximo informe, y cualquier estiércol producido en el mes actual deberá contabilizarse."/>
 		<text name="rt_policy_report_description_restricted_slurry" text="El informe muestra cuántas veces se aplicó purín durante los meses restringidos."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="El informe muestra cuántos árboles fueron plantados y talados en el período semestral actual."/>
+		<text name="rt_policy_report_description_spreading_conditions" text="El informe muestra cuántas veces se aplicó fertilizante, purín, digestato o estiércol en malas condiciones, desglosado por causa."/>
 		<text name="rt_report_name_farmland" text="Terreno agrícola %s"/>
 		<text name="rt_report_name_total_area" text="Área total"/>
 		<text name="rt_report_name_non_compliant_area" text="Área no cumpliente"/>
@@ -108,6 +111,10 @@
 		<text name="rt_report_name_manure_stored_amount" text="Estiércol actualmente almacenado"/>
 		<text name="rt_report_name_manure_max_stored_amount" text="Almacenamiento máximo permitido"/>
 		<text name="rt_report_name_restricted_slurry_violations" text="Violaciones de purín restringido"/>
+		<text name="rt_report_name_spread_snow" text="Aplicado sobre nieve"/>
+		<text name="rt_report_name_spread_frozen" text="Aplicado sobre suelo helado"/>
+		<text name="rt_report_name_spread_rain" text="Aplicado con lluvia"/>
+		<text name="rt_report_name_spread_waterlogged" text="Aplicado sobre suelo encharcado"/>
 		<text name="rt_report_name_bale_penalty" text="Penalización por pacas"/>
 		<text name="rt_report_name_total_payout" text="Cantidad total pagada"/>
 		<text name="rt_report_name_animal_count" text="Recuento de animales elegibles"/>

@@ -77,7 +77,7 @@ RTSchemes = {
             local report = {}
             local totalReward = 0
             for _, farmland in pairs(g_farmlandManager.farmlands) do
-                if farmland.farmId == farmId then
+                if farmland.farmId == farmId and farmland.field ~= nil then
                     local farmlandData = gatherer:getFarmlandData(farmland.id)
 
                     local juneFruit = farmlandData.fruitHistory[cumulativeMonth - 1]
@@ -712,7 +712,7 @@ RTSchemes = {
             local report = {}
             local totalReward = 0
             for _, farmland in pairs(g_farmlandManager.farmlands) do
-                if farmland.farmId == farmId then
+                if farmland.farmId == farmId and farmland.field ~= nil then
                     local farmlandData = gatherer:getFarmlandData(farmland.id)
 
                     local febFruit = farmlandData.fruitHistory[cumulativeMonth - 1]
@@ -1061,7 +1061,7 @@ RTSchemes = {
             local payout = 0
             local eligibleHa = 0
             for _, farmland in pairs(g_farmlandManager.farmlands) do
-                if farmland.farmId == farmId then
+                if farmland.farmId == farmId and farmland.field ~= nil then
                     local farmlandData = gatherer:getFarmlandData(farmland.id)
                     local bonus = schemeInfo.tiers[tier].bonusPerHa
                     local reward = 0

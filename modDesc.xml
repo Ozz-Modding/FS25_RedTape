@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="113">
+<modDesc descVersion="114">
     <author>Ozz</author>
     <version>1.0.3.5</version>
     <iconFilename>icon_RedTape.dds</iconFilename>
@@ -31,6 +31,9 @@ Changelog:
 - Fixed some translation errors which caused problems with Grants.
 - Added an API so other mods can register their own finance statistics as tax expenses or income.
 - Added Ukranian translation thanks to Gemax750.
+- Spraying liquid fertiliser or digestate near water now counts as a violation of the Water Contamination policy, the same as other fertilisers.
+- Delayed Mowing, Winter Cover Crops and Set-Aside scheme reports no longer list owned farmland that has no field on it.
+- New Spreading Conditions policy: don't spread fertiliser, slurry, digestate or manure in the rain, on waterlogged or frozen ground, or on snow. The report shows which conditions you were caught spreading in.
 
 1.0.3.4:
 - Fixed the Productivity Recovery setting breaking animal feeding and production when used alongside other husbandry mods such as Realistic Livestock. Any value other than 1x stopped those mods running their hourly animal update, so animals no longer ate or produced.

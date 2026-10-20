@@ -12,6 +12,7 @@ function FarmGatherer.new()
     self.sprayCoords = {}
     self.productivityExceptions = {}
     self.snowOnGround = false
+    self.waterloggedUntilMinute = -1 -- in-game minute (see getGameMinute) the ground stays waterlogged until
     self.saltData = {}
     self.manureCells = {}
     self.saltSyncDirtyFarms = {}  -- farmId -> true when saltCount changed since last broadcast
@@ -117,6 +118,7 @@ function FarmGatherer:resetMonthlyData()
         farmData.monthlyLowProductivityHusbandry = 0
         farmData.monthlyAnimalSpaceViolations = 0
         farmData.monthlyRestrictedSlurryViolations = 0
+        farmData.monthlyBadConditionsSpread = FarmGatherer.newBadConditionsSpreadCounts()
         farmData.monthlyAnimalGrazingHours = 0
         farmData.monthlyScaledAnimalGrazingHours = 0
         farmData.monthlyAnimalHours = 0
@@ -141,6 +143,7 @@ function FarmGatherer:getFarmData(farmId)
             monthlyLowProductivityHusbandry = 0,
             monthlyAnimalSpaceViolations = 0,
             monthlyRestrictedSlurryViolations = 0,
+            monthlyBadConditionsSpread = FarmGatherer.newBadConditionsSpreadCounts(),
             currentManureLevel = 0,
             monthlyAnimalGrazingHours = 0,
             monthlyScaledAnimalGrazingHours = 0,
@@ -159,6 +162,7 @@ end
 function FarmGatherer:saveToXmlFile(xmlFile, key)
     local farmGathererKey = string.format("%s.farmGatherer", key)
     setXMLBool(xmlFile, farmGathererKey .. "#snowOnGround", self.snowOnGround)
+    setXMLFloat(xmlFile, farmGathererKey .. "#waterloggedUntilMinute", self.waterloggedUntilMinute)
 
     local y = 0
     for uniqueId, hours in pairs(self.productivityExceptions) do
@@ -213,6 +217,10 @@ function FarmGatherer:saveToXmlFile(xmlFile, key)
         setXMLInt(xmlFile, farmKey .. "#monthlyAnimalSpaceViolations", farmData.monthlyAnimalSpaceViolations)
         setXMLInt(xmlFile, farmKey .. "#currentManureLevel", farmData.currentManureLevel)
         setXMLInt(xmlFile, farmKey .. "#monthlyRestrictedSlurryViolations", farmData.monthlyRestrictedSlurryViolations)
+        for _, reason in ipairs(FarmGatherer.BAD_SPREAD_REASONS) do
+            setXMLInt(xmlFile, farmKey .. "#monthlyBadConditionsSpread_" .. reason,
+                farmData.monthlyBadConditionsSpread[reason] or 0)
+        end
         setXMLInt(xmlFile, farmKey .. "#monthlyAnimalGrazingHours", farmData.monthlyAnimalGrazingHours)
         setXMLInt(xmlFile, farmKey .. "#monthlyScaledAnimalGrazingHours", farmData.monthlyScaledAnimalGrazingHours)
         setXMLInt(xmlFile, farmKey .. "#monthlyAnimalHours", farmData.monthlyAnimalHours)
@@ -267,6 +275,7 @@ end
 function FarmGatherer:loadFromXMLFile(xmlFile, key)
     local farmGathererKey = string.format("%s.farmGatherer", key)
     self.snowOnGround = getXMLBool(xmlFile, farmGathererKey .. "#snowOnGround") or false
+    self.waterloggedUntilMinute = getXMLFloat(xmlFile, farmGathererKey .. "#waterloggedUntilMinute") or -1
 
     local x = 0
     while true do
@@ -338,6 +347,12 @@ function FarmGatherer:loadFromXMLFile(xmlFile, key)
             biAnnualPlantedTrees = getXMLInt(xmlFile, farmKey .. "#biAnnualPlantedTrees") or 0,
             saltCount = getXMLInt(xmlFile, farmKey .. "#saltCount") or 0,
         }
+
+        self.data[farmId].monthlyBadConditionsSpread = FarmGatherer.newBadConditionsSpreadCounts()
+        for _, reason in ipairs(FarmGatherer.BAD_SPREAD_REASONS) do
+            self.data[farmId].monthlyBadConditionsSpread[reason] =
+                getXMLInt(xmlFile, farmKey .. "#monthlyBadConditionsSpread_" .. reason) or 0
+        end
 
         local j = 0
         self.data[farmId].sprayHistory = {}
@@ -417,15 +432,96 @@ function FarmGatherer:loadFromXMLFile(xmlFile, key)
     end
 end
 
+-- Why a spreading tick broke the spreading conditions policy. Checked in this order and each
+-- tick counts against the first that applies, so the counts add up to the total violations.
+FarmGatherer.BAD_SPREAD_REASONS = { "snow", "frozen", "rain", "waterlogged" }
+-- Ground wetness at which the ground counts as waterlogged, and how many in-game minutes it
+-- stays that way after dropping back below. The game's own wetness dries out in 30 in-game
+-- minutes, which is only seconds at higher time scales, so it can't be used on its own.
+FarmGatherer.BAD_SPREAD_WATERLOGGED_WETNESS = 0.7
+FarmGatherer.BAD_SPREAD_WATERLOGGED_MINUTES = 120
+FarmGatherer.BAD_SPREAD_FROZEN_TEMPERATURE = 0
+
+function FarmGatherer.newBadConditionsSpreadCounts()
+    local counts = {}
+    for _, reason in ipairs(FarmGatherer.BAD_SPREAD_REASONS) do
+        counts[reason] = 0
+    end
+    return counts
+end
+
+function FarmGatherer.getBadConditionsSpreadTotal(farmData)
+    local total = 0
+    for _, reason in ipairs(FarmGatherer.BAD_SPREAD_REASONS) do
+        total = total + ((farmData.monthlyBadConditionsSpread or {})[reason] or 0)
+    end
+    return total
+end
+
+-- The reason spreading right now would break the spreading conditions policy, or nil if
+-- conditions are fine.
+function FarmGatherer:getBadSpreadReason()
+    local weather = g_currentMission.environment ~= nil and g_currentMission.environment.weather or nil
+    if self.snowOnGround then
+        return "snow"
+    end
+    if weather == nil then
+        return nil
+    end
+    if weather:getCurrentTemperature() <= FarmGatherer.BAD_SPREAD_FROZEN_TEMPERATURE then
+        return "frozen"
+    end
+    if weather:getIsRaining() or weather:getIsHailing() or weather:getIsSnowing() then
+        return "rain"
+    end
+    if FarmGatherer.getGameMinute() < self.waterloggedUntilMinute then
+        return "waterlogged"
+    end
+    return nil
+end
+
+-- In-game minutes since the start of the save. Only ever counts up, including across days.
+function FarmGatherer.getGameMinute()
+    local environment = g_currentMission.environment
+    return ((environment.currentMonotonicDay or 0) * 86400000 + (environment.dayTime or 0)) / 60000
+end
+
+-- Keeps the waterlogged window open for as long as the ground is soaked, so it runs out a set
+-- time after the ground starts drying rather than after any rain at all.
+function FarmGatherer:updateWaterlogged()
+    local weather = g_currentMission.environment ~= nil and g_currentMission.environment.weather or nil
+    if weather == nil then
+        return
+    end
+    if weather:getGroundWetness() >= FarmGatherer.BAD_SPREAD_WATERLOGGED_WETNESS then
+        self.waterloggedUntilMinute = FarmGatherer.getGameMinute() + FarmGatherer.BAD_SPREAD_WATERLOGGED_MINUTES
+    end
+end
+
 function FarmGatherer:storeSprayAreaCoords(uniqueId, coords)
     self.sprayCoords[uniqueId] = coords
 end
 
 function FarmGatherer:checkSprayers()
-    local checkFillTypes = { FillType.FERTILIZER, FillType.LIQUIDMANURE, FillType.LIME, FillType.MANURE, FillType
-        .HERBICIDE }
+    self:updateWaterlogged()
+
+    -- Built without holes: a fill type missing on this map would otherwise cut ipairs short
+    local function presentFillTypes(fillTypeIndices)
+        local present = {}
+        for _, fillTypeIndex in pairs(fillTypeIndices) do
+            table.insert(present, fillTypeIndex)
+        end
+        return present
+    end
+    local checkFillTypes = presentFillTypes({ FillType.FERTILIZER, FillType.LIQUIDFERTILIZER, FillType.LIQUIDMANURE,
+        FillType.DIGESTATE, FillType.LIME, FillType.MANURE, FillType.HERBICIDE })
+    local nutrientFillTypes = presentFillTypes({ FillType.FERTILIZER, FillType.LIQUIDFERTILIZER, FillType.LIQUIDMANURE,
+        FillType.DIGESTATE, FillType.MANURE })
     local restrictedSlurryPolicy = RTPolicies[RTPolicyIds.RESTRICTED_SLURRY]
     local restrictedSlurryMonths = restrictedSlurryPolicy.getRestrictedMonths(restrictedSlurryPolicy)
+    -- Worked out once per check, and only if something is actually spreading
+    local badSpreadReason
+    local badSpreadReasonChecked = false
 
     for uniqueId, sprayer in pairs(self.turnedOnSprayers) do
         local sprayerFarmId = sprayer:getOwnerFarmId()
@@ -441,6 +537,17 @@ function FarmGatherer:checkSprayers()
 
         if RedTape.tableHasValue(restrictedSlurryMonths, currentMonth) and fillType == FillType.LIQUIDMANURE then
             farmData.monthlyRestrictedSlurryViolations = farmData.monthlyRestrictedSlurryViolations + 1
+        end
+
+        if RedTape.tableHasValue(nutrientFillTypes, fillType) then
+            if not badSpreadReasonChecked then
+                badSpreadReason = self:getBadSpreadReason()
+                badSpreadReasonChecked = true
+            end
+            if badSpreadReason ~= nil then
+                local counts = farmData.monthlyBadConditionsSpread
+                counts[badSpreadReason] = (counts[badSpreadReason] or 0) + 1
+            end
         end
 
         if RedTape.tableHasValue(checkFillTypes, fillType) then

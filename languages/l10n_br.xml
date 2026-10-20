@@ -75,6 +75,7 @@
 		<text name="rt_policy_manure_spreading" text="Gestão de Estrume"/>
 		<text name="rt_policy_restricted_slurry" text="Aplicação Restrita de Chorume"/>
 		<text name="rt_policy_sustainable_forestry" text="Manejo Florestal Sustentável"/>
+		<text name="rt_policy_spreading_conditions" text="Condições de Aplicação"/>
 		<text name="rt_policy_description_croprotation" text="Exige a rotação de culturas entre campos e estações para manter a fertilidade do solo, interromper ciclos de pragas e doenças, melhorar o equilíbrio de nutrientes e preservar a produtividade a longo prazo."/>
 		<text name="rt_policy_description_sprayviolation" text="Proíbe a pulverização de produtos químicos (fertilizante sólido, chorume, cal, esterco, herbicida) em zonas de proteção de 14m de corpos d'água para evitar escoamento e contaminação que possam prejudicar a vida aquática, degradar a qualidade da água e colocar em risco a saúde humana. Violações são punidas."/>
 		<text name="rt_policy_description_empty_food" text="Exige que os animais tenham sempre alimentação suficiente disponível; mantenha os comedouros abastecidos e acessíveis o tempo todo para evitar fome e atender aos padrões de bem-estar."/>
@@ -85,6 +86,7 @@
 		<text name="rt_policy_description_manure_spreading" text="Você não deve deixar o estrume parado indefinidamente. Garanta que não armazena mais de 50% do estrume que produz em um período de 6 meses. Se você não produz estrume, não será afetado por esta política. O relatório será atualizado mensalmente; entretanto, a avaliação completa e o pagamento ou multas ocorrerão em Maio e Novembro."/>
 		<text name="rt_policy_description_restricted_slurry" text="Não é permitido aplicar chorume nos meses de %s a %s. Você será penalizado por cada violação."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Incentiva práticas florestais sustentáveis, recompensando o plantio líquido de árvores e multando o desmatamento geral. A política se aplica às suas próprias terras. Trabalho por contrato não afetará sua avaliação. O relatório será atualizado mensalmente com totais semestrais; entretanto, a avaliação completa e o pagamento ou multas ocorrerão em Junho e Dezembro."/>
+		<text name="rt_policy_description_spreading_conditions" text="Você não deve aplicar fertilizante, chorume, digestato ou esterco enquanto estiver chovendo, nas 2 horas de jogo após a chuva, enquanto o solo estiver encharcado, quando a temperatura estiver em zero grau ou abaixo, ou quando houver neve no chão. Nutrientes aplicados nessas condições escoam para os cursos d'água em vez de nutrir a lavoura. Você será penalizado por cada violação."/>
 		<text name="rt_policy_report_description_croprotation" text="O relatório mostra totais para áreas conformes e não conformes."/>
 		<text name="rt_policy_report_description_sprayviolation" text="O relatório mostra quantas violações de pulverização ocorreram no último mês."/>
 		<text name="rt_policy_report_description_empty_food" text="O relatório mostra quantas horas combinadas a alimentação ficou vazia em currais."/>
@@ -95,6 +97,7 @@
 		<text name="rt_policy_report_description_manure_spreading" text="O relatório mostra a quantidade de estrume produzida nos últimos 6 meses. Também mostra o total produzido e o armazenamento máximo permitido nos últimos 6 meses. Observe que os dados do Mês 1 exibidos não serão incluídos no próximo relatório, e qualquer estrume produzido no mês atual deverá ser contabilizado."/>
 		<text name="rt_policy_report_description_restricted_slurry" text="O relatório mostra quantas vezes chorume foi aplicado durante os meses restritos."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="O relatório mostra quantas árvores foram plantadas e cortadas no período semestral atual."/>
+		<text name="rt_policy_report_description_spreading_conditions" text="O relatório mostra quantas vezes fertilizante, chorume, digestato ou esterco foi aplicado em más condições, separado por causa."/>
 		<text name="rt_report_name_farmland" text="Terreno %s"/>
 		<text name="rt_report_name_total_area" text="Área Total"/>
 		<text name="rt_report_name_non_compliant_area" text="Área Não Conforme"/>
@@ -108,6 +111,10 @@
 		<text name="rt_report_name_manure_stored_amount" text="Estrume armazenado atualmente"/>
 		<text name="rt_report_name_manure_max_stored_amount" text="Armazenamento máximo permitido"/>
 		<text name="rt_report_name_restricted_slurry_violations" text="Violações de chorume restrito"/>
+		<text name="rt_report_name_spread_snow" text="Aplicado sobre neve"/>
+		<text name="rt_report_name_spread_frozen" text="Aplicado em solo congelado"/>
+		<text name="rt_report_name_spread_rain" text="Aplicado na chuva"/>
+		<text name="rt_report_name_spread_waterlogged" text="Aplicado em solo encharcado"/>
 		<text name="rt_report_name_bale_penalty" text="Penalidade por fardo"/>
 		<text name="rt_report_name_total_payout" text="Total pago"/>
 		<text name="rt_report_name_animal_count" text="Contagem de animais elegíveis"/>
