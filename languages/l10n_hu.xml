@@ -141,7 +141,7 @@
 		<text name="rt_scheme_desc_winter_cover_crops" text="Bátorítja a takarónövények telepítését télen a talajerózió és tápanyag-kimosódás csökkentésére. Minden jóváhagyott tábla után jutalmat kapsz."/>
 		<text name="rt_scheme_desc_road_snow_clearing" text="A helyi önkormányzat a friss hó miatt kéri a gazdálkodókat, hogy segítsenek az utak járhatóságának és biztonságának megőrzésében. A sót olyan utakra kell szórni, amelyeket rendszeresen más járművek is használnak. A szórásnál a sebességed ne haladja meg a %s%s-t a megfelelő fedés érdekében."/>
 		<text name="rt_scheme_desc_brand_demo" text="%s lehetőséget kínál farmodnak néhány eszköz kipróbálására %s hónapra. A pontos specifikáció a programra való jelentkezéskor kerül meghatározásra."/>
-		<text name="rt_scheme_desc_set_aside" text="Bátorítja a föld egy részének pihentetését. Jutalmat kapsz, ha a föld legalább %d hónapig üres marad december előtt. Ha több, mint %s tábla megfelel, az összes eladott növény az adott adóévben 5%-os adókulcs alá esik."/>
+		<text name="rt_scheme_desc_set_aside" text="Bátorítja a föld egy részének pihentetését. Jutalmat kapsz, ha a föld legalább %d hónapig üres marad december előtt. Ha több, mint %s tábla megfelel, az összes eladott növény az adott adóévben 5%%-os adókulcs alá esik."/>
 		<text name="rt_scheme_report_desc_delayed_mowing" text="A jelentés listázza a földterületeket és az utolsó értékelés során kifizetett összegeket."/>
 		<text name="rt_scheme_report_desc_crop_promotion" text="A jelentés listázza a földterületeket és az utolsó értékelés során kifizetett összegeket."/>
 		<text name="rt_scheme_report_desc_reduce_bale_wrapping" text="A jelentés listázza a földterületeket és az utolsó értékelés során kifizetett összegeket."/>
@@ -221,7 +221,7 @@
 		<text name="rt_toolTip_policyEnabled" text="Be- vagy kikapcsolja a(z) %s előírás érvényesítését. Kikapcsolva az előírás soha nem kerül kiosztásra, és nem jár érte jelentés, pont, figyelmeztetés vagy bírság."/>
 		<text name="rt_grant_button" text="Támogatás igénylése" />
 		<text name="rt_grant_application_submitted" text="A támogatási kérelmedet benyújtottuk, és megtekinthető a Támogatások fülön." />
-		<text name="rt_grant_confirm_application_dialog" text="Szeretnél támogatást igényelni ehhez az építkezéshez? A kérelem díja %s. A kérelmek feldolgozása akár 6 hónapot is igénybe vehet, a jóváhagyás esélye 35–45%, amit befolyásolhat a megfelelőségi értéked." />
+		<text name="rt_grant_confirm_application_dialog" text="Szeretnél támogatást igényelni ehhez az építkezéshez? A kérelem díja %s. A kérelmek feldolgozása akár 6 hónapot is igénybe vehet, a jóváhagyás esélye 50–60%%, amit befolyásolhat a megfelelőségi értéked." />
 		<text name="rt_grant_existing_application" text="Egyszerre csak egy aktív kérelem engedélyezett. Új kérelmet csak a meglévő feldolgozása után nyújthatsz be." />
 		<text name="rt_grant_approved_notification" text="A támogatási kérelmed jóváhagyásra került! %s összeget kapsz az épület megvásárlásakor." />
 		<text name="rt_grant_rejected_notification" text="A támogatási kérelmedet elutasították." />

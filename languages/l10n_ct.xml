@@ -11,7 +11,7 @@
 		<text name="rt_policy_custom" text="自訂"/>
 		<text name="rt_notify_scheme_payout" text="計畫 %s 已向您支付：%s"/>
 		<text name="rt_notify_policy_warning" text="您因違反政策 %s 而收到警告"/>
-		<text name="rt_notify_policy_fine" text="您因違反政策 %2$s 被罰款 %1$s"/>
+		<text name="rt_notify_policy_fine" text="您被罰款 %s，原因是違反政策 %s"/>
 		<text name="rt_label_active_policies" text="啟用中的政策"/>
 		<text name="rt_label_tax_statement" text="稅務申報表"/>
 		<text name="rt_header_policies" text="法"/>

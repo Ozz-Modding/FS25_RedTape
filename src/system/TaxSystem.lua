@@ -354,77 +354,146 @@ function RTTaxSystem:getTaxedAmount(lineItem, taxStatement)
     return lineItem.amount * taxedAmountModifier
 end
 
-function RTTaxSystem:categoriseLineItem(lineItem, taxStatement)
-    local otherExpense = lineItem.statistic == "other" and lineItem.amount < 0
-    local otherIncome = lineItem.statistic == "other" and lineItem.amount > 0
+RTTaxSystem.STAT_KIND = {
+    EXPENSE = "expense",
+    INCOME = "income",
+    IGNORE = "ignore"
+}
 
-    local expenseStats = {
-        "newVehiclesCost",
-        "constructionCost",
-        "newHandtoolsCost",
-        "wagePayment",
-        "newAnimalsCost",
-        "animalUpkeep",
-        "purchaseSeeds",
-        "purchaseFertilizer",
-        "purchaseFuel",
-        "purchaseSaplings",
-        "purchaseWater",
-        "purchaseBales",
-        "purchasePallets",
-        "purchaseConsumable",
-        "fieldPurchase",
-        "vehicleLeasingCost",
-        "loanInterest",
-        "vehicleRunningCost",
-        "propertyMaintenance",
-        "productionCosts",
-        "grantApplicationCost",
-        "invoiceExpense",
-        "bankLoanInterest"
-    }
+RTTaxSystem.EXPENSE_STATS = {
+    "newVehiclesCost",
+    "constructionCost",
+    "newHandtoolsCost",
+    "wagePayment",
+    "newAnimalsCost",
+    "animalUpkeep",
+    "purchaseSeeds",
+    "purchaseFertilizer",
+    "purchaseFuel",
+    "purchaseSaplings",
+    "purchaseWater",
+    "purchaseBales",
+    "purchasePallets",
+    "purchaseConsumable",
+    "fieldPurchase",
+    "vehicleLeasingCost",
+    "loanInterest",
+    "vehicleRunningCost",
+    "propertyMaintenance",
+    "productionCosts",
+    "grantApplicationCost",
+    "invoiceExpense",
+    "bankLoanInterest"
+}
 
-    local incomeStats = {
-        "soldVehicles",
-        "soldBuildings",
-        "soldHandtools",
-        "soldMilk",
-        "soldAnimals",
-        "harvestIncome",
-        "missionIncome",
-        "fieldSelling",
-        "propertyIncome",
-        "soldProducts",
-        "incomeBga",
-        "soldWood",
-        "soldBales",
-        "expenses",
-        "invoiceIncome"
-    }
+RTTaxSystem.INCOME_STATS = {
+    "soldVehicles",
+    "soldBuildings",
+    "soldHandtools",
+    "soldMilk",
+    "soldAnimals",
+    "harvestIncome",
+    "missionIncome",
+    "fieldSelling",
+    "propertyIncome",
+    "soldProducts",
+    "incomeBga",
+    "soldWood",
+    "soldBales",
+    "expenses",
+    "invoiceIncome"
+}
 
-    local ignoreStats = {
-        "policyFine",
-        "schemePayout",
-        "grantReceived",
-        "taxCost"
-    }
+RTTaxSystem.IGNORE_STATS = {
+    "policyFine",
+    "schemePayout",
+    "grantReceived",
+    "taxCost"
+}
 
-    if g_modIsLoaded["FS25_RealisticLivestock"] or g_modIsLoaded["FS25_RealisticLivestockRM"] then
-        table.insert(expenseStats, "herdsmanWages")
-        table.insert(expenseStats, "semenPurchase")
-        table.insert(expenseStats, "medicine")
-        table.insert(expenseStats, "monitorSubscriptions")
+RTTaxSystem.REALISTIC_LIVESTOCK_EXPENSE_STATS = {
+    "herdsmanWages",
+    "semenPurchase",
+    "medicine",
+    "monitorSubscriptions"
+}
+
+-- statistic -> RTTaxSystem.STAT_KIND, filled by other mods via registerTaxStatistic
+RTTaxSystem.registeredStatistics = {}
+
+-- Public API for other mods: put a finance statistic of their own on the tax statement.
+-- Call on every machine (server and clients) from loadMap or later, not at file load, since mods
+-- are not guaranteed to be sourced after Red Tape. e.g.
+--   if RTTaxSystem ~= nil and RTTaxSystem.registerTaxStatistic ~= nil then
+--       RTTaxSystem.registerTaxStatistic("tornadoInsurancePremium", "expense")
+--   end
+-- kind is "expense", "income" or "ignore". Red Tape's own statistics cannot be reclassified.
+-- Returns true if the statistic was registered.
+function RTTaxSystem.registerTaxStatistic(statistic, kind)
+    if type(statistic) ~= "string" or statistic == "" or statistic == "other" then
+        RedTape.logWarning("registerTaxStatistic: invalid statistic '" .. tostring(statistic) .. "'")
+        return false
     end
 
-    if otherExpense or RedTape.tableHasValue(expenseStats, lineItem.statistic) then
+    if kind ~= RTTaxSystem.STAT_KIND.EXPENSE and kind ~= RTTaxSystem.STAT_KIND.INCOME and kind ~= RTTaxSystem.STAT_KIND.IGNORE then
+        RedTape.logWarning("registerTaxStatistic: invalid kind '" .. tostring(kind) .. "' for statistic '" .. statistic ..
+            "', expected 'expense', 'income' or 'ignore'")
+        return false
+    end
+
+    if RTTaxSystem.getBuiltInStatKind(statistic) ~= nil then
+        RedTape.logWarning("registerTaxStatistic: '" .. statistic .. "' is already categorised by Red Tape, ignoring")
+        return false
+    end
+
+    RTTaxSystem.registeredStatistics[statistic] = kind
+    return true
+end
+
+function RTTaxSystem.getBuiltInStatKind(statistic)
+    if RedTape.tableHasValue(RTTaxSystem.EXPENSE_STATS, statistic) then
+        return RTTaxSystem.STAT_KIND.EXPENSE
+    end
+
+    if (g_modIsLoaded["FS25_RealisticLivestock"] or g_modIsLoaded["FS25_RealisticLivestockRM"]) and
+        RedTape.tableHasValue(RTTaxSystem.REALISTIC_LIVESTOCK_EXPENSE_STATS, statistic) then
+        return RTTaxSystem.STAT_KIND.EXPENSE
+    end
+
+    if RedTape.tableHasValue(RTTaxSystem.INCOME_STATS, statistic) then
+        return RTTaxSystem.STAT_KIND.INCOME
+    end
+
+    if RedTape.tableHasValue(RTTaxSystem.IGNORE_STATS, statistic) then
+        return RTTaxSystem.STAT_KIND.IGNORE
+    end
+
+    return nil
+end
+
+function RTTaxSystem.getStatKind(statistic, amount)
+    if statistic == "other" then
+        if amount < 0 then
+            return RTTaxSystem.STAT_KIND.EXPENSE
+        elseif amount > 0 then
+            return RTTaxSystem.STAT_KIND.INCOME
+        end
+        return RTTaxSystem.STAT_KIND.IGNORE
+    end
+
+    return RTTaxSystem.getBuiltInStatKind(statistic) or RTTaxSystem.registeredStatistics[statistic]
+end
+
+function RTTaxSystem:categoriseLineItem(lineItem, taxStatement)
+    local kind = RTTaxSystem.getStatKind(lineItem.statistic, lineItem.amount)
+
+    if kind == RTTaxSystem.STAT_KIND.EXPENSE then
         taxStatement.totalExpenses = taxStatement.totalExpenses + math.abs(lineItem.amount)
-    elseif otherIncome or RedTape.tableHasValue(incomeStats, lineItem.statistic) then
+    elseif kind == RTTaxSystem.STAT_KIND.INCOME then
         taxStatement.totalTaxableIncome = taxStatement.totalTaxableIncome + math.abs(lineItem.amount)
         taxStatement.totalTaxedIncome = taxStatement.totalTaxedIncome + self:getTaxedAmount(lineItem, taxStatement)
-    else
-        if not RedTape.tableHasValue(ignoreStats, lineItem.statistic) then
-            print("Warning: Uncategorised tax line item statistic '" .. tostring(lineItem.statistic) .. "'")
-        end
+    elseif kind == nil then
+        print("Warning: Uncategorised tax line item statistic '" .. tostring(lineItem.statistic) .. "'")
     end
 end
 

@@ -20,6 +20,33 @@ Some rough plans are:
 - A system to apply for Grants, e.g. to help towards a new cow shed
 - Long term: random events, e.g. your tractor was stolen.
 
+## For mod authors: registering tax statistics
+
+Red Tape only puts money on the tax statement if it knows which finance statistic it belongs to.
+Anything else is logged as "Uncategorised" and left off. If your mod has its own finance
+statistics (insurance, loans, contracts, ...), register them so they're taxed correctly:
+
+```lua
+-- Call from loadMap or later, on every machine (server and clients).
+-- Don't call at file load: your mod may be loaded before Red Tape.
+if RTTaxSystem ~= nil and RTTaxSystem.registerTaxStatistic ~= nil then
+    RTTaxSystem.registerTaxStatistic("myModPremium", "expense")
+    RTTaxSystem.registerTaxStatistic("myModPayout", "income")
+end
+```
+
+`kind` is one of:
+
+- `"expense"` - deducted from taxable profit.
+- `"income"` - counted as taxable income.
+- `"ignore"` - deliberately left off the tax statement, without the warning.
+
+The function returns `true` if the statistic was registered. It logs a warning and returns `false`
+for an invalid statistic or kind, or for a statistic Red Tape already categorises (its own
+categories can't be overridden).
+
+Money types using the `"other"` statistic aren't covered by this; use a statistic of your own.
+
 ## Discord
 
 [![Discord](https://img.shields.io/discord/1415966930799693847?logo=discord)](https://discord.gg/eGyACAan)
