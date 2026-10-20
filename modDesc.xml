@@ -34,6 +34,7 @@ Changelog:
 - Spraying liquid fertiliser or digestate near water now counts as a violation of the Water Contamination policy, the same as other fertilisers.
 - Delayed Mowing, Winter Cover Crops and Set-Aside scheme reports no longer list owned farmland that has no field on it.
 - New Spreading Conditions policy: don't spread fertiliser, slurry, digestate or manure in the rain, on waterlogged or frozen ground, or on snow. The report shows which conditions you were caught spreading in.
+- New Noxious Weed Control policy: fields with a growing crop must not be left overrun with untreated weeds. One weedy month is let off, two months in a row earns a warning, and from the third month you are fined per hectare until the field is sprayed or weeded.
 
 1.0.3.4:
 - Fixed the Productivity Recovery setting breaking animal feeding and production when used alongside other husbandry mods such as Realistic Livestock. Any value other than 1x stopped those mods running their hourly animal update, so animals no longer ate or produced.

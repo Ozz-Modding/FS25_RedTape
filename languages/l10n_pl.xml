@@ -76,6 +76,7 @@
 <text name="rt_policy_restricted_slurry" text="Ograniczenia w rozlewaniu gnojowicy"/>
 <text name="rt_policy_sustainable_forestry" text="Zrównoważone leśnictwo"/>
 <text name="rt_policy_spreading_conditions" text="Warunki nawożenia"/>
+<text name="rt_policy_noxious_weeds" text="Zwalczanie szkodliwych chwastów"/>
 <text name="rt_policy_description_croprotation" text="Wymaga rotacji upraw na polach i między sezonami w celu utrzymania żyzności gleby, przerywania cykli szkodników i chorób, poprawy bilansu składników odżywczych oraz ochrony długoterminowych plonów."/>
 <text name="rt_policy_description_sprayviolation" text="Zabrania rozpylania środków chemicznych (nawóz stały, gnojowica, wapno, obornik, herbicyd) w 14-metrowych strefach buforowych wokół zbiorników wodnych, aby zapobiec spływom i zanieczyszczeniom, które mogą szkodzić organizmom wodnym, obniżać jakość wody i zagrażać zdrowiu ludzkiemu. Naruszenia są karane."/>
 <text name="rt_policy_description_empty_food" text="Wymaga, aby zwierzęta zawsze miały dostęp do wystarczającej ilości paszy; utrzymuj koryta napełnione i łatwo dostępne przez cały czas, aby zapobiec głodowi i spełnić normy dobrostanu."/>
@@ -87,6 +88,7 @@
 <text name="rt_policy_description_restricted_slurry" text="Nie wolno ci rozlewać gnojowicy w miesiącach od %s do %s. Zostaniesz ukarany za każde naruszenie."/>
 <text name="rt_policy_description_sustainable_forestry" text="Zachęca do zrównoważonych praktyk leśnych, nagradzając za dodatni bilans sadzenia drzew i karząc za ogólne wylesianie. Polityka dotyczy tylko twojej własnej ziemi. Wykonywanie prac kontraktowych nie wpłynie na twoją ocenę. Raport będzie aktualizowany co miesiąc i zliczał wartości półroczne, jednak pełna ocena, wypłaty lub grzywny będą miały miejsce w czerwcu i grudniu."/>
 <text name="rt_policy_description_spreading_conditions" text="Nie wolno ci rozsiewać nawozu, rozlewać gnojowicy, pofermentu ani rozrzucać obornika podczas deszczu, przez 2 godziny gry po deszczu, gdy gleba jest podmokła, gdy temperatura wynosi zero stopni lub mniej albo gdy na ziemi leży śnieg. Składniki pokarmowe zastosowane w takich warunkach spływają do cieków wodnych zamiast odżywiać uprawę. Zostaniesz ukarany za każde naruszenie."/>
+<text name="rt_policy_description_noxious_weeds" text="Musisz zapobiegać rozprzestrzenianiu się szkodliwych chwastów z Twojej ziemi. Co miesiąc pola z rosnącą uprawą są sprawdzane pod kątem średnich lub dużych, nieodchwaszczonych chwastów. Pojedynczy miesiąc z chwastami nie jest karany, ale pole zachwaszczone przez 2 miesiące z rzędu otrzymuje ostrzeżenie, a od 3. miesiąca płacisz karę za każdy hektar, dopóki nie zostanie odchwaszczone. Łąki, winnice i gaje oliwne nie są sprawdzane."/>
 <text name="rt_policy_report_description_croprotation" text="Raport przedstawia sumy dla ziemi zgodnej i niezgodnej z przepisami."/>
 <text name="rt_policy_report_description_sprayviolation" text="Raport pokazuje, ile naruszeń dotyczących oprysków miało miejsce w ostatnim miesiącu."/>
 <text name="rt_policy_report_description_empty_food" text="Raport pokazuje, przez ile łącznie godzin brakowało jedzenia w zagrodach dla zwierząt."/>
@@ -98,6 +100,7 @@
 <text name="rt_policy_report_description_restricted_slurry" text="Raport pokazuje, ile razy rozlewano gnojowicę w miesiącach z ograniczeniami."/>
 <text name="rt_policy_report_description_sustainable_forestry" text="Raport pokazuje, ile drzew zasadzono i wycięto w bieżącym okresie półrocznym."/>
 <text name="rt_policy_report_description_spreading_conditions" text="Raport pokazuje, ile razy nawóz, gnojowica, poferment lub obornik zostały zastosowane w złych warunkach, z podziałem na przyczyny."/>
+<text name="rt_policy_report_description_noxious_weeds" text="Raport pokazuje, ile pól z rosnącą uprawą sprawdzono, oraz wymienia każde zachwaszczone pole, przez ile miesięcy z rzędu jest zachwaszczone i jakie podjęto działanie."/>
 <text name="rt_report_name_farmland" text="Działka %s"/>
 <text name="rt_report_name_total_area" text="Całkowita powierzchnia"/>
 <text name="rt_report_name_non_compliant_area" text="Obszar niezgodny z przepisami"/>
@@ -115,6 +118,11 @@
 <text name="rt_report_name_spread_frozen" text="Nawożenie na zamarzniętej glebie"/>
 <text name="rt_report_name_spread_rain" text="Nawożenie w deszczu"/>
 <text name="rt_report_name_spread_waterlogged" text="Nawożenie na podmokłej glebie"/>
+<text name="rt_report_name_fields_checked" text="Sprawdzone pola"/>
+<text name="rt_report_value_weeds_monitoring" text="Obserwacja"/>
+<text name="rt_report_value_weeds_warning" text="Ostrzeżenie"/>
+<text name="rt_report_value_weeds_fined" text="Kara"/>
+<text name="rt_report_value_weeds_disabled" text="Chwasty są wyłączone w tym zapisie gry, więc nie sprawdzono żadnych pól."/>
 <text name="rt_report_name_bale_penalty" text="Kara za bele"/>
 <text name="rt_report_name_total_payout" text="Łączna kwota wypłacona"/>
 <text name="rt_report_name_animal_count" text="Kwalifikująca się liczba zwierząt"/>

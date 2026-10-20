@@ -10,6 +10,7 @@ RTPolicyIds = {
     RESTRICTED_SLURRY = 9,
     SUSTAINABLE_FORESTRY = 10,
     SPREADING_CONDITIONS = 11,
+    NOXIOUS_WEEDS = 12,
 }
 
 RTPolicies = {
@@ -775,6 +776,117 @@ RTPolicies = {
             for _, reason in ipairs(FarmGatherer.BAD_SPREAD_REASONS) do
                 table.insert(report,
                     { cell1 = g_i18n:getText(policyInfo.reasonNames[reason]), cell2 = counts[reason] or 0 })
+            end
+            table.insert(report, { cell1 = g_i18n:getText("rt_report_name_points"), cell2 = reward })
+
+            if reward ~= 0 then
+                g_client:getServerConnection():sendEvent(RTPolicyPointsEvent.new(farmId, reward, policy:getName()))
+            end
+
+            return report
+        end,
+    },
+
+    [RTPolicyIds.NOXIOUS_WEEDS] = {
+        id = RTPolicyIds.NOXIOUS_WEEDS,
+        name = "rt_policy_noxious_weeds",
+        description = "rt_policy_description_noxious_weeds",
+        report_description = "rt_policy_report_description_noxious_weeds",
+        probability = 0.5,
+        periodicReward = 10,
+        pointsPenaltyPerHa = -2,
+        finePerHa = 400,
+        evaluationInterval = 1,
+        maxWarnings = 1,
+        -- Consecutive overrun months before a field draws a warning, and then a fine. A single
+        -- weedy month is never acted on, so there is always time to spray after weeds appear.
+        warningMonths = 2,
+        fineMonths = 3,
+        -- Nothing to enforce in a savegame without weeds
+        isAvailable = function(policyInfo)
+            return FarmlandGatherer.getWeedsActive()
+        end,
+        activate = function(policyInfo, policy, farmId)
+        end,
+        evaluate = function(policyInfo, policy, farmId, currentTier)
+            local report = {}
+
+            if not FarmlandGatherer.getWeedsActive() then
+                table.insert(report, {
+                    cell1 = g_i18n:getText("rt_report_name_note"),
+                    cell2 = g_i18n:getText("rt_report_value_weeds_disabled")
+                })
+                g_client:getServerConnection():sendEvent(RTPolicyClearWarningsEvent.new(farmId, policy.policyIndex))
+                return report
+            end
+
+            local ig = g_currentMission.RedTape.InfoGatherer
+            local gatherer = ig.gatherers[INFO_KEYS.FARMLANDS]
+
+            local fieldsChecked = 0
+            local anyOverrun = false
+            local warnedFields = 0
+            local finedHa = 0
+            local fieldRows = {}
+
+            -- The gatherer has just sampled every field this period change, so its streaks
+            -- already include last month.
+            for _, farmland in pairs(g_farmlandManager.farmlands) do
+                if farmland.farmId == farmId and farmland.field ~= nil then
+                    local farmlandData = gatherer:getFarmlandData(farmland.id)
+                    local months = farmlandData.highWeedMonths or 0
+
+                    if farmlandData.weedJudged then
+                        fieldsChecked = fieldsChecked + 1
+                    end
+
+                    if months > 0 then
+                        anyOverrun = true
+
+                        local status
+                        if months >= policyInfo.fineMonths then
+                            finedHa = finedHa + (farmlandData.areaHa or 0)
+                            status = "rt_report_value_weeds_fined"
+                        elseif months >= policyInfo.warningMonths then
+                            warnedFields = warnedFields + 1
+                            status = "rt_report_value_weeds_warning"
+                        else
+                            status = "rt_report_value_weeds_monitoring"
+                        end
+
+                        local suffix = months > 1 and g_i18n:getText("rt_misc_month_plural_suffix") or ""
+                        table.insert(fieldRows, {
+                            id = farmland.id,
+                            cell1 = string.format(g_i18n:getText("rt_report_name_farmland"), farmland.id),
+                            cell2 = string.format("%d %s%s", months, g_i18n:getText("rt_misc_month"), suffix),
+                            cell3 = g_i18n:getText(status)
+                        })
+                    end
+                end
+            end
+
+            local reward = 0
+            if finedHa > 0 then
+                reward = math.floor(policyInfo.pointsPenaltyPerHa * finedHa)
+                local fineAmount = finedHa * policyInfo.finePerHa
+                g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, true)
+            elseif warnedFields > 0 then
+                -- A warning only. The fine comes from the field reaching fineMonths, not from
+                -- the warning count, so no fine is passed here.
+                g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, 0, false)
+            else
+                -- A field in its first weedy month is not penalised, but it does not earn a
+                -- clean month either.
+                if not anyOverrun and (fieldsChecked > 0 or currentTier == RTPolicySystem.TIER.D) then
+                    reward = policyInfo.periodicReward
+                end
+                g_client:getServerConnection():sendEvent(RTPolicyClearWarningsEvent.new(farmId, policy.policyIndex))
+            end
+
+            table.insert(report, { cell1 = g_i18n:getText("rt_report_name_fields_checked"), cell2 = fieldsChecked })
+            table.sort(fieldRows, function(a, b) return a.id < b.id end)
+            for _, row in ipairs(fieldRows) do
+                table.insert(report, { cell1 = row.cell1, cell2 = row.cell2, cell3 = row.cell3 })
             end
             table.insert(report, { cell1 = g_i18n:getText("rt_report_name_points"), cell2 = reward })
 

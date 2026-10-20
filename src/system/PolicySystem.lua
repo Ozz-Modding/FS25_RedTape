@@ -229,7 +229,8 @@ function RTPolicySystem:getNextPolicyIndex()
 
     local availablePolicies = {}
     for id, policy in pairs(RTPolicies) do
-        if not inUse[id] and RedTape.isPolicyEnforced(id) then
+        if not inUse[id] and RedTape.isPolicyEnforced(id)
+            and (policy.isAvailable == nil or policy.isAvailable(policy)) then
             table.insert(availablePolicies, policy)
         end
     end

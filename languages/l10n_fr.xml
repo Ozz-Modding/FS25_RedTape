@@ -76,6 +76,7 @@
 		<text name="rt_policy_restricted_slurry" text="Application restreinte du lisier"/>
 		<text name="rt_policy_sustainable_forestry" text="Foresterie durable"/>
 		<text name="rt_policy_spreading_conditions" text="Conditions d'épandage"/>
+		<text name="rt_policy_noxious_weeds" text="Lutte contre les mauvaises herbes nuisibles"/>
 		<text name="rt_policy_description_croprotation" text="Exige la rotation des cultures entre les champs et les saisons pour maintenir la fertilité du sol, briser les cycles de parasites et de maladies, améliorer l'équilibre nutritif et protéger les rendements à long terme."/>
 		<text name="rt_policy_description_sprayviolation" text="Interdit la pulvérisation de produits chimiques (engrais solide, lisier, chite, chaux, fumier, herbicide) dans les zones tampons de 14m des cours d'eau pour prévenir le ruissellement et la contamination pouvant nuire à la vie aquatique, dégrader la qualité de l'eau et mettre en danger la santé humaine. Les violations sont sanctionnées."/>
 		<text name="rt_policy_description_empty_food" text="Exige que les animaux aient toujours suffisamment de nourriture disponible ; gardez les mangeoires remplies et accessibles en permanence pour prévenir la faim et respecter les normes de bien-être."/>
@@ -87,6 +88,7 @@
 		<text name="rt_policy_description_restricted_slurry" text="Vous n'êtes pas autorisé à épandre du lisier pendant les mois de %s à %s. Vous serez pénalisé pour chaque violation."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Encourage les pratiques forestières durables, récompensant la plantation nette positive d'arbres et sanctionnant la déforestation globale. La politique s'applique à vos propres terres. Effectuer des travaux sous contrat n'affectera pas votre évaluation. Le rapport sera mis à jour mensuellement avec des totaux semestriels, cependant l'évaluation complète et le versement ou les amendes auront lieu en juin et décembre."/>
 		<text name="rt_policy_description_spreading_conditions" text="Vous ne devez pas épandre d'engrais, de lisier, de digestat ou de fumier lorsqu'il pleut, pendant les 2 heures de jeu qui suivent la pluie, lorsque le sol est détrempé, lorsque la température est inférieure ou égale à zéro ou lorsque le sol est enneigé. Les nutriments épandus dans ces conditions ruissellent vers les cours d'eau au lieu de nourrir la culture. Vous serez pénalisé pour chaque violation."/>
+		<text name="rt_policy_description_noxious_weeds" text="Vous devez empêcher les mauvaises herbes nuisibles de se propager depuis vos terres. Chaque mois, les champs avec une culture en croissance sont contrôlés pour détecter les mauvaises herbes moyennes ou grandes non traitées. Un seul mois envahi n'est pas pénalisé, mais un champ envahi 2 mois de suite reçoit un avertissement, et à partir du 3e mois vous recevez une amende par hectare jusqu'à ce qu'il soit traité. Les prairies, vignes et oliveraies ne sont pas contrôlées."/>
 		<text name="rt_policy_report_description_croprotation" text="Le rapport montre les totaux pour les terres conformes et non conformes."/>
 		<text name="rt_policy_report_description_sprayviolation" text="Le rapport montre combien de violations de pulvérisation ont eu lieu le mois dernier."/>
 		<text name="rt_policy_report_description_empty_food" text="Le rapport montre combien d'heures cumulées la nourriture était vide dans les enclos d'animaux."/>
@@ -98,6 +100,7 @@
 		<text name="rt_policy_report_description_restricted_slurry" text="Le rapport montre combien de fois le lisier a été appliqué pendant les mois restreints."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="Le rapport montre combien d'arbres ont été plantés et coupés pendant la période semestrielle en cours."/>
 		<text name="rt_policy_report_description_spreading_conditions" text="Le rapport montre combien de fois de l'engrais, du lisier, du digestat ou du fumier a été épandu dans de mauvaises conditions, détaillé par cause."/>
+		<text name="rt_policy_report_description_noxious_weeds" text="Le rapport indique combien de champs avec une culture en croissance ont été contrôlés, et liste chaque champ envahi par les mauvaises herbes, le nombre de mois consécutifs d'envahissement et la mesure prise."/>
 		<text name="rt_report_name_farmland" text="Terrain agricole %s"/>
 		<text name="rt_report_name_total_area" text="Superficie totale"/>
 		<text name="rt_report_name_non_compliant_area" text="Superficie non conforme"/>
@@ -115,6 +118,11 @@
 		<text name="rt_report_name_spread_frozen" text="Épandage sur sol gelé"/>
 		<text name="rt_report_name_spread_rain" text="Épandage sous la pluie"/>
 		<text name="rt_report_name_spread_waterlogged" text="Épandage sur sol détrempé"/>
+		<text name="rt_report_name_fields_checked" text="Champs contrôlés"/>
+		<text name="rt_report_value_weeds_monitoring" text="Surveillance"/>
+		<text name="rt_report_value_weeds_warning" text="Avertissement"/>
+		<text name="rt_report_value_weeds_fined" text="Amende"/>
+		<text name="rt_report_value_weeds_disabled" text="Les mauvaises herbes sont désactivées dans cette partie, aucun champ n'a donc été contrôlé."/>
 		<text name="rt_report_name_bale_penalty" text="Pénalité de balles"/>		
 		<text name="rt_report_name_total_payout" text="Montant total versé"/>
 		<text name="rt_report_name_animal_count" text="Nombre d'animaux éligibles"/>

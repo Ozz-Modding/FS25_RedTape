@@ -1,6 +1,35 @@
 # CLAUDE.md
 
-Notes for working on FS25_RedTape. This file currently documents the **Policy** system only.
+Notes for working on FS25_RedTape. Apart from the testing section below, this file currently
+documents the **Policy** system only.
+
+## Tests
+
+**Add or update tests for anything you touch from now on**: new features, bug fixes and changes
+to existing behaviour. Run the whole suite before reporting back, and say if anything fails.
+In-game testing is still the real check; the unit tests sit alongside it.
+
+The tests are in `tests/` and run with `test.bat` (plain Lua 5.1, at the default install path or
+`%LUA%`; `test.bat tests	est_foo.lua` runs one file). They load the real `src/` files against
+fake engine globals, so they check our logic, not our assumptions about vanilla. The layout
+matches FS25_TheContractor's:
+
+- `tests/run.lua` — the runner. Each `tests/test_*.lua` file runs in its own process and stops at
+  its first failure (there's no `pcall` here either).
+- `tests/stubs.lua` — the fake FS25 globals. `stubs.install()` gives each test a fresh `world`,
+  loads the core mod files (RedTape, PolicyList, settings, PolicySystem, Policy, InfoGatherer,
+  FarmlandGatherer) and records every event sent through `g_client:getServerConnection()` in
+  `world.events`. Builders: `stubs.addField` (a farmland with a square field, its crop and its
+  weeds), `stubs.nextMonth`, `stubs.eventsOfKind`. `g_i18n` reads the real
+  `languages/l10n_en.xml`, so a missing key fails the test. Extend the stubs when the code under
+  test needs another engine call, and check that call against `../Reference/FS25_Lua`.
+- `tests/luau.lua` — loads a `src/` file under 5.1 by rewriting `continue` (FS25 dialect) into
+  `repeat ... until true` / `break`, keeping line numbers. A loop that uses both `continue` and
+  `break` can't be rewritten and fails the load.
+- `tests/test_*.lua` — `test("name", function() ... end)` blocks using `assertEquals`,
+  `assertNear` and `assertTrue`. One file per feature, e.g. `test_noxiousWeeds.lua`.
+
+`package.bat` leaves `tests/` (and `test.bat`) out of the mod zip.
 
 ## What a policy is
 
@@ -32,6 +61,9 @@ Keyed by `RTPolicyIds.<NAME>`. Common fields:
 - `periodicReward` / `periodicPenalty` / `pointsPenaltyPerViolation` — points applied on evaluation.
 - `finePerViolation`, `warningThreshold`, `maxWarnings` — fine and warning behaviour.
 - `activate(policyInfo, policy, farmId)` — called once per farm when the policy is issued.
+- `isAvailable(policyInfo)` — optional. When it returns false the policy is never issued (e.g.
+  `NOXIOUS_WEEDS` in a savegame with weeds switched off). It does not stop an already active
+  policy evaluating, so `evaluate` must still cope.
 - `evaluate(policyInfo, policy, farmId, currentTier)` — the actual check. Returns a report: an
   array of `{cell1, cell2, cell3}` rows, coerced to strings by `RTPolicy:evaluate`.
 
@@ -97,7 +129,8 @@ savegames from before this feature load with every policy enforced.
 
 Where it is applied:
 
-- `RTPolicySystem:getNextPolicyIndex()` — a disabled policy is never issued.
+- `RTPolicySystem:getNextPolicyIndex()` — a disabled policy is never issued (nor is one whose
+  `isAvailable` returns false).
 - `RTPolicy:evaluate()` — returns early, so no report, points, warnings or fines. It still rolls
   `nextEvaluationMonth` forward, so re-enabling a policy starts a fresh evaluation period instead
   of immediately judging the months it spent switched off.

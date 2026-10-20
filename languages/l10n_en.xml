@@ -76,6 +76,7 @@
 		<text name="rt_policy_restricted_slurry" text="Restricted Slurry Application"/>
 		<text name="rt_policy_sustainable_forestry" text="Sustainable Forestry"/>
 		<text name="rt_policy_spreading_conditions" text="Spreading Conditions"/>
+		<text name="rt_policy_noxious_weeds" text="Noxious Weed Control"/>
 		<text name="rt_policy_description_croprotation" text="Requires rotating crops between fields and seasons to maintain soil fertility, break pest and disease cycles, improve nutrient balance, and protect long term yields."/>
 		<text name="rt_policy_description_sprayviolation" text="Prohibits spraying chemicals (Solid Fertilizer, Liquid Fertilizer, Slurry, Digestate, Lime, Manure, Herbicide) within 14m buffer zones of water bodies to prevent runoff and contamination that can harm aquatic life, degrade water quality, and endanger human health. Violations are penalized."/>
 		<text name="rt_policy_description_empty_food" text="Requires animals to always have sufficient feed available; keep feed troughs topped up and accessible at all times to prevent hunger and meet welfare standards."/>
@@ -87,6 +88,7 @@
 		<text name="rt_policy_description_restricted_slurry" text="You are not allowed to apply slurry during the months of %s to %s. You will be penalized for each violation."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Encourages sustainable forestry practices, rewarding net positive tree planting and fining for overall deforestation. The policy applies to your own land. Doing contract work will not affect your evaluation. The report will update monthly with bi-annual totals, however full evaluation and payout or fines will occur in June and December."/>
 		<text name="rt_policy_description_spreading_conditions" text="You must not spread fertilizer, slurry, digestate or manure while it is raining, for 2 in-game hours after rain while the ground is waterlogged, when the temperature is at or below freezing, or when there is snow on the ground. Nutrients applied in these conditions wash into watercourses instead of feeding the crop. You will be penalized for each violation."/>
+		<text name="rt_policy_description_noxious_weeds" text="You must stop injurious weeds spreading from your land. Each month, fields with a growing crop are checked for medium or large weeds that have not been treated. A single weedy month is not penalized, but a field overrun for 2 months in a row earns a warning, and from the 3rd month you are fined for every hectare until it is treated. Grass, vineyards and olive groves are not checked."/>
 		<text name="rt_policy_report_description_croprotation" text="The report shows totals for compliant and non-compliant land."/>
 		<text name="rt_policy_report_description_sprayviolation" text="The report shows how many spraying violations occurred in the last month."/>
 		<text name="rt_policy_report_description_empty_food" text="The report shows how many combined hours food was empty in animal pens."/>
@@ -98,6 +100,7 @@
 		<text name="rt_policy_report_description_restricted_slurry" text="The report shows how many times slurry was applied during the restricted months."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="The report shows how many trees were planted and cut down in the current bi-annual period."/>
 		<text name="rt_policy_report_description_spreading_conditions" text="The report shows how many times fertilizer, slurry, digestate or manure was spread in bad conditions, broken down by cause."/>
+		<text name="rt_policy_report_description_noxious_weeds" text="The report shows how many fields with a growing crop were checked, and lists each field overrun with weeds, how many months in a row it has been overrun and the action taken."/>
 		<text name="rt_report_name_farmland" text="Farmland %s"/>
 		<text name="rt_report_name_total_area" text="Total Area"/>
 		<text name="rt_report_name_non_compliant_area" text="Non-Compliant Area"/>
@@ -115,6 +118,11 @@
 		<text name="rt_report_name_spread_frozen" text="Spread on frozen ground"/>
 		<text name="rt_report_name_spread_rain" text="Spread in rain"/>
 		<text name="rt_report_name_spread_waterlogged" text="Spread on waterlogged ground"/>
+		<text name="rt_report_name_fields_checked" text="Fields checked"/>
+		<text name="rt_report_value_weeds_monitoring" text="Monitoring"/>
+		<text name="rt_report_value_weeds_warning" text="Warning"/>
+		<text name="rt_report_value_weeds_fined" text="Fined"/>
+		<text name="rt_report_value_weeds_disabled" text="Weeds are switched off in this savegame, so no fields were checked."/>
 		<text name="rt_report_name_bale_penalty" text="Bale penalty"/>
 		<text name="rt_report_name_total_payout" text="Total amount paid"/>
 		<text name="rt_report_name_animal_count" text="Eligible animal count"/>

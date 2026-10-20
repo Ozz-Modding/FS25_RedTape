@@ -76,6 +76,7 @@
 		<text name="rt_policy_restricted_slurry" text="Aplicação Restrita de Chorume"/>
 		<text name="rt_policy_sustainable_forestry" text="Manejo Florestal Sustentável"/>
 		<text name="rt_policy_spreading_conditions" text="Condições de Aplicação"/>
+		<text name="rt_policy_noxious_weeds" text="Controle de ervas daninhas nocivas"/>
 		<text name="rt_policy_description_croprotation" text="Exige a rotação de culturas entre campos e estações para manter a fertilidade do solo, interromper ciclos de pragas e doenças, melhorar o equilíbrio de nutrientes e preservar a produtividade a longo prazo."/>
 		<text name="rt_policy_description_sprayviolation" text="Proíbe a pulverização de produtos químicos (fertilizante sólido, chorume, cal, esterco, herbicida) em zonas de proteção de 14m de corpos d'água para evitar escoamento e contaminação que possam prejudicar a vida aquática, degradar a qualidade da água e colocar em risco a saúde humana. Violações são punidas."/>
 		<text name="rt_policy_description_empty_food" text="Exige que os animais tenham sempre alimentação suficiente disponível; mantenha os comedouros abastecidos e acessíveis o tempo todo para evitar fome e atender aos padrões de bem-estar."/>
@@ -87,6 +88,7 @@
 		<text name="rt_policy_description_restricted_slurry" text="Não é permitido aplicar chorume nos meses de %s a %s. Você será penalizado por cada violação."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Incentiva práticas florestais sustentáveis, recompensando o plantio líquido de árvores e multando o desmatamento geral. A política se aplica às suas próprias terras. Trabalho por contrato não afetará sua avaliação. O relatório será atualizado mensalmente com totais semestrais; entretanto, a avaliação completa e o pagamento ou multas ocorrerão em Junho e Dezembro."/>
 		<text name="rt_policy_description_spreading_conditions" text="Você não deve aplicar fertilizante, chorume, digestato ou esterco enquanto estiver chovendo, nas 2 horas de jogo após a chuva, enquanto o solo estiver encharcado, quando a temperatura estiver em zero grau ou abaixo, ou quando houver neve no chão. Nutrientes aplicados nessas condições escoam para os cursos d'água em vez de nutrir a lavoura. Você será penalizado por cada violação."/>
+		<text name="rt_policy_description_noxious_weeds" text="Você deve impedir que ervas daninhas nocivas se espalhem a partir das suas terras. Todo mês, os campos com uma cultura em crescimento são verificados quanto a ervas daninhas médias ou grandes não tratadas. Um único mês com ervas daninhas não é penalizado, mas um campo infestado por 2 meses seguidos recebe uma advertência e, a partir do 3º mês, você é multado por cada hectare até que seja tratado. Pastagens, vinhedos e olivais não são verificados."/>
 		<text name="rt_policy_report_description_croprotation" text="O relatório mostra totais para áreas conformes e não conformes."/>
 		<text name="rt_policy_report_description_sprayviolation" text="O relatório mostra quantas violações de pulverização ocorreram no último mês."/>
 		<text name="rt_policy_report_description_empty_food" text="O relatório mostra quantas horas combinadas a alimentação ficou vazia em currais."/>
@@ -98,6 +100,7 @@
 		<text name="rt_policy_report_description_restricted_slurry" text="O relatório mostra quantas vezes chorume foi aplicado durante os meses restritos."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="O relatório mostra quantas árvores foram plantadas e cortadas no período semestral atual."/>
 		<text name="rt_policy_report_description_spreading_conditions" text="O relatório mostra quantas vezes fertilizante, chorume, digestato ou esterco foi aplicado em más condições, separado por causa."/>
+		<text name="rt_policy_report_description_noxious_weeds" text="O relatório mostra quantos campos com uma cultura em crescimento foram verificados e lista cada campo infestado por ervas daninhas, há quantos meses seguidos está infestado e a ação tomada."/>
 		<text name="rt_report_name_farmland" text="Terreno %s"/>
 		<text name="rt_report_name_total_area" text="Área Total"/>
 		<text name="rt_report_name_non_compliant_area" text="Área Não Conforme"/>
@@ -115,6 +118,11 @@
 		<text name="rt_report_name_spread_frozen" text="Aplicado em solo congelado"/>
 		<text name="rt_report_name_spread_rain" text="Aplicado na chuva"/>
 		<text name="rt_report_name_spread_waterlogged" text="Aplicado em solo encharcado"/>
+		<text name="rt_report_name_fields_checked" text="Campos verificados"/>
+		<text name="rt_report_value_weeds_monitoring" text="Em observação"/>
+		<text name="rt_report_value_weeds_warning" text="Advertência"/>
+		<text name="rt_report_value_weeds_fined" text="Multa"/>
+		<text name="rt_report_value_weeds_disabled" text="As ervas daninhas estão desativadas neste jogo salvo, então nenhum campo foi verificado."/>
 		<text name="rt_report_name_bale_penalty" text="Penalidade por fardo"/>
 		<text name="rt_report_name_total_payout" text="Total pago"/>
 		<text name="rt_report_name_animal_count" text="Contagem de animais elegíveis"/>

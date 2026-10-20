@@ -1,6 +1,14 @@
 FarmlandGatherer = {}
 FarmlandGatherer_mt = Class(FarmlandGatherer)
 
+-- A live weed at or above this yield factor counts as a high weed level. In the base game that
+-- is medium and large weeds; small weeds are left alone, they only need watching.
+FarmlandGatherer.HIGH_WEED_FACTOR = 0.75
+-- Share of a field's sampled crop that must be weedy for the whole field to count as overrun
+FarmlandGatherer.HIGH_WEED_SHARE = 0.5
+-- Vertices to sample towards, on top of the field centre
+FarmlandGatherer.WEED_SAMPLE_VERTICES = 8
+
 function FarmlandGatherer.new()
     local self = {}
     setmetatable(self, FarmlandGatherer_mt)
@@ -47,6 +55,8 @@ function FarmlandGatherer:periodChanged()
             end
             farmlandData.areaHa = field:getAreaHa()
 
+            self:updateWeedHistory(farmland, farmlandData)
+
             -- remove history entries older than 24 months
             for month, _ in pairs(farmlandData.fruitHistory) do
                 if month < oldestHistoryMonth then
@@ -87,7 +97,10 @@ function FarmlandGatherer:getFarmlandData(farmlandId)
             harvestPrimed = false,
             sawGrowingCrop = false,
             harvestedCropsHistory = {},
-            rotationExceptions = 0
+            rotationExceptions = 0,
+            highWeedMonths = 0,
+            weedOwnerFarmId = 0,
+            weedJudged = false
         }
     end
     return self.data[farmlandId]
@@ -108,6 +121,8 @@ function FarmlandGatherer:saveToXmlFile(xmlFile, key)
         setXMLBool(xmlFile, farmlandKey .. "#isHarvested", farmlandData.isHarvested)
         setXMLBool(xmlFile, farmlandKey .. "#sawGrowingCrop", farmlandData.sawGrowingCrop)
         setXMLInt(xmlFile, farmlandKey .. "#rotationExceptions", farmlandData.rotationExceptions)
+        setXMLInt(xmlFile, farmlandKey .. "#highWeedMonths", farmlandData.highWeedMonths or 0)
+        setXMLInt(xmlFile, farmlandKey .. "#weedOwnerFarmId", farmlandData.weedOwnerFarmId or 0)
 
         local j = 0
         for month, fruitEntry in pairs(farmlandData.fruitHistory) do
@@ -154,6 +169,10 @@ function FarmlandGatherer:loadFromXMLFile(xmlFile, key)
             harvestPrimed = false,
             sawGrowingCrop = getXMLBool(xmlFile, farmlandKey .. "#sawGrowingCrop") or false,
             rotationExceptions = getXMLInt(xmlFile, farmlandKey .. "#rotationExceptions") or 0,
+            highWeedMonths = getXMLInt(xmlFile, farmlandKey .. "#highWeedMonths") or 0,
+            weedOwnerFarmId = getXMLInt(xmlFile, farmlandKey .. "#weedOwnerFarmId") or 0,
+            -- Only meaningful straight after periodChanged has sampled the field
+            weedJudged = false,
             harvestedCropsHistory = {}
         }
 
@@ -387,6 +406,114 @@ function FarmlandGatherer:wasFruitPresent(farmlandId, startMonth, endMonth, frui
         end
     end
     return false
+end
+
+-- Whether the savegame has weeds at all. With weeds switched off, or on a map without a weed
+-- layer, there is nothing to sample.
+function FarmlandGatherer.getWeedsActive()
+    local mission = g_currentMission
+    local weedSystem = mission.weedSystem
+    return mission.missionInfo ~= nil and mission.missionInfo.weedsEnabled == true
+        and weedSystem ~= nil and weedSystem:getMapHasWeed()
+end
+
+-- The field centre (always inside the polygon) plus points halfway from it towards a spread of
+-- the polygon's vertices. On an odd shaped field some of these can land outside it; those find
+-- no crop and are ignored by the sampling.
+function FarmlandGatherer.getWeedSamplePoints(field)
+    local cx, cz = field:getCenterOfFieldWorldPosition()
+    if cx == nil or cz == nil then
+        return {}
+    end
+
+    local points = { { x = cx, z = cz } }
+    local vertices = field:getPolygonPoints() or {}
+    local vertexCount = #vertices
+    local sampleCount = math.min(vertexCount, FarmlandGatherer.WEED_SAMPLE_VERTICES)
+
+    for i = 1, sampleCount do
+        local vertex = vertices[math.floor((i - 1) * vertexCount / sampleCount) + 1]
+        if vertex ~= nil then
+            local vx, _, vz = getWorldTranslation(vertex)
+            table.insert(points, { x = (cx + vx) * 0.5, z = (cz + vz) * 0.5 })
+        end
+    end
+
+    return points
+end
+
+-- Fruits whose weeds are not judged: grass is not weeded, and vines and olives use their own
+-- weed states. Every index can be nil on a map that removes the fruit.
+function FarmlandGatherer.getWeedSkipFruits()
+    local skip = {}
+    for _, fruitTypeIndex in pairs(RedTape.getGrassTypes()) do
+        skip[fruitTypeIndex] = true
+    end
+    for _, fruitTypeIndex in pairs({ FruitType.GRAPE, FruitType.OLIVE }) do
+        if fruitTypeIndex ~= nil then
+            skip[fruitTypeIndex] = true
+        end
+    end
+    return skip
+end
+
+-- Returns whether the field has a growing crop to judge and, if so, whether most of that crop
+-- is overrun with live weeds. Weeds already killed by herbicide still dent the yield but are no
+-- longer spreading, so they do not count.
+function FarmlandGatherer.sampleFieldWeeds(field, skipFruits)
+    local weedSystem = g_currentMission.weedSystem
+    local herbicide = weedSystem:getHerbicideReplacements()
+    -- A state herbicide can still act on is a live weed
+    local liveStates = (herbicide ~= nil and herbicide.weed ~= nil and herbicide.weed.replacements) or {}
+    local factors = weedSystem:getFactors() or {}
+
+    local croppedPoints = 0
+    local weedyPoints = 0
+    for _, point in ipairs(FarmlandGatherer.getWeedSamplePoints(field)) do
+        local fruitTypeIndex, growthState = FSDensityMapUtil.getFruitTypeIndexAtWorldPos(point.x, point.z)
+        local fruit = fruitTypeIndex ~= nil and g_fruitTypeManager:getFruitTypeByIndex(fruitTypeIndex) or nil
+
+        if fruit ~= nil and not skipFruits[fruitTypeIndex] and growthState ~= nil and growthState > 0
+            and not fruit:getIsCut(growthState) and not fruit:getIsWithered(growthState)
+            and not fruit:getIsCatchCrop() then
+            croppedPoints = croppedPoints + 1
+
+            local weedState = weedSystem:getWeedStateAtWorldPos(point.x, point.z)
+            if liveStates[weedState] ~= nil and (factors[weedState] or 0) >= FarmlandGatherer.HIGH_WEED_FACTOR then
+                weedyPoints = weedyPoints + 1
+            end
+        end
+    end
+
+    if croppedPoints == 0 then
+        return false, false
+    end
+    return true, weedyPoints / croppedPoints >= FarmlandGatherer.HIGH_WEED_SHARE
+end
+
+-- Counts how many months in a row a field has been overrun with weeds. Any month the field is
+-- clean, or has no growing crop to judge, breaks the run.
+function FarmlandGatherer:updateWeedHistory(farmland, farmlandData)
+    -- A field that changes hands starts with a clean record
+    local ownerFarmId = farmland.farmId or 0
+    if farmlandData.weedOwnerFarmId ~= ownerFarmId then
+        farmlandData.weedOwnerFarmId = ownerFarmId
+        farmlandData.highWeedMonths = 0
+    end
+
+    farmlandData.weedJudged = false
+    if not FarmlandGatherer.getWeedsActive() then
+        farmlandData.highWeedMonths = 0
+        return
+    end
+
+    local judged, overrun = FarmlandGatherer.sampleFieldWeeds(farmland.field, FarmlandGatherer.getWeedSkipFruits())
+    farmlandData.weedJudged = judged
+    if judged and overrun then
+        farmlandData.highWeedMonths = (farmlandData.highWeedMonths or 0) + 1
+    else
+        farmlandData.highWeedMonths = 0
+    end
 end
 
 function FarmlandGatherer:addRotationException(farmlandId, count)

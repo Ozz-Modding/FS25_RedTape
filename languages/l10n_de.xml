@@ -76,6 +76,7 @@
 		<text name="rt_policy_restricted_slurry" text="Eingeschränkte Gülleausbringung"/>
 		<text name="rt_policy_sustainable_forestry" text="Nachhaltige Forstwirtschaft"/>
 		<text name="rt_policy_spreading_conditions" text="Ausbringungsbedingungen"/>
+		<text name="rt_policy_noxious_weeds" text="Bekämpfung von Schadunkraut"/>
 		<text name="rt_policy_description_croprotation" text="Erfordert den Wechsel von Kulturen zwischen Feldern und Jahreszeiten, um die Bodenfruchtbarkeit zu erhalten, Schädlings- und Krankheitszyklen zu unterbrechen, das Nährstoffgleichgewicht zu verbessern und langfristige Erträge zu schützen."/>
 		<text name="rt_policy_description_sprayviolation" text="Verbietet das Ausbringen von Chemikalien (Festdünger, Gülle, Kalk, Mist, Herbizid) in 14m Pufferzonen von Gewässern, um Abfluss und Verunreinigungen zu verhindern, die Wasserlebewesen schaden, die Wasserqualität verschlechtern und die menschliche Gesundheit gefährden können. Verstöße werden bestraft."/>
 		<text name="rt_policy_description_empty_food" text="Erfordert, dass Tiere immer ausreichend Futter zur Verfügung haben; halten Sie Futtertröge stets gefüllt und zugänglich, um Hunger zu verhindern und Tierschutzstandards zu erfüllen."/>
@@ -87,6 +88,7 @@
 		<text name="rt_policy_description_restricted_slurry" text="Sie dürfen in den Monaten %s bis %s keine Gülle ausbringen. Sie werden für jeden Verstoß bestraft."/>
 		<text name="rt_policy_description_sustainable_forestry" text="Fördert nachhaltige Forstwirtschaftspraktiken, belohnt netto positive Baumpflanzungen und bestraft Gesamtabholzung. Die Richtlinie gilt für Ihr eigenes Land. Auftragsarbeiten wirken sich nicht auf Ihre Bewertung aus. Der Bericht wird monatlich mit halbjährlichen Summen aktualisiert, jedoch erfolgt die vollständige Bewertung und Auszahlung oder Bußgelder im Juni und Dezember."/>
 		<text name="rt_policy_description_spreading_conditions" text="Sie dürfen keinen Dünger, keine Gülle, keine Gärreste und keinen Mist ausbringen, während es regnet, in den 2 Spielstunden nach Regen, solange der Boden wassergesättigt ist, bei Temperaturen am oder unter dem Gefrierpunkt oder wenn Schnee liegt. Unter diesen Bedingungen ausgebrachte Nährstoffe werden in Gewässer gespült, statt die Pflanzen zu versorgen. Sie werden für jeden Verstoß bestraft."/>
+		<text name="rt_policy_description_noxious_weeds" text="Sie müssen verhindern, dass sich Schadunkräuter von Ihrem Land ausbreiten. Jeden Monat werden Felder mit wachsender Kultur auf mittleres oder großes, unbehandeltes Unkraut geprüft. Ein einzelner Monat mit Unkraut wird nicht bestraft, aber ein Feld, das 2 Monate in Folge verunkrautet ist, erhält eine Verwarnung, und ab dem 3. Monat zahlen Sie ein Bußgeld pro Hektar, bis es behandelt wird. Grünland, Weinberge und Olivenhaine werden nicht geprüft."/>
 		<text name="rt_policy_report_description_croprotation" text="Der Bericht zeigt Summen für konforme und nicht konforme Flächen."/>
 		<text name="rt_policy_report_description_sprayviolation" text="Der Bericht zeigt, wie viele Sprühverstöße im letzten Monat aufgetreten sind."/>
 		<text name="rt_policy_report_description_empty_food" text="Der Bericht zeigt, wie viele kombinierte Stunden Futter in Tiergehegen leer war."/>
@@ -98,6 +100,7 @@
 		<text name="rt_policy_report_description_restricted_slurry" text="Der Bericht zeigt, wie oft Gülle während der eingeschränkten Monate ausgebracht wurde."/>
 		<text name="rt_policy_report_description_sustainable_forestry" text="Der Bericht zeigt, wie viele Bäume im aktuellen Halbjahr gepflanzt und gefällt wurden."/>
 		<text name="rt_policy_report_description_spreading_conditions" text="Der Bericht zeigt, wie oft Dünger, Gülle, Gärreste oder Mist bei ungünstigen Bedingungen ausgebracht wurden, aufgeschlüsselt nach Ursache."/>
+		<text name="rt_policy_report_description_noxious_weeds" text="Der Bericht zeigt, wie viele Felder mit wachsender Kultur geprüft wurden, und listet jedes verunkrautete Feld auf, wie viele Monate in Folge es verunkrautet ist und welche Maßnahme ergriffen wurde."/>
 		<text name="rt_report_name_farmland" text="Ackerland %s"/>
 		<text name="rt_report_name_total_area" text="Gesamtfläche"/>
 		<text name="rt_report_name_non_compliant_area" text="Nicht konforme Fläche"/>
@@ -115,6 +118,11 @@
 		<text name="rt_report_name_spread_frozen" text="Auf gefrorenem Boden ausgebracht"/>
 		<text name="rt_report_name_spread_rain" text="Bei Regen ausgebracht"/>
 		<text name="rt_report_name_spread_waterlogged" text="Auf wassergesättigtem Boden ausgebracht"/>
+		<text name="rt_report_name_fields_checked" text="Geprüfte Felder"/>
+		<text name="rt_report_value_weeds_monitoring" text="Beobachtung"/>
+		<text name="rt_report_value_weeds_warning" text="Verwarnung"/>
+		<text name="rt_report_value_weeds_fined" text="Bußgeld"/>
+		<text name="rt_report_value_weeds_disabled" text="Unkraut ist in diesem Spielstand deaktiviert, daher wurden keine Felder geprüft."/>
 		<text name="rt_report_name_bale_penalty" text="Ballenstrafe"/>		
 		<text name="rt_report_name_total_payout" text="Gesamtbetrag ausgezahlt"/>
 		<text name="rt_report_name_animal_count" text="Anzahl berechtigter Tiere"/>
