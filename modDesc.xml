@@ -30,6 +30,7 @@ Changelog:
 - Major refactor of code safety for conflict avoidance.
 - Fixed some translation errors which caused problems with Grants.
 - Added an API so other mods can register their own finance statistics as tax expenses or income.
+- Added Ukranian translation thanks to Gemax750.
 
 1.0.3.4:
 - Fixed the Productivity Recovery setting breaking animal feeding and production when used alongside other husbandry mods such as Realistic Livestock. Any value other than 1x stopped those mods running their hourly animal update, so animals no longer ate or produced.
