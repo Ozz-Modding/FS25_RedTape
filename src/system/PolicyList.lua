@@ -11,6 +11,7 @@ RTPolicyIds = {
     SUSTAINABLE_FORESTRY = 10,
     SPREADING_CONDITIONS = 11,
     NOXIOUS_WEEDS = 12,
+    WASTE_DISPOSAL = 13,
 }
 
 RTPolicies = {
@@ -887,6 +888,91 @@ RTPolicies = {
             table.sort(fieldRows, function(a, b) return a.id < b.id end)
             for _, row in ipairs(fieldRows) do
                 table.insert(report, { cell1 = row.cell1, cell2 = row.cell2, cell3 = row.cell3 })
+            end
+            table.insert(report, { cell1 = g_i18n:getText("rt_report_name_points"), cell2 = reward })
+
+            if reward ~= 0 then
+                g_client:getServerConnection():sendEvent(RTPolicyPointsEvent.new(farmId, reward, policy:getName()))
+            end
+
+            return report
+        end,
+    },
+
+    -- Fed by other mods through RedTapeAPI.recordWasteDisposal (e.g. FS25_AdvancedDamageSystem's
+    -- waste oil and coolant drums). See docs/RedTapeAPI.md.
+    [RTPolicyIds.WASTE_DISPOSAL] = {
+        id = RTPolicyIds.WASTE_DISPOSAL,
+        name = "rt_policy_waste_disposal",
+        description = "rt_policy_description_waste_disposal",
+        report_description = "rt_policy_report_description_waste_disposal",
+        probability = 0.5,
+        periodicReward = 10,
+        pointsPenaltyPer100Liters = -5,
+        finePerLiter = 2,
+        -- Discarding more than this in a month is fined straight away, without a warning first
+        warningThresholdLiters = 400,
+        maxWarnings = 1,
+        evaluationInterval = 1,
+        -- Report label for each RedTapeAPI.DISPOSAL_METHODS / WASTE_TYPES entry
+        methodNames = {
+            delivered = "rt_report_name_waste_delivered",
+            collected = "rt_report_name_waste_collected",
+            discarded = "rt_report_name_waste_discarded",
+        },
+        wasteTypeNames = {
+            oil = "rt_report_name_waste_oil",
+            coolant = "rt_report_name_waste_coolant",
+        },
+        -- Only issued while another mod reports waste disposals
+        isAvailable = function(policyInfo)
+            return RedTapeAPI.hasWasteSource()
+        end,
+        activate = function(policyInfo, policy, farmId)
+        end,
+        evaluate = function(policyInfo, policy, farmId, currentTier)
+            local report = {}
+
+            if not RedTapeAPI.hasWasteSource() then
+                table.insert(report, {
+                    cell1 = g_i18n:getText("rt_report_name_note"),
+                    cell2 = g_i18n:getText("rt_report_value_waste_no_source")
+                })
+                g_client:getServerConnection():sendEvent(RTPolicyClearWarningsEvent.new(farmId, policy.policyIndex))
+                return report
+            end
+
+            local ig = g_currentMission.RedTape.InfoGatherer
+            local gatherer = ig.gatherers[INFO_KEYS.WASTE]
+            local farmData = gatherer:getFarmData(farmId)
+            local discarded = gatherer:getMethodTotal(farmId, "discarded")
+            local delivered = gatherer:getMethodTotal(farmId, "delivered")
+
+            local reward = 0
+            if discarded > 0 then
+                reward = math.floor(policyInfo.pointsPenaltyPer100Liters * discarded / 100)
+                local fineAmount = math.ceil(discarded * policyInfo.finePerLiter)
+                local skipWarning = discarded > policyInfo.warningThresholdLiters
+                g_currentMission.RedTape.PolicySystem:WarnAndFine(policyInfo, policy, farmId, fineAmount, skipWarning)
+            else
+                -- Collection from the farm is legal but only delivery earns the reward
+                if delivered > 0 or currentTier == RTPolicySystem.TIER.D then
+                    reward = policyInfo.periodicReward
+                end
+                g_client:getServerConnection():sendEvent(RTPolicyClearWarningsEvent.new(farmId, policy.policyIndex))
+            end
+
+            table.insert(report, {
+                cell1 = "",
+                cell2 = g_i18n:getText(policyInfo.wasteTypeNames.oil),
+                cell3 = g_i18n:getText(policyInfo.wasteTypeNames.coolant)
+            })
+            for _, method in ipairs(RedTapeAPI.DISPOSAL_METHODS) do
+                table.insert(report, {
+                    cell1 = g_i18n:getText(policyInfo.methodNames[method]),
+                    cell2 = g_i18n:formatVolume(farmData.oil[method], 0),
+                    cell3 = g_i18n:formatVolume(farmData.coolant[method], 0)
+                })
             end
             table.insert(report, { cell1 = g_i18n:getText("rt_report_name_points"), cell2 = reward })
 

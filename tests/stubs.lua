@@ -325,15 +325,23 @@ function stubs.install()
     world:load("src/instances/Policy.lua")
     world:load("src/system/InfoGatherer.lua")
     world:load("src/gatherers/FarmlandGatherer.lua")
+    world:load("src/gatherers/WasteGatherer.lua")
+    world:load("src/RedTapeAPI.lua")
 
     -- The parts of the running mod the code under test reaches for
     local policySystem = setmetatable({ policies = {}, points = {}, warnings = {} }, RTPolicySystem_mt)
     world.farmlandGatherer = FarmlandGatherer.new()
+    world.wasteGatherer = WasteGatherer.new()
     g_currentMission.RedTape = {
         settings = {},
         monthStarted = 0,
         PolicySystem = policySystem,
-        InfoGatherer = { gatherers = { [INFO_KEYS.FARMLANDS] = world.farmlandGatherer } },
+        InfoGatherer = {
+            gatherers = {
+                [INFO_KEYS.FARMLANDS] = world.farmlandGatherer,
+                [INFO_KEYS.WASTE] = world.wasteGatherer,
+            },
+        },
     }
     world.policySystem = policySystem
 

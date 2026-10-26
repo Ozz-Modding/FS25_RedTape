@@ -6,6 +6,7 @@ RTInfoGatherer.RETENTION_YEARS = 5
 INFO_KEYS = {
     FARMLANDS = "farmlands",
     FARMS = "farms",
+    WASTE = "waste",
 }
 
 function RTInfoGatherer.new()
@@ -15,6 +16,7 @@ function RTInfoGatherer.new()
     self.gatherers = {
         [INFO_KEYS.FARMLANDS] = FarmlandGatherer.new(),
         [INFO_KEYS.FARMS] = FarmGatherer.new(),
+        [INFO_KEYS.WASTE] = WasteGatherer.new(),
     }
 
     return self

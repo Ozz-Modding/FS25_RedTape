@@ -35,6 +35,8 @@ Changelog:
 - Delayed Mowing, Winter Cover Crops and Set-Aside scheme reports no longer list owned farmland that has no field on it.
 - New Spreading Conditions policy: don't spread fertiliser, slurry, digestate or manure in the rain, on waterlogged or frozen ground, or on snow. The report shows which conditions you were caught spreading in.
 - New Noxious Weed Control policy: fields with a growing crop must not be left overrun with untreated weeds. One weedy month is let off, two months in a row earns a warning, and from the third month you are fined per hectare until the field is sprayed or weeded.
+- New Waste Oil and Coolant Disposal policy, for mods that produce waste oil and coolant such as Advanced Damage System (a version of that mod with Red Tape support is needed). Delivering your waste to an approved site earns points, having it collected from the farm is allowed, and discarding it illegally earns a warning and then a fine for every litre.
+- Added an API so other mods can report waste disposals to Red Tape and check whether waste disposal is currently regulated.
 
 1.0.3.4:
 - Fixed the Productivity Recovery setting breaking animal feeding and production when used alongside other husbandry mods such as Realistic Livestock. Any value other than 1x stopped those mods running their hourly animal update, so animals no longer ate or produced.
@@ -579,6 +581,7 @@ Journal des modifications:
         <sourceFile filename="src/extensions/TreePlantManagerExtension.lua"/>
         <sourceFile filename="src/gatherers/FarmGatherer.lua"/>
         <sourceFile filename="src/gatherers/FarmlandGatherer.lua"/>
+        <sourceFile filename="src/gatherers/WasteGatherer.lua"/>
         <sourceFile filename="src/gui/tableRenderers/ActivePoliciesRenderer.lua"/>
         <sourceFile filename="src/gui/tableRenderers/CropRotationRenderer.lua"/>
         <sourceFile filename="src/gui/tableRenderers/EventLogRenderer.lua"/>
@@ -601,6 +604,7 @@ Journal des modifications:
         <sourceFile filename="src/system/TaxSystem.lua"/>
         <sourceFile filename="src/RedTape.lua"/>
         <sourceFile filename="src/RedTapeSettings.lua"/>
+        <sourceFile filename="src/RedTapeAPI.lua"/>
     </extraSourceFiles>
     <multiplayer supported="true"/>
     <l10n filenamePrefix="languages/l10n" />

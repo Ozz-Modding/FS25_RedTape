@@ -77,6 +77,7 @@
 		<text name="rt_policy_sustainable_forestry" text="Silvicoltura sostenibile"/>
 		<text name="rt_policy_spreading_conditions" text="Condizioni di spandimento"/>
 		<text name="rt_policy_noxious_weeds" text="Controllo delle erbe infestanti nocive"/>
+		<text name="rt_policy_waste_disposal" text="Smaltimento di olio esausto e liquido di raffreddamento"/>
 		<text name="rt_policy_description_croprotation" text="Richiede la rotazione delle colture tra campi e stagioni per mantenere la fertilità del suolo, interrompere cicli di parassiti e malattie, migliorare l’equilibrio dei nutrienti e proteggere le rese a lungo termine."/>
 		<text name="rt_policy_description_sprayviolation" text="Vieta l’uso di prodotti chimici (fertilizzante solido, liquami, calce, letame, erbicida) entro 14 m dai corsi d’acqua per prevenire ruscellamento e contaminazione che possono danneggiare la fauna acquatica, degradare la qualità dell’acqua e mettere a rischio la salute umana. Le violazioni sono penalizzate."/>
 		<text name="rt_policy_description_empty_food" text="Richiede che gli animali abbiano sempre cibo sufficiente; mantieni le mangiatoie sempre piene e accessibili per prevenire la fame e rispettare gli standard di benessere."/>
@@ -89,6 +90,7 @@
 		<text name="rt_policy_description_sustainable_forestry" text="Incoraggia pratiche forestali sostenibili, premiando la piantumazione netta positiva e multando la deforestazione complessiva. La politica si applica ai tuoi terreni. Il lavoro in conto terzi non influisce sulla valutazione. Il rapporto si aggiorna mensilmente con totali semestrali, mentre valutazione completa e pagamenti o multe avverranno a giugno e dicembre."/>
 		<text name="rt_policy_description_spreading_conditions" text="Non è consentito spandere fertilizzanti, liquami, digestato o letame mentre piove, nelle 2 ore di gioco successive alla pioggia, quando il terreno è saturo d'acqua, quando la temperatura è pari o inferiore a zero o quando c'è neve al suolo. I nutrienti distribuiti in queste condizioni finiscono nei corsi d'acqua invece di nutrire la coltura. Ogni violazione sarà penalizzata."/>
 		<text name="rt_policy_description_noxious_weeds" text="Devi impedire che le erbe infestanti nocive si diffondano dai tuoi terreni. Ogni mese i campi con una coltura in crescita vengono controllati per erbe infestanti medie o grandi non trattate. Un singolo mese infestato non viene penalizzato, ma un campo infestato per 2 mesi consecutivi riceve un avvertimento e dal 3° mese ricevi una multa per ogni ettaro finché non viene trattato. Prati, vigneti e uliveti non vengono controllati."/>
+		<text name="rt_policy_description_waste_disposal" text="L'olio motore, l'olio idraulico e il liquido di raffreddamento usati sono rifiuti pericolosi. Devono essere tenuti separati dagli altri rifiuti e consegnati a un raccoglitore autorizzato, mai versati o abbandonati. Un mese in cui consegni rifiuti a un centro autorizzato senza smaltirne nessuno illegalmente ti fa guadagnare punti. Farli ritirare in fattoria è consentito ma non porta nulla. Smaltire rifiuti illegalmente comporta un avvertimento e poi una multa per ogni litro, e smaltirne illegalmente più di 400 litri in un mese viene multato subito."/>
 		<text name="rt_policy_report_description_croprotation" text="Il rapporto mostra i totali delle superfici conformi e non conformi."/>
 		<text name="rt_policy_report_description_sprayviolation" text="Il rapporto mostra quante violazioni di irrorazione sono avvenute nell’ultimo mese."/>
 		<text name="rt_policy_report_description_empty_food" text="Il rapporto mostra quante ore complessive il cibo è mancato nei recinti degli animali."/>
@@ -101,6 +103,7 @@
 		<text name="rt_policy_report_description_sustainable_forestry" text="Il rapporto mostra quanti alberi sono stati piantati e abbattuti nel periodo semestrale corrente."/>
 		<text name="rt_policy_report_description_spreading_conditions" text="Il rapporto mostra quante volte fertilizzanti, liquami, digestato o letame sono stati sparsi in condizioni sfavorevoli, suddivise per causa."/>
 		<text name="rt_policy_report_description_noxious_weeds" text="Il rapporto mostra quanti campi con una coltura in crescita sono stati controllati ed elenca ogni campo infestato, da quanti mesi consecutivi è infestato e l'azione intrapresa."/>
+		<text name="rt_policy_report_description_waste_disposal" text="Il rapporto mostra quanti litri di olio esausto e liquido di raffreddamento hai consegnato a un centro autorizzato, fatto ritirare in fattoria o smaltito illegalmente il mese scorso."/>
 		<text name="rt_report_name_farmland" text="Terreno agricolo %s"/>
 		<text name="rt_report_name_total_area" text="Area totale"/>
 		<text name="rt_report_name_non_compliant_area" text="Area non conforme"/>
@@ -123,6 +126,12 @@
 		<text name="rt_report_value_weeds_warning" text="Avvertimento"/>
 		<text name="rt_report_value_weeds_fined" text="Multa"/>
 		<text name="rt_report_value_weeds_disabled" text="Le erbe infestanti sono disattivate in questo salvataggio, quindi nessun campo è stato controllato."/>
+		<text name="rt_report_name_waste_oil" text="Olio esausto"/>
+		<text name="rt_report_name_waste_coolant" text="Liquido di raffreddamento usato"/>
+		<text name="rt_report_name_waste_delivered" text="Consegnato"/>
+		<text name="rt_report_name_waste_collected" text="Ritirato"/>
+		<text name="rt_report_name_waste_discarded" text="Smaltito illegalmente"/>
+		<text name="rt_report_value_waste_no_source" text="Nessuna mod installata segnala smaltimenti di rifiuti, quindi non è stato controllato nulla."/>
 		<text name="rt_report_name_bale_penalty" text="Penalità balle"/>
 		<text name="rt_report_name_total_payout" text="Importo totale pagato"/>
 		<text name="rt_report_name_animal_count" text="Numero animali idonei"/>

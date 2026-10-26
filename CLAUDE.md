@@ -18,8 +18,8 @@ matches FS25_TheContractor's:
   its first failure (there's no `pcall` here either).
 - `tests/stubs.lua` — the fake FS25 globals. `stubs.install()` gives each test a fresh `world`,
   loads the core mod files (RedTape, PolicyList, settings, PolicySystem, Policy, InfoGatherer,
-  FarmlandGatherer) and records every event sent through `g_client:getServerConnection()` in
-  `world.events`. Builders: `stubs.addField` (a farmland with a square field, its crop and its
+  FarmlandGatherer, WasteGatherer, RedTapeAPI) and records every event sent through
+  `g_client:getServerConnection()` in `world.events`. Builders: `stubs.addField` (a farmland with a square field, its crop and its
   weeds), `stubs.nextMonth`, `stubs.eventsOfKind`. `g_i18n` reads the real
   `languages/l10n_en.xml`, so a missing key fails the test. Extend the stubs when the code under
   test needs another engine call, and check that call against `../Reference/FS25_Lua`.
@@ -140,3 +140,18 @@ A policy disabled while already active **keeps its record** (reports, warnings, 
 re-enabling resumes where it left off. It also keeps its slot against `DESIRED_POLICY_COUNT`, so
 disabling an active policy leaves the farm with fewer active policies rather than substituting a
 different one.
+
+## Public API for other mods (`RedTapeAPI`)
+
+`src/RedTapeAPI.lua` is the versioned contract other mods call, reached through Red Tape's mod
+environment (`getfenv(0)["FS25_RedTape"].RedTapeAPI`). `docs/RedTapeAPI.md` is the guide we hand
+to other authors: keep it in step with the code, and describe only the contract, not how the other
+mod should use it internally. Bump `RedTapeAPI.VERSION` only for a change a caller would notice;
+announce new features in `getInfo().features`. API functions must never throw (a caller's code
+would break): check every argument, log with `RedTape.logWarning` and return `false, reason`.
+
+Version 1 is waste disposal, fed by FS25_AdvancedDamageSystem's waste oil and coolant drums:
+`recordWasteDisposal` (server only) adds litres to `WasteGatherer` (`INFO_KEYS.WASTE`), which the
+`WASTE_DISPOSAL` policy judges monthly. The policy is only issued while a mod has called
+`registerWasteSource`. The older `RTTaxSystem.registerTaxStatistic` predates `RedTapeAPI` and
+stays where it is.
